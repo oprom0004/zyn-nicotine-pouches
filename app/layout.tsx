@@ -3,15 +3,16 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import SchemaMarkup from '@/components/SchemaMarkup'
 import { CartProvider } from '@/contexts/CartContext'
 import { NotificationProvider } from '@/contexts/NotificationContext'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Zyn - Premium Nicotine Pouches',
-  description: 'Discover the cleanest, most convenient way to enjoy nicotine. Tobacco-free, smoke-free, and spit-free.',
-  keywords: 'nicotine pouches, Zyn, tobacco-free, smoke-free, spit-free',
+  title: 'Zyn Nicotine Pouches | Premium Tobacco-Free Nicotine Pouches Online',
+  description: 'Shop the best nicotine pouches online. Zyn tobacco-free nicotine pouches offer smokeless, discreet nicotine satisfaction. Buy nicotine pouches with fast shipping. Adults 21+.',
+  keywords: 'nicotine pouches, zyn nicotine pouches, tobacco-free nicotine pouches, smokeless nicotine pouches, buy nicotine pouches online, best nicotine pouches, white nicotine pouches, oral nicotine pouches, nicotine pouches for sale, strong nicotine pouches, mild nicotine pouches, mint nicotine pouches, citrus nicotine pouches, wintergreen nicotine pouches, 3mg nicotine pouches, 6mg nicotine pouches, 9mg nicotine pouches, 12mg nicotine pouches',
   authors: [{ name: 'Zyn' }],
   openGraph: {
     title: 'Zyn - Premium Nicotine Pouches',
@@ -60,6 +61,7 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <meta name="theme-color" content="#0066cc" />
+        <SchemaMarkup />
       </head>
       <body className={inter.className}>
         <NotificationProvider>

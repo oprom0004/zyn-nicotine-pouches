@@ -51,11 +51,12 @@ export default function FeaturedProducts() {
             <span className="text-sm font-medium text-gray-700">Customer Favorites</span>
           </div>
           <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-6">
-            <span className="font-serif italic">Curated</span> Collection
+            Best <span className="font-serif italic gradient-text">Nicotine Pouches</span> Collection
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Each product in our exclusive lineup has been meticulously crafted to deliver 
-            an unparalleled experience that defines modern luxury.
+            Discover our premium nicotine pouches selection featuring the best nicotine pouches available. 
+            Shop tobacco-free nicotine pouches in multiple strengths and flavors. 
+            All nicotine pouches are smokeless and designed for adult use only.
           </p>
         </div>
         

@@ -25,16 +25,17 @@ export default function HeroSection() {
             </div>
             
             <h1 className="text-5xl md:text-7xl font-black leading-none">
-              <span className="font-serif italic">Redefine</span>
+              <span className="font-serif italic">Premium</span>
               <br />
               <span className="bg-gradient-to-r from-white to-pink-200 bg-clip-text text-transparent">
-                Your Experience
+                Nicotine Pouches
               </span>
             </h1>
             
             <p className="text-xl text-gray-100 max-w-lg leading-relaxed">
-              Discover the future of nicotine enjoyment with our premium, 
-              tobacco-free pouches designed for the modern lifestyle.
+              Experience the best nicotine pouches available - tobacco-free, 
+              smokeless nicotine pouches that deliver satisfaction without compromise. 
+              Shop premium nicotine pouches for adults 21+.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4">
