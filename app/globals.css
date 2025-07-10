@@ -1,0 +1,192 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --zyn-primary: #0066cc;
+  --zyn-secondary: #004499;
+  --zyn-accent: #00aaff;
+  --zyn-success: #00cc66;
+  --zyn-warning: #ff9900;
+  --zyn-danger: #ff3333;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+  color: #1a202c;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Custom Components */
+.btn {
+  @apply inline-flex items-center justify-center px-6 py-3 font-semibold rounded-lg transition-all duration-300 shadow-md hover:shadow-lg;
+}
+
+.btn-primary {
+  @apply bg-zyn-primary text-white hover:bg-zyn-secondary transform hover:-translate-y-0.5;
+}
+
+.btn-secondary {
+  @apply bg-transparent text-zyn-primary border-2 border-zyn-primary hover:bg-zyn-primary hover:text-white;
+}
+
+.btn-success {
+  @apply bg-zyn-success text-white hover:bg-green-600;
+}
+
+.btn-lg {
+  @apply px-8 py-4 text-lg;
+}
+
+.card {
+  @apply bg-white rounded-xl shadow-sm border border-gray-100 p-6 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:border-zyn-accent;
+}
+
+.product-image {
+  @apply h-48 bg-gradient-to-br from-blue-50 to-indigo-100 rounded-lg flex items-center justify-center text-gray-600 font-medium relative overflow-hidden;
+}
+
+.product-image::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent 49%, rgba(255,255,255,0.3) 50%, transparent 51%);
+  animation: shimmer 2s infinite;
+}
+
+.badge {
+  @apply inline-flex items-center px-3 py-1 text-xs font-semibold rounded-full uppercase tracking-wide;
+}
+
+.badge-success {
+  @apply bg-green-100 text-green-800;
+}
+
+.badge-warning {
+  @apply bg-yellow-100 text-yellow-800;
+}
+
+.badge-strength {
+  @apply bg-zyn-primary text-white;
+}
+
+.badge-flavor {
+  @apply bg-gray-100 text-gray-700;
+}
+
+.hero-gradient {
+  background: linear-gradient(135deg, var(--zyn-primary) 0%, var(--zyn-secondary) 50%, var(--zyn-accent) 100%);
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, var(--zyn-primary), #8b5cf6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.star-rating {
+  @apply flex text-yellow-400;
+}
+
+.star-rating svg {
+  @apply w-4 h-4 fill-current;
+}
+
+/* Loading Animation */
+.loading {
+  @apply inline-block w-5 h-5 border-2 border-gray-200 border-t-zyn-primary rounded-full animate-spin;
+}
+
+/* Notification */
+.notification {
+  @apply fixed top-5 right-5 bg-zyn-success text-white px-6 py-4 rounded-lg shadow-lg z-50 animate-fade-in-up;
+}
+
+/* Modal */
+.modal-overlay {
+  @apply fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-50 flex items-center justify-center;
+}
+
+.modal-content {
+  @apply bg-white rounded-xl shadow-xl max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto;
+}
+
+/* Cart Badge */
+.cart-badge {
+  @apply absolute -top-1 -right-1 bg-zyn-danger text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold;
+}
+
+/* Mobile Menu */
+.mobile-menu {
+  @apply fixed inset-0 bg-white z-40 transform transition-transform duration-300;
+}
+
+.mobile-menu.closed {
+  @apply translate-x-full;
+}
+
+/* Scroll Behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Focus Styles */
+.focus-ring {
+  @apply focus:outline-none focus:ring-2 focus:ring-zyn-primary focus:ring-offset-2;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.stagger-1 { animation-delay: 0.1s; animation-fill-mode: both; }
+.stagger-2 { animation-delay: 0.2s; animation-fill-mode: both; }
+.stagger-3 { animation-delay: 0.3s; animation-fill-mode: both; }
+.stagger-4 { animation-delay: 0.4s; animation-fill-mode: both; }
