@@ -69,10 +69,10 @@ export default function Categories() {
               </div>
               
               <div className="p-4 bg-white">
-                <button className="w-full flex items-center justify-center text-blue-600 hover:text-blue-700 font-medium group-hover:translate-x-1 transition-transform">
+                <a href="https://zylopouch.com/" className="w-full flex items-center justify-center text-blue-600 hover:text-blue-700 font-medium group-hover:translate-x-1 transition-transform">
                   Shop Now
                   <ArrowRight size={16} className="ml-2" />
-                </button>
+                </a>
               </div>
             </div>
           ))}

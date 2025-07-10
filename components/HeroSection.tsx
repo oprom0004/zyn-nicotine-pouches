@@ -39,10 +39,10 @@ export default function HeroSection() {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4">
-              <button className="group bg-white text-gray-900 px-8 py-4 rounded-2xl font-bold hover:shadow-2xl transition-all duration-300 flex items-center justify-center transform hover:scale-105">
+              <a href="https://zylopouch.com/" className="group bg-white text-gray-900 px-8 py-4 rounded-2xl font-bold hover:shadow-2xl transition-all duration-300 flex items-center justify-center transform hover:scale-105">
                 <span>Explore Collection</span>
                 <ArrowRight size={20} className="ml-2 group-hover:translate-x-1 transition-transform" />
-              </button>
+              </a>
               <button className="glass-effect text-white px-8 py-4 rounded-2xl font-semibold hover:bg-white hover:bg-opacity-30 transition-all duration-300">
                 Watch Story
               </button>

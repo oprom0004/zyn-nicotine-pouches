@@ -79,9 +79,9 @@ export default function Header() {
               </button>
 
               {/* CTA Button - Desktop */}
-              <button className="hidden md:block luxury-gradient text-white px-6 py-3 rounded-2xl font-bold hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+              <a href="https://zylopouch.com/" className="hidden md:block luxury-gradient text-white px-6 py-3 rounded-2xl font-bold hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
                 Shop Now
-              </button>
+              </a>
 
               {/* Mobile menu button */}
               <button
@@ -106,9 +106,9 @@ export default function Header() {
                     {item.name}
                   </Link>
                 ))}
-                <button className="luxury-gradient text-white py-4 rounded-2xl font-bold mt-4">
+                <a href="https://zylopouch.com/" className="luxury-gradient text-white py-4 rounded-2xl font-bold mt-4 text-center">
                   Shop Collection
-                </button>
+                </a>
               </nav>
             </div>
           )}
