@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { useCart } from '@/contexts/CartContext'
-import { Search, ShoppingCart, Menu, X, User } from 'lucide-react'
+import { Search, ShoppingCart, Menu, X, User, Sparkles } from 'lucide-react'
 import SearchModal from './SearchModal'
 import CartModal from './CartModal'
 
@@ -16,23 +16,24 @@ export default function Header() {
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0)
 
   const navigation = [
-    { name: 'Home', href: '/' },
-    { name: 'Products', href: '/products' },
+    { name: 'Collection', href: '/products' },
     { name: 'About', href: '/about' },
-    { name: 'Contact', href: '/contact' },
+    { name: 'Experience', href: '/contact' },
   ]
 
   return (
     <>
-      <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-lg border-b border-gray-200 shadow-sm">
+      <header className="glass-effect sticky top-0 z-40 border-b border-white/20">
         <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between h-16">
+          <div className="flex items-center justify-between h-20">
             {/* Logo */}
             <Link href="/" className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-zyn-primary rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-xl">Z</span>
+              <div className="w-12 h-12 luxury-gradient rounded-2xl flex items-center justify-center">
+                <Sparkles className="text-white" size={24} />
               </div>
-              <span className="text-2xl font-bold text-gray-900">Zyn</span>
+              <span className="text-2xl font-black text-gray-900">
+                <span className="font-serif italic">Zyn</span>
+              </span>
             </Link>
 
             {/* Desktop Navigation */}
@@ -41,123 +42,82 @@ export default function Header() {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="text-gray-600 hover:text-zyn-primary font-medium transition-colors duration-200 relative group"
+                  className="relative text-gray-700 hover:text-gray-900 font-medium transition-all duration-300 group"
                 >
                   {item.name}
-                  <span className="absolute inset-x-0 -bottom-1 h-0.5 bg-zyn-primary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-200"></span>
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 luxury-gradient transition-all duration-300 group-hover:w-full"></span>
                 </Link>
               ))}
             </nav>
 
-            {/* Right Side Actions */}
-            <div className="flex items-center space-x-4">
-              {/* Search Button */}
+            {/* Actions */}
+            <div className="flex items-center space-x-2">
+              {/* Search */}
               <button
                 onClick={() => setIsSearchOpen(true)}
-                className="p-2 text-gray-600 hover:text-zyn-primary transition-colors duration-200"
-                aria-label="Search products"
+                className="w-12 h-12 glass-effect rounded-2xl flex items-center justify-center text-gray-700 hover:text-gray-900 transition-all duration-300 hover:scale-105"
               >
-                <Search className="w-6 h-6" />
+                <Search size={20} />
               </button>
 
-              {/* Cart Button */}
+              {/* Cart */}
               <button
                 onClick={() => setIsCartOpen(true)}
-                className="relative p-2 text-gray-600 hover:text-zyn-primary transition-colors duration-200"
-                aria-label="Shopping cart"
+                className="relative w-12 h-12 glass-effect rounded-2xl flex items-center justify-center text-gray-700 hover:text-gray-900 transition-all duration-300 hover:scale-105"
               >
-                <ShoppingCart className="w-6 h-6" />
+                <ShoppingCart size={20} />
                 {totalItems > 0 && (
-                  <span className="cart-badge">
-                    {totalItems > 99 ? '99+' : totalItems}
+                  <span className="absolute -top-2 -right-2 premium-gradient text-white text-xs rounded-full w-6 h-6 flex items-center justify-center font-bold shadow-lg animate-pulse">
+                    {totalItems}
                   </span>
                 )}
               </button>
 
-              {/* Account Button */}
-              <Link
-                href="/account"
-                className="hidden md:flex items-center space-x-2 px-4 py-2 text-gray-600 hover:text-zyn-primary transition-colors duration-200"
-              >
-                <User className="w-5 h-5" />
-                <span>Account</span>
-              </Link>
+              {/* User */}
+              <button className="w-12 h-12 glass-effect rounded-2xl flex items-center justify-center text-gray-700 hover:text-gray-900 transition-all duration-300 hover:scale-105">
+                <User size={20} />
+              </button>
 
-              {/* Sign In Button */}
-              <Link href="/account" className="hidden md:block btn btn-primary">
-                Sign In
-              </Link>
+              {/* CTA Button - Desktop */}
+              <button className="hidden md:block luxury-gradient text-white px-6 py-3 rounded-2xl font-bold hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+                Shop Now
+              </button>
 
-              {/* Mobile Menu Button */}
+              {/* Mobile menu button */}
               <button
-                onClick={() => setIsMobileMenuOpen(true)}
-                className="md:hidden p-2 text-gray-600 hover:text-zyn-primary transition-colors duration-200"
-                aria-label="Open menu"
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="md:hidden w-12 h-12 glass-effect rounded-2xl flex items-center justify-center text-gray-700 hover:text-gray-900 transition-all duration-300"
               >
-                <Menu className="w-6 h-6" />
+                {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
               </button>
             </div>
           </div>
+
+          {/* Mobile Navigation */}
+          {isMobileMenuOpen && (
+            <div className="md:hidden border-t border-white/20 py-6">
+              <nav className="flex flex-col space-y-4">
+                {navigation.map((item) => (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className="text-gray-700 hover:text-gray-900 font-medium py-3 px-4 rounded-2xl hover:bg-white/50 transition-all duration-300"
+                  >
+                    {item.name}
+                  </Link>
+                ))}
+                <button className="luxury-gradient text-white py-4 rounded-2xl font-bold mt-4">
+                  Shop Collection
+                </button>
+              </nav>
+            </div>
+          )}
         </div>
       </header>
 
-      {/* Mobile Menu */}
-      <div className={`mobile-menu ${isMobileMenuOpen ? '' : 'closed'}`}>
-        <div className="flex items-center justify-between p-4 border-b">
-          <div className="flex items-center space-x-3">
-            <div className="w-8 h-8 bg-zyn-primary rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold">Z</span>
-            </div>
-            <span className="text-xl font-bold text-gray-900">Zyn</span>
-          </div>
-          <button
-            onClick={() => setIsMobileMenuOpen(false)}
-            className="p-2 text-gray-600"
-          >
-            <X className="w-6 h-6" />
-          </button>
-        </div>
-        
-        <nav className="p-4 space-y-4">
-          {navigation.map((item) => (
-            <Link
-              key={item.name}
-              href={item.href}
-              className="block py-2 text-lg font-medium text-gray-900 hover:text-zyn-primary"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              {item.name}
-            </Link>
-          ))}
-          <Link
-            href="/account"
-            className="block py-2 text-lg font-medium text-gray-900 hover:text-zyn-primary"
-            onClick={() => setIsMobileMenuOpen(false)}
-          >
-            Account
-          </Link>
-        </nav>
-      </div>
-
-      {/* Search Modal */}
-      <SearchModal
-        isOpen={isSearchOpen}
-        onClose={() => setIsSearchOpen(false)}
-      />
-
-      {/* Cart Modal */}
-      <CartModal
-        isOpen={isCartOpen}
-        onClose={() => setIsCartOpen(false)}
-      />
-
-      {/* Mobile Menu Overlay */}
-      {isMobileMenuOpen && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-25 z-30"
-          onClick={() => setIsMobileMenuOpen(false)}
-        />
-      )}
+      {/* Modals */}
+      <SearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
+      <CartModal isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
     </>
   )
 }
