@@ -7,7 +7,7 @@ const categories = [
     id: 1,
     name: 'Cool Mint',
     description: 'Refreshing mint flavor',
-    image: '/api/placeholder/200/200',
+    image: 'https://via.placeholder.com/200x200/3B82F6/FFFFFF?text=Cat',
     productCount: 8,
     color: 'bg-green-100'
   },
@@ -15,7 +15,7 @@ const categories = [
     id: 2,
     name: 'Citrus',
     description: 'Zesty citrus burst',
-    image: '/api/placeholder/200/200',
+    image: 'https://via.placeholder.com/200x200/3B82F6/FFFFFF?text=Cat',
     productCount: 6,
     color: 'bg-orange-100'
   },
@@ -23,7 +23,7 @@ const categories = [
     id: 3,
     name: 'Coffee',
     description: 'Rich coffee taste',
-    image: '/api/placeholder/200/200',
+    image: 'https://via.placeholder.com/200x200/3B82F6/FFFFFF?text=Cat',
     productCount: 4,
     color: 'bg-amber-100'
   },
@@ -31,7 +31,7 @@ const categories = [
     id: 4,
     name: 'Berry',
     description: 'Sweet berry blend',
-    image: '/api/placeholder/200/200',
+    image: 'https://via.placeholder.com/200x200/3B82F6/FFFFFF?text=Cat',
     productCount: 5,
     color: 'bg-purple-100'
   }

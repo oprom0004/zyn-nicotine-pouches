@@ -4,15 +4,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
-:root {
-  --zyn-primary: #0066cc;
-  --zyn-secondary: #004499;
-  --zyn-accent: #00aaff;
-  --zyn-success: #00cc66;
-  --zyn-warning: #ff9900;
-  --zyn-danger: #ff3333;
-}
-
 * {
   box-sizing: border-box;
   padding: 0;
@@ -26,16 +17,7 @@ body {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   line-height: 1.6;
   color: #1a202c;
-}
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background: #ffffff;
 }
 
 a {
