@@ -2,13 +2,15 @@ import { products } from '@/data/products'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 
-export default function ProductPage({ params }: { params: { id: string } }) {
+export default async function ProductPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
+  
   // 尝试按id查找产品
-  let product = products.find(p => p.id === parseInt(params.id))
+  let product = products.find(p => p.id === parseInt(id))
   
   // 如果按id找不到，尝试按slug查找
   if (!product) {
-    product = products.find(p => p.slug === params.id)
+    product = products.find(p => p.slug === id)
   }
 
   if (!product) {
