@@ -59,7 +59,7 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
     : 0
 
   return (
-    <Link href={`/products/${product.slug}`} className="group">
+    <Link href={`/${product.slug}`} className="group">
       <div className={`card cursor-pointer animate-fade-in-up stagger-${(index % 4) + 1}`}>
         {/* Product Image */}
         <div className="relative mb-4">
