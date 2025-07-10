@@ -5,16 +5,16 @@ export default function NotFound() {
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
       <div className="text-center space-y-6">
         <div className="text-8xl font-bold text-gray-300">404</div>
-        <h1 className="text-4xl font-bold text-gray-900">Nicotine Pouch Not Found</h1>
+        <h1 className="text-4xl font-bold text-gray-900">Product Not Found</h1>
         <p className="text-xl text-gray-600 max-w-lg mx-auto">
-          The nicotine pouch you're looking for doesn't exist or has been moved.
+          The product you're looking for doesn't exist.
         </p>
         <div className="space-y-4">
           <Link 
             href="/products"
-            className="inline-block luxury-gradient text-white px-8 py-4 rounded-2xl font-bold hover:shadow-lg transition-all"
+            className="inline-block bg-blue-600 text-white px-8 py-4 rounded-lg font-bold hover:bg-blue-700 transition-all"
           >
-            Browse All Nicotine Pouches
+            Browse All Products
           </Link>
           <div>
             <Link 
