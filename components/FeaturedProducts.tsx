@@ -57,8 +57,11 @@ export default function FeaturedProducts() {
                 <div className="aspect-square bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center relative overflow-hidden">
                   <img 
                     src={product.imageUrl || 'https://via.placeholder.com/300x300/3B82F6/FFFFFF?text=Zyn'} 
-                    alt={product.name}
+                    alt={`${product.name} - ${product.flavor} ${product.strength} nicotine pouches - Premium tobacco-free smokeless pouches`}
+                    title={`${product.name} | ${product.flavor} flavor, ${product.strength} strength`}
                     className="w-32 h-32 object-cover rounded-2xl shadow-lg transform group-hover:scale-110 transition-transform duration-500"
+                    loading="eager"
+                    decoding="async"
                   />
                   {/* 动态背景效果 */}
                   <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>

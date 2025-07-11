@@ -1,5 +1,4 @@
 import { Metadata } from 'next'
-import ProductsClient from './ProductsClient'
 
 export const metadata: Metadata = {
   title: 'Shop All Nicotine Pouches | Zyn Tobacco-Free Pouches Collection',
@@ -53,8 +52,4 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-}
-
-export default function ProductsPage() {
-  return <ProductsClient />
 }
