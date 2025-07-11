@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     : 0
 
   return {
-    title: `${product.name} | ${product.flavor} ${product.strength} Nicotine Pouches`,
+    title: `Buy Nicotine pouches ${product.flavor} ${product.strength} Online - Zyn, On premium flavor, perfect strength`,
     description: `Buy ${product.name} - ${product.flavor} flavored ${product.strength} nicotine pouches. ${product.description} ${discountPercent > 0 ? `Save ${discountPercent}%!` : ''} Free shipping over $25. Adults 21+.`,
     keywords: [
       product.name.toLowerCase(),
