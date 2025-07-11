@@ -363,18 +363,26 @@ export default function ProductContent({ product }: { product: any }) {
               </div>
 
               {/* Key Features */}
-              <div className="grid grid-cols-3 gap-4">
-                <div className="text-center p-4 bg-gray-50 rounded-xl">
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                <div className="text-center p-4 bg-green-50 border border-green-200 rounded-xl">
                   <Shield className="mx-auto mb-2 text-green-600" size={24} />
-                  <div className="text-sm font-medium text-gray-900">Tobacco-Free</div>
+                  <div className="text-sm font-bold text-green-800">Tobacco-Free</div>
+                  <div className="text-xs text-green-600">100% Natural</div>
                 </div>
-                <div className="text-center p-4 bg-gray-50 rounded-xl">
-                  <Award className="mx-auto mb-2 text-blue-600" size={24} />
-                  <div className="text-sm font-medium text-gray-900">Premium Quality</div>
+                <div className="text-center p-4 bg-blue-50 border border-blue-200 rounded-xl">
+                  <Truck className="mx-auto mb-2 text-blue-600" size={24} />
+                  <div className="text-sm font-bold text-blue-800">Free Shipping</div>
+                  <div className="text-xs text-blue-600">Orders $25+</div>
                 </div>
-                <div className="text-center p-4 bg-gray-50 rounded-xl">
-                  <Truck className="mx-auto mb-2 text-purple-600" size={24} />
-                  <div className="text-sm font-medium text-gray-900">Fast Shipping</div>
+                <div className="text-center p-4 bg-purple-50 border border-purple-200 rounded-xl">
+                  <Award className="mx-auto mb-2 text-purple-600" size={24} />
+                  <div className="text-sm font-bold text-purple-800">30-Day Return</div>
+                  <div className="text-xs text-purple-600">Money Back</div>
+                </div>
+                <div className="text-center p-4 bg-orange-50 border border-orange-200 rounded-xl">
+                  <Package className="mx-auto mb-2 text-orange-600" size={24} />
+                  <div className="text-sm font-bold text-orange-800">Premium Quality</div>
+                  <div className="text-xs text-orange-600">Lab Tested</div>
                 </div>
               </div>
 
@@ -404,17 +412,33 @@ export default function ProductContent({ product }: { product: any }) {
                   </div>
                 </div>
                 
-                <div className="flex space-x-4">
-                  <button className="flex-1 bg-blue-600 text-white py-4 rounded-xl font-bold hover:bg-blue-700 transition-all duration-300 flex items-center justify-center">
-                    <ShoppingCart size={20} className="mr-2" />
-                    Add to Cart
-                  </button>
-                  <button className="bg-gray-100 p-4 rounded-xl hover:bg-gray-200 transition-colors">
-                    <Heart size={20} />
-                  </button>
-                  <button className="bg-gray-100 p-4 rounded-xl hover:bg-gray-200 transition-colors">
-                    <Share2 size={20} />
-                  </button>
+                <div className="space-y-4">
+                  <div className="flex space-x-4">
+                    <button className="flex-1 bg-blue-600 text-white py-4 rounded-xl font-bold hover:bg-blue-700 transition-all duration-300 flex items-center justify-center">
+                      <ShoppingCart size={20} className="mr-2" />
+                      Add to Cart
+                    </button>
+                    <button className="bg-gray-100 p-4 rounded-xl hover:bg-gray-200 transition-colors">
+                      <Heart size={20} />
+                    </button>
+                    <button className="bg-gray-100 p-4 rounded-xl hover:bg-gray-200 transition-colors">
+                      <Share2 size={20} />
+                    </button>
+                  </div>
+                  
+                  {/* Purchase Guarantees */}
+                  <div className="bg-green-50 border border-green-200 rounded-xl p-4">
+                    <div className="flex items-center justify-center space-x-6 text-sm">
+                      <div className="flex items-center text-green-700">
+                        <Truck size={16} className="mr-1" />
+                        <span className="font-medium">FREE shipping on $25+</span>
+                      </div>
+                      <div className="flex items-center text-green-700">
+                        <Shield size={16} className="mr-1" />
+                        <span className="font-medium">30-day money back</span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
 
