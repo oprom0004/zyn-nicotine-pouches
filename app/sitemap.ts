@@ -64,5 +64,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }))
 
-  return [...staticPages, ...productPages, ...categoryPages, ...strengthPages]
+  // Flavor category pages
+  const flavorPages = [
+    'mint-flavors-nicotine-pouches',
+    'wintergreen-flavors-nicotine-pouches', 
+    'citrus-flavors-nicotine-pouches',
+    'berry-flavors-nicotine-pouches'
+  ].map((flavor) => ({
+    url: `${baseUrl}/flavors/${flavor}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: 0.9,
+  }))
+
+  return [...staticPages, ...productPages, ...categoryPages, ...strengthPages, ...flavorPages]
 }
