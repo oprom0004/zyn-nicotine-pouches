@@ -6,7 +6,6 @@ import { Star, Plus, Minus, ShoppingCart, Heart, Share2, Shield, Truck, Award, I
 export default function ProductContent({ product }: { product: any }) {
   const [quantity, setQuantity] = useState(1)
   const [selectedImage, setSelectedImage] = useState(0)
-  const [activeTab, setActiveTab] = useState('overview')
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null)
   const [showAllReviews, setShowAllReviews] = useState(false)
 
@@ -301,276 +300,263 @@ export default function ProductContent({ product }: { product: any }) {
         </div>
       </section>
 
-      {/* Detailed Content Tabs */}
+      {/* Product Overview Section */}
       <section className="py-12 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            {/* Tab Navigation */}
-            <div className="flex flex-wrap space-x-1 mb-8 bg-white rounded-xl p-2">
-              {[
-                { id: 'overview', label: 'Overview' },
-                { id: 'specifications', label: 'Specifications' },
-                { id: 'guide', label: 'Buying Guide' },
-                { id: 'faq', label: 'FAQ' },
-                { id: 'reviews', label: 'Reviews' }
-              ].map((tab) => (
-                <button
-                  key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
-                  className={`flex-1 py-3 px-6 rounded-lg font-medium transition-all ${
-                    activeTab === tab.id 
-                      ? 'bg-blue-600 text-white' 
-                      : 'text-gray-600 hover:text-gray-900'
-                  }`}
-                >
-                  {tab.label}
-                </button>
-              ))}
+            <div className="bg-white rounded-xl p-8 mb-8">
+              <h3 className="text-2xl font-bold text-gray-900 mb-6">
+                About {product.name} Nicotine Pouches
+              </h3>
+              <p className="text-lg text-gray-600 leading-relaxed mb-8">
+                {product.description} This premium nicotine pouch delivers consistent 
+                satisfaction with every use. Our tobacco-free formula ensures a clean, 
+                smokeless experience perfect for modern lifestyles.
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                  <h4 className="font-semibold text-gray-900 mb-4">Key Features:</h4>
+                  <ul className="space-y-2 text-gray-600">
+                    <li>• 100% tobacco-free nicotine pouches</li>
+                    <li>• {product.strength} nicotine strength</li>
+                    <li>• Premium {product.flavor} flavor</li>
+                    <li>• Discreet and convenient</li>
+                    <li>• No spitting required</li>
+                    <li>• 20 pouches per can</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 className="font-semibold text-gray-900 mb-4">Benefits:</h4>
+                  <ul className="space-y-2 text-gray-600">
+                    <li>• Smoke-free nicotine delivery</li>
+                    <li>• Long-lasting satisfaction</li>
+                    <li>• Stain-free teeth</li>
+                    <li>• Travel-friendly packaging</li>
+                    <li>• No harmful combustion</li>
+                    <li>• Adult 21+ use only</li>
+                  </ul>
+                </div>
+              </div>
             </div>
+          </div>
+        </div>
+      </section>
 
-            {/* Tab Content */}
-            <div className="bg-white rounded-xl p-8">
-              {/* Overview Tab */}
-              {activeTab === 'overview' && (
-                <div className="space-y-6">
-                  <h3 className="text-2xl font-bold text-gray-900">
-                    About {product.name} Nicotine Pouches
-                  </h3>
-                  <p className="text-lg text-gray-600 leading-relaxed">
-                    {product.description} This premium nicotine pouch delivers consistent 
-                    satisfaction with every use. Our tobacco-free formula ensures a clean, 
-                    smokeless experience perfect for modern lifestyles.
-                  </p>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <h4 className="font-semibold text-gray-900 mb-3">Key Features:</h4>
-                      <ul className="space-y-2 text-gray-600">
-                        <li>• 100% tobacco-free nicotine pouches</li>
-                        <li>• {product.strength} nicotine strength</li>
-                        <li>• Premium {product.flavor} flavor</li>
-                        <li>• Discreet and convenient</li>
-                        <li>• No spitting required</li>
-                        <li>• 20 pouches per can</li>
-                      </ul>
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-gray-900 mb-3">Benefits:</h4>
-                      <ul className="space-y-2 text-gray-600">
-                        <li>• Smoke-free nicotine delivery</li>
-                        <li>• Long-lasting satisfaction</li>
-                        <li>• Stain-free teeth</li>
-                        <li>• Travel-friendly packaging</li>
-                        <li>• No harmful combustion</li>
-                        <li>• Adult 21+ use only</li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {/* Specifications Tab */}
-              {activeTab === 'specifications' && (
-                <div className="space-y-6">
-                  <h3 className="text-2xl font-bold text-gray-900">Product Specifications</h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div>
-                      <h4 className="font-semibold text-gray-900 mb-4">Technical Details</h4>
-                      <div className="space-y-3">
-                        {specifications.map((spec, index) => (
-                          <div key={index} className="flex justify-between py-2 border-b border-gray-100">
-                            <span className="text-gray-600">{spec.label}</span>
-                            <span className="font-medium text-gray-900">{spec.value}</span>
-                          </div>
-                        ))}
+      {/* Product Specifications Section */}
+      <section className="py-12">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <div className="bg-white rounded-xl p-8 mb-8">
+              <h3 className="text-2xl font-bold text-gray-900 mb-6">Product Specifications</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                  <h4 className="font-semibold text-gray-900 mb-4">Technical Details</h4>
+                  <div className="space-y-3">
+                    {specifications.map((spec, index) => (
+                      <div key={index} className="flex justify-between py-2 border-b border-gray-100">
+                        <span className="text-gray-600">{spec.label}</span>
+                        <span className="font-medium text-gray-900">{spec.value}</span>
                       </div>
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-gray-900 mb-4">Ingredients</h4>
-                      <div className="space-y-3">
-                        <div>
-                          <h5 className="font-medium text-gray-900 mb-2">Contains:</h5>
-                          <ul className="space-y-1 text-gray-600 text-sm">
-                            <li>• Pharmaceutical-grade nicotine</li>
-                            <li>• Natural plant fibers</li>
-                            <li>• Food-grade flavorings</li>
-                            <li>• Stabilizers and pH adjusters</li>
-                            <li>• Natural sweeteners</li>
-                          </ul>
-                        </div>
-                        <div>
-                          <h5 className="font-medium text-gray-900 mb-2">Does NOT contain:</h5>
-                          <ul className="space-y-1 text-gray-600 text-sm">
-                            <li>• Tobacco leaf or stems</li>
-                            <li>• Artificial colors</li>
-                            <li>• Harmful chemicals</li>
-                            <li>• Combustion byproducts</li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
+                    ))}
                   </div>
                 </div>
-              )}
-
-              {/* Buying Guide Tab */}
-              {activeTab === 'guide' && (
-                <div className="space-y-6">
-                  <h3 className="text-2xl font-bold text-gray-900">Choosing the Right Strength</h3>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div className={`p-6 rounded-xl border-2 ${product.strength === '3mg' ? 'border-green-500 bg-green-50' : 'border-gray-200'}`}>
-                      <h4 className="font-semibold text-gray-900 mb-2">Beginner (3mg)</h4>
-                      <p className="text-gray-600 text-sm mb-3">New to nicotine pouches or light tobacco users</p>
-                      <p className="text-sm font-medium">{buyingGuide.beginner}</p>
-                    </div>
-                    <div className={`p-6 rounded-xl border-2 ${product.strength === '6mg' ? 'border-blue-500 bg-blue-50' : 'border-gray-200'}`}>
-                      <h4 className="font-semibold text-gray-900 mb-2">Regular (6mg)</h4>
-                      <p className="text-gray-600 text-sm mb-3">Moderate nicotine users and daily users</p>
-                      <p className="text-sm font-medium">{buyingGuide.regular}</p>
-                    </div>
-                    <div className={`p-6 rounded-xl border-2 ${product.strength === '9mg' ? 'border-red-500 bg-red-50' : 'border-gray-200'}`}>
-                      <h4 className="font-semibold text-gray-900 mb-2">Strong (9mg+)</h4>
-                      <p className="text-gray-600 text-sm mb-3">Heavy users and experienced nicotine users</p>
-                      <p className="text-sm font-medium">{buyingGuide.experienced}</p>
-                    </div>
-                  </div>
-                  
-                  <div className="bg-blue-50 rounded-xl p-6">
-                    <h4 className="font-semibold text-blue-900 mb-3">Usage Instructions</h4>
-                    <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                      {[
-                        { step: 1, title: 'Open Can', desc: 'Remove one pouch from the can' },
-                        { step: 2, title: 'Place Pouch', desc: 'Position under your upper lip' },
-                        { step: 3, title: 'Enjoy', desc: 'Leave for 30-60 minutes' },
-                        { step: 4, title: 'Dispose', desc: 'Remove and dispose responsibly' }
-                      ].map((item) => (
-                        <div key={item.step} className="text-center">
-                          <div className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-sm mx-auto mb-3">
-                            {item.step}
-                          </div>
-                          <h5 className="font-medium text-gray-900 mb-1 text-sm">{item.title}</h5>
-                          <p className="text-xs text-gray-600">{item.desc}</p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {/* FAQ Tab */}
-              {activeTab === 'faq' && (
-                <div className="space-y-6">
-                  <h3 className="text-2xl font-bold text-gray-900">Frequently Asked Questions</h3>
+                <div>
+                  <h4 className="font-semibold text-gray-900 mb-4">Ingredients</h4>
                   <div className="space-y-4">
-                    {faqs.map((faq, index) => (
-                      <div key={index} className="border border-gray-200 rounded-xl">
-                        <button
-                          onClick={() => setExpandedFaq(expandedFaq === index ? null : index)}
-                          className="w-full p-6 text-left flex items-center justify-between hover:bg-gray-50 transition-colors"
-                        >
-                          <span className="font-medium text-gray-900">{faq.question}</span>
-                          {expandedFaq === index ? (
-                            <ChevronUp className="text-gray-500" size={20} />
-                          ) : (
-                            <ChevronDown className="text-gray-500" size={20} />
-                          )}
-                        </button>
-                        {expandedFaq === index && (
-                          <div className="px-6 pb-6 text-gray-600">
-                            {faq.answer}
-                          </div>
-                        )}
-                      </div>
-                    ))}
+                    <div>
+                      <h5 className="font-medium text-gray-900 mb-2">Contains:</h5>
+                      <ul className="space-y-1 text-gray-600 text-sm">
+                        <li>• Pharmaceutical-grade nicotine</li>
+                        <li>• Natural plant fibers</li>
+                        <li>• Food-grade flavorings</li>
+                        <li>• Stabilizers and pH adjusters</li>
+                        <li>• Natural sweeteners</li>
+                      </ul>
+                    </div>
+                    <div>
+                      <h5 className="font-medium text-gray-900 mb-2">Does NOT contain:</h5>
+                      <ul className="space-y-1 text-gray-600 text-sm">
+                        <li>• Tobacco leaf or stems</li>
+                        <li>• Artificial colors</li>
+                        <li>• Harmful chemicals</li>
+                        <li>• Combustion byproducts</li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
-              )}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-              {/* Reviews Tab */}
-              {activeTab === 'reviews' && (
-                <div className="space-y-6">
-                  <div className="flex items-center justify-between">
-                    <h3 className="text-2xl font-bold text-gray-900">Customer Reviews</h3>
-                    <button className="bg-blue-600 text-white px-6 py-3 rounded-xl font-medium hover:bg-blue-700 transition-colors">
-                      Write Review
+      {/* Buying Guide Section */}
+      <section className="py-12 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <div className="bg-white rounded-xl p-8 mb-8">
+              <h3 className="text-2xl font-bold text-gray-900 mb-6">Choosing the Right Strength</h3>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div className={`p-6 rounded-xl border-2 ${product.strength === '3mg' ? 'border-green-500 bg-green-50' : 'border-gray-200'}`}>
+                  <h4 className="font-semibold text-gray-900 mb-2">Beginner (3mg)</h4>
+                  <p className="text-gray-600 text-sm mb-3">New to nicotine pouches or light tobacco users</p>
+                  <p className="text-sm font-medium">{buyingGuide.beginner}</p>
+                </div>
+                <div className={`p-6 rounded-xl border-2 ${product.strength === '6mg' ? 'border-blue-500 bg-blue-50' : 'border-gray-200'}`}>
+                  <h4 className="font-semibold text-gray-900 mb-2">Regular (6mg)</h4>
+                  <p className="text-gray-600 text-sm mb-3">Moderate nicotine users and daily users</p>
+                  <p className="text-sm font-medium">{buyingGuide.regular}</p>
+                </div>
+                <div className={`p-6 rounded-xl border-2 ${product.strength === '9mg' ? 'border-red-500 bg-red-50' : 'border-gray-200'}`}>
+                  <h4 className="font-semibold text-gray-900 mb-2">Strong (9mg+)</h4>
+                  <p className="text-gray-600 text-sm mb-3">Heavy users and experienced nicotine users</p>
+                  <p className="text-sm font-medium">{buyingGuide.experienced}</p>
+                </div>
+              </div>
+              
+              <div className="bg-blue-50 rounded-xl p-6">
+                <h4 className="font-semibold text-blue-900 mb-3">Usage Instructions</h4>
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                  {[
+                    { step: 1, title: 'Open Can', desc: 'Remove one pouch from the can' },
+                    { step: 2, title: 'Place Pouch', desc: 'Position under your upper lip' },
+                    { step: 3, title: 'Enjoy', desc: 'Leave for 30-60 minutes' },
+                    { step: 4, title: 'Dispose', desc: 'Remove and dispose responsibly' }
+                  ].map((item) => (
+                    <div key={item.step} className="text-center">
+                      <div className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-sm mx-auto mb-3">
+                        {item.step}
+                      </div>
+                      <h5 className="font-medium text-gray-900 mb-1 text-sm">{item.title}</h5>
+                      <p className="text-xs text-gray-600">{item.desc}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-12">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <div className="bg-white rounded-xl p-8 mb-8">
+              <h3 className="text-2xl font-bold text-gray-900 mb-6">Frequently Asked Questions</h3>
+              <div className="space-y-4">
+                {faqs.map((faq, index) => (
+                  <div key={index} className="border border-gray-200 rounded-xl">
+                    <button
+                      onClick={() => setExpandedFaq(expandedFaq === index ? null : index)}
+                      className="w-full p-6 text-left flex items-center justify-between hover:bg-gray-50 transition-colors"
+                    >
+                      <span className="font-medium text-gray-900">{faq.question}</span>
+                      {expandedFaq === index ? (
+                        <ChevronUp className="text-gray-500" size={20} />
+                      ) : (
+                        <ChevronDown className="text-gray-500" size={20} />
+                      )}
                     </button>
-                  </div>
-                  
-                  {/* Review Summary */}
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-6 bg-gray-50 rounded-xl">
-                    <div className="text-center">
-                      <div className="text-4xl font-bold text-gray-900 mb-2">{product.rating}</div>
-                      <div className="flex justify-center text-yellow-400 mb-2">
-                        {[...Array(5)].map((_, i) => (
-                          <Star key={i} size={20} fill={i < Math.floor(product.rating) ? "currentColor" : "none"} />
-                        ))}
+                    {expandedFaq === index && (
+                      <div className="px-6 pb-6 text-gray-600">
+                        {faq.answer}
                       </div>
-                      <div className="text-gray-600">Based on {product.reviews} reviews</div>
-                    </div>
-                    <div className="col-span-2">
-                      {[5,4,3,2,1].map(rating => (
-                        <div key={rating} className="flex items-center space-x-3 mb-2">
-                          <span className="w-3 text-sm">{rating}</span>
-                          <Star size={16} className="text-yellow-400" fill="currentColor" />
-                          <div className="flex-1 bg-gray-200 rounded-full h-2">
-                            <div 
-                              className="bg-yellow-400 h-2 rounded-full" 
-                              style={{width: `${rating === 5 ? 70 : rating === 4 ? 20 : rating === 3 ? 7 : rating === 2 ? 2 : 1}%`}}
-                            ></div>
-                          </div>
-                          <span className="text-sm text-gray-600 w-8">
-                            {rating === 5 ? '70%' : rating === 4 ? '20%' : rating === 3 ? '7%' : rating === 2 ? '2%' : '1%'}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
+                    )}
                   </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-                  {/* Reviews List */}
-                  <div className="space-y-6">
-                    {(showAllReviews ? reviews : reviews.slice(0, 3)).map((review, index) => (
-                      <div key={index} className="border border-gray-200 rounded-xl p-6">
-                        <div className="flex items-center justify-between mb-4">
-                          <div className="flex items-center space-x-3">
-                            <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white font-bold">
-                              {review.name.charAt(0)}
-                            </div>
-                            <div>
-                              <div className="flex items-center space-x-2">
-                                <span className="font-medium text-gray-900">{review.name}</span>
-                                {review.verified && (
-                                  <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">Verified</span>
-                                )}
-                              </div>
-                              <div className="text-sm text-gray-500">{review.date}</div>
-                            </div>
-                          </div>
-                          <div className="flex text-yellow-400">
-                            {[...Array(review.rating)].map((_, i) => (
-                              <Star key={i} size={16} fill="currentColor" />
-                            ))}
-                          </div>
-                        </div>
-                        <p className="text-gray-600 mb-4">{review.review}</p>
-                        <div className="flex items-center justify-between text-sm">
-                          <button className="text-gray-500 hover:text-gray-700">
-                            👍 Helpful ({review.helpful})
-                          </button>
-                          <button className="text-gray-500 hover:text-gray-700">Report</button>
-                        </div>
-                      </div>
+      {/* Customer Reviews Section */}
+      <section className="py-12 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <div className="bg-white rounded-xl p-8">
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="text-2xl font-bold text-gray-900">Customer Reviews</h3>
+                <button className="bg-blue-600 text-white px-6 py-3 rounded-xl font-medium hover:bg-blue-700 transition-colors">
+                  Write Review
+                </button>
+              </div>
+              
+              {/* Review Summary */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-6 bg-gray-50 rounded-xl mb-8">
+                <div className="text-center">
+                  <div className="text-4xl font-bold text-gray-900 mb-2">{product.rating}</div>
+                  <div className="flex justify-center text-yellow-400 mb-2">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} size={20} fill={i < Math.floor(product.rating) ? "currentColor" : "none"} />
                     ))}
                   </div>
-
-                  {reviews.length > 3 && (
-                    <div className="text-center">
-                      <button
-                        onClick={() => setShowAllReviews(!showAllReviews)}
-                        className="bg-gray-100 text-gray-700 px-6 py-3 rounded-xl font-medium hover:bg-gray-200 transition-colors"
-                      >
-                        {showAllReviews ? 'Show Less' : `Show All ${reviews.length} Reviews`}
-                      </button>
+                  <div className="text-gray-600">Based on {product.reviews} reviews</div>
+                </div>
+                <div className="col-span-2">
+                  {[5,4,3,2,1].map(rating => (
+                    <div key={rating} className="flex items-center space-x-3 mb-2">
+                      <span className="w-3 text-sm">{rating}</span>
+                      <Star size={16} className="text-yellow-400" fill="currentColor" />
+                      <div className="flex-1 bg-gray-200 rounded-full h-2">
+                        <div 
+                          className="bg-yellow-400 h-2 rounded-full" 
+                          style={{width: `${rating === 5 ? 70 : rating === 4 ? 20 : rating === 3 ? 7 : rating === 2 ? 2 : 1}%`}}
+                        ></div>
+                      </div>
+                      <span className="text-sm text-gray-600 w-8">
+                        {rating === 5 ? '70%' : rating === 4 ? '20%' : rating === 3 ? '7%' : rating === 2 ? '2%' : '1%'}
+                      </span>
                     </div>
-                  )}
+                  ))}
+                </div>
+              </div>
+
+              {/* Reviews List */}
+              <div className="space-y-6">
+                {(showAllReviews ? reviews : reviews.slice(0, 3)).map((review, index) => (
+                  <div key={index} className="border border-gray-200 rounded-xl p-6">
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white font-bold">
+                          {review.name.charAt(0)}
+                        </div>
+                        <div>
+                          <div className="flex items-center space-x-2">
+                            <span className="font-medium text-gray-900">{review.name}</span>
+                            {review.verified && (
+                              <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">Verified</span>
+                            )}
+                          </div>
+                          <div className="text-sm text-gray-500">{review.date}</div>
+                        </div>
+                      </div>
+                      <div className="flex text-yellow-400">
+                        {[...Array(review.rating)].map((_, i) => (
+                          <Star key={i} size={16} fill="currentColor" />
+                        ))}
+                      </div>
+                    </div>
+                    <p className="text-gray-600 mb-4">{review.review}</p>
+                    <div className="flex items-center justify-between text-sm">
+                      <button className="text-gray-500 hover:text-gray-700">
+                        👍 Helpful ({review.helpful})
+                      </button>
+                      <button className="text-gray-500 hover:text-gray-700">Report</button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {reviews.length > 3 && (
+                <div className="text-center mt-8">
+                  <button
+                    onClick={() => setShowAllReviews(!showAllReviews)}
+                    className="bg-gray-100 text-gray-700 px-6 py-3 rounded-xl font-medium hover:bg-gray-200 transition-colors"
+                  >
+                    {showAllReviews ? 'Show Less' : `Show All ${reviews.length} Reviews`}
+                  </button>
                 </div>
               )}
             </div>
