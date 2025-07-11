@@ -69,7 +69,7 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
               <span className="mx-2">/</span>
               <Link href="/products" className="hover:text-blue-600">Products</Link>
               <span className="mx-2">/</span>
-              <span className="capitalize font-medium">{flavor} Nicotine Pouches</span>
+              <span className="capitalize font-medium">{flavorInfo.title}</span>
             </nav>
 
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
@@ -190,8 +190,16 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
 
             {/* Results Count */}
             <div className="text-center mt-8 text-gray-600">
-              Showing {filteredProducts.length} of {products.length} {flavor} nicotine pouches
+              Showing {filteredProducts.length} of {products.length} {flavorInfo.flavorName} nicotine pouches
             </div>
+            
+            {/* Debug Info - Remove in production */}
+            {process.env.NODE_ENV === 'development' && (
+              <div className="text-center mt-4 text-xs text-gray-400">
+                Debug: Total products passed: {products.length} | 
+                Products: {products.map(p => p.name).join(', ')}
+              </div>
+            )}
           </div>
         </div>
       </section>
