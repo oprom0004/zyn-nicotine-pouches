@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
     }
   }
 
-  const title = `Buy Nicotine pouches ${product.flavor} ${product.strength} Online - Zyn, On your best flavor choice`
+  const title = `Buy Nicotine pouches ${product.flavor} ${product.strength} Online - Zyn, On premium flavor, perfect strength`
   const description = `Shop ${product.name} online. ${product.description} Premium tobacco-free nicotine pouches with ${product.strength} strength. Fast shipping. Adults 21+.`
 
   return {
