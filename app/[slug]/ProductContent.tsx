@@ -54,48 +54,151 @@ export default function ProductContent({ product }: { product: any }) {
     }
   ]
 
-  const reviews = [
-    { 
-      name: 'Mike R.', 
-      rating: 5, 
-      date: '2 days ago', 
-      review: `Love the ${product.flavor.toLowerCase()} flavor! Perfect ${product.strength} strength for my needs. Will definitely order again.`,
-      helpful: 12,
-      verified: true
-    },
-    { 
-      name: 'Sarah L.', 
-      rating: 5, 
-      date: '1 week ago', 
-      review: `Best ${product.flavor.toLowerCase()} nicotine pouches I've tried. Clean taste, no residue, perfect nicotine level.`,
-      helpful: 8,
-      verified: true
-    },
-    { 
-      name: 'David K.', 
-      rating: 4, 
-      date: '2 weeks ago', 
-      review: `Good quality product. ${product.strength} strength is just right. Fast shipping and great packaging.`,
-      helpful: 6,
-      verified: false
-    },
-    { 
-      name: 'Emma T.', 
-      rating: 5, 
-      date: '3 weeks ago', 
-      review: `Amazing ${product.flavor.toLowerCase()} flavor! Much better than other brands. The ${product.strength} strength is perfect for daily use.`,
-      helpful: 15,
-      verified: true
-    },
-    { 
-      name: 'Alex M.', 
-      rating: 4, 
-      date: '1 month ago', 
-      review: `Smooth and satisfying. The flavor lasts the entire duration. Good value for money.`,
-      helpful: 4,
-      verified: true
+  // 基于产品生成独特的评论
+  const generateReviews = (product: any) => {
+    const names = [
+      'James T.', 'Maria G.', 'Chris W.', 'Lisa K.', 'Ryan B.', 'Anna S.', 
+      'Mark D.', 'Jenny H.', 'Paul C.', 'Nicole F.', 'Steve M.', 'Amy R.',
+      'Tom L.', 'Rachel P.', 'Kevin J.', 'Samantha B.', 'Eric N.', 'Michelle A.'
+    ]
+    
+    const flavorTemplates: { [key: string]: string[] } = {
+      'Cool Mint': [
+        'The mint is perfectly balanced - not too intense but refreshing enough to last.',
+        'Great cooling sensation without being overpowering. Very refreshing.',
+        'Love how the mint flavor develops gradually. Clean and crisp taste.',
+        'Perfect mint flavor for someone who wants fresh breath all day.',
+        'The cooling effect is exactly what I was looking for. Highly recommend.'
+      ],
+      'Lemon': [
+        'Bright citrus flavor that doesn\'t taste artificial. Really enjoy it.',
+        'The lemon taste is natural and zesty. Perfect for morning use.',
+        'Love the citrus kick! Helps me stay alert during long work days.',
+        'Fresh lemon flavor that lasts the full duration. Very satisfied.',
+        'Not too sour, just the right amount of lemon tartness.'
+      ],
+      'Wintergreen': [
+        'Classic wintergreen taste that reminds me of old-school gum.',
+        'Strong wintergreen flavor that I absolutely love. Very authentic.',
+        'The wintergreen is bold but not overwhelming. Perfect balance.',
+        'Great traditional flavor. Takes me back to childhood.',
+        'Excellent wintergreen taste that lasts throughout the entire use.'
+      ],
+      'Cinnamon': [
+        'Warm cinnamon spice that\'s comforting and satisfying.',
+        'Perfect amount of cinnamon heat. Not too spicy, just right.',
+        'Love the warming sensation. Great for cold weather.',
+        'The cinnamon flavor is authentic and well-balanced.',
+        'Smooth cinnamon taste that doesn\'t burn. Very pleasant.'
+      ]
     }
-  ]
+    
+    const strengthTemplates: { [key: string]: string[] } = {
+      '3mg': [
+        'Perfect for beginners like me. Not too strong but definitely satisfying.',
+        'Great mild strength. I can use it throughout the day without any issues.',
+        'Ideal strength for someone transitioning from lighter products.',
+        'Just the right amount of nicotine. Helps with cravings without being harsh.',
+        'Smooth and gentle. Perfect introduction to nicotine pouches.'
+      ],
+      '6mg': [
+        'Perfect moderate strength for regular daily use.',
+        'Great balance - stronger than 3mg but not overwhelming like 9mg.',
+        'This strength hits the sweet spot for my needs.',
+        'Ideal for steady use throughout the day. Very consistent.',
+        'Just right for someone with moderate nicotine tolerance.'
+      ],
+      '9mg': [
+        'Strong enough to satisfy even heavy users. Very effective.',
+        'Perfect for when I need a stronger hit. Really does the job.',
+        'Finally found a nicotine pouch that matches my tolerance level.',
+        'Strong but not harsh. Great for experienced users.',
+        'This strength is exactly what I was looking for. Very satisfying.'
+      ],
+      '12mg': [
+        'Maximum strength that really delivers. Perfect for heavy users.',
+        'Strong and effective. Exactly what experienced users need.',
+        'Powerful nicotine content that satisfies even the strongest cravings.',
+        'Finally a product that matches my high tolerance. Excellent.',
+        'Very strong but smooth. Perfect for those who need maximum effect.'
+      ]
+    }
+    
+    // 基于产品slug生成一致但独特的评论
+    const productSeed = product.slug.split('').reduce((a: number, b: string) => a + b.charCodeAt(0), 0)
+    const nameIndices: number[] = []
+    const reviewTexts: string[] = []
+    
+    // 选择口味和强度相关的评论模板
+    const flavorReviews = flavorTemplates[product.flavor] || [
+      `The ${product.flavor.toLowerCase()} flavor is really well done.`,
+      `Great ${product.flavor.toLowerCase()} taste that I enjoy.`,
+      `Love this ${product.flavor.toLowerCase()} flavor profile.`
+    ]
+    
+    const strengthReviews = strengthTemplates[product.strength] || [
+      `The ${product.strength} strength works well for me.`,
+      `Good nicotine level with ${product.strength}.`,
+      `${product.strength} is just the right strength.`
+    ]
+    
+    // 生成5个独特的评论
+    for (let i = 0; i < 5; i++) {
+      nameIndices.push((productSeed + i * 3) % names.length)
+      if (i < 2) {
+        reviewTexts.push(flavorReviews[i % flavorReviews.length])
+      } else if (i < 4) {
+        reviewTexts.push(strengthReviews[(i-2) % strengthReviews.length])
+      } else {
+        reviewTexts.push(`Quality product with great ${product.flavor.toLowerCase()} flavor and perfect ${product.strength} strength. Would recommend to others.`)
+      }
+    }
+    
+    return [
+      {
+        name: names[nameIndices[0]],
+        rating: 5,
+        date: '2 days ago',
+        review: reviewTexts[0],
+        helpful: (productSeed % 8) + 8,
+        verified: true
+      },
+      {
+        name: names[nameIndices[1]],
+        rating: 5,
+        date: '1 week ago',
+        review: reviewTexts[1],
+        helpful: (productSeed % 6) + 6,
+        verified: true
+      },
+      {
+        name: names[nameIndices[2]],
+        rating: 4,
+        date: '2 weeks ago',
+        review: reviewTexts[2],
+        helpful: (productSeed % 5) + 3,
+        verified: false
+      },
+      {
+        name: names[nameIndices[3]],
+        rating: 5,
+        date: '3 weeks ago',
+        review: reviewTexts[3],
+        helpful: (productSeed % 10) + 10,
+        verified: true
+      },
+      {
+        name: names[nameIndices[4]],
+        rating: 4,
+        date: '1 month ago',
+        review: reviewTexts[4],
+        helpful: (productSeed % 4) + 2,
+        verified: true
+      }
+    ]
+  }
+
+  const reviews = generateReviews(product)
 
   const usageScenarios = [
     { icon: Clock, title: 'Work Break', description: 'Perfect for office breaks and meetings' },
