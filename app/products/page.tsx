@@ -12,6 +12,9 @@ export default function ProductsPage() {
     strength: null,
     category: null,
     search: '',
+    priceRange: null,
+    minRating: null,
+    availability: null,
   })
   const [sortBy, setSortBy] = useState<string>('name')
   const [isLoading, setIsLoading] = useState(false)
@@ -35,8 +38,31 @@ export default function ProductsPage() {
         filtered = filtered.filter(p => 
           p.name.toLowerCase().includes(searchLower) ||
           p.flavor.toLowerCase().includes(searchLower) ||
-          p.category.toLowerCase().includes(searchLower)
+          p.category.toLowerCase().includes(searchLower) ||
+          p.description.toLowerCase().includes(searchLower)
         )
+      }
+      if (filters.priceRange) {
+        const priceRanges = {
+          'under-5': { min: 0, max: 5 },
+          '5-10': { min: 5, max: 10 },
+          '10-15': { min: 10, max: 15 },
+          '15-plus': { min: 15, max: Infinity }
+        }
+        const range = priceRanges[filters.priceRange as keyof typeof priceRanges]
+        if (range) {
+          filtered = filtered.filter(p => p.price >= range.min && p.price < range.max)
+        }
+      }
+      if (filters.minRating) {
+        filtered = filtered.filter(p => p.rating >= filters.minRating!)
+      }
+      if (filters.availability) {
+        if (filters.availability === 'in-stock') {
+          filtered = filtered.filter(p => p.inStock)
+        } else if (filters.availability === 'featured') {
+          filtered = filtered.filter(p => p.featured)
+        }
       }
 
       // Apply sorting
@@ -52,6 +78,13 @@ export default function ProductsPage() {
           break
         case 'reviews':
           filtered.sort((a, b) => b.reviews - a.reviews)
+          break
+        case 'featured':
+          filtered.sort((a, b) => {
+            if (a.featured && !b.featured) return -1
+            if (!a.featured && b.featured) return 1
+            return a.name.localeCompare(b.name)
+          })
           break
         default:
           filtered.sort((a, b) => a.name.localeCompare(b.name))
@@ -77,6 +110,9 @@ export default function ProductsPage() {
       strength: null,
       category: null,
       search: '',
+      priceRange: null,
+      minRating: null,
+      availability: null,
     })
   }
 

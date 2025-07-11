@@ -33,6 +33,9 @@ export interface FilterState {
   strength: string | null
   category: string | null
   search: string
+  priceRange?: string | null
+  minRating?: number | null
+  availability?: 'in-stock' | 'featured' | null
 }
 
 // Category Types
