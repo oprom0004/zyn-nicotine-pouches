@@ -64,63 +64,112 @@ export default function ProductContent({ product }: { product: any }) {
     
     const flavorTemplates: { [key: string]: string[] } = {
       'Cool Mint': [
-        'The mint is perfectly balanced - not too intense but refreshing enough to last.',
-        'Great cooling sensation without being overpowering. Very refreshing.',
-        'Love how the mint flavor develops gradually. Clean and crisp taste.',
-        'Perfect mint flavor for someone who wants fresh breath all day.',
-        'The cooling effect is exactly what I was looking for. Highly recommend.'
+        'The mint delivers a crisp, refreshing experience without being overpowering. Smooth nicotine delivery with excellent flavor retention.',
+        'Outstanding cool sensation that provides long-lasting freshness. These tobacco-free pouches are perfectly balanced for daily use.',
+        'Premium quality mint that develops gradually. No artificial aftertaste, just clean satisfaction throughout the entire duration.',
+        'Discreet and convenient for workplace use. The cooling effect helps maintain focus during stressful meetings.',
+        'Smokeless alternative that actually works. Fresh breath confidence with consistent nicotine satisfaction all day.'
       ],
       'Lemon': [
-        'Bright citrus flavor that doesn\'t taste artificial. Really enjoy it.',
-        'The lemon taste is natural and zesty. Perfect for morning use.',
-        'Love the citrus kick! Helps me stay alert during long work days.',
-        'Fresh lemon flavor that lasts the full duration. Very satisfied.',
-        'Not too sour, just the right amount of lemon tartness.'
+        'Bright citrusy burst that energizes without being too tart. Natural lemon essence shines through beautifully.',
+        'Perfect morning pick-me-up with authentic zesty flavor. These pouches provide steady nicotine release for sustained alertness.',
+        'Love the vitamin C vibes! Citrus kick helps me power through afternoon slumps and long commute drives.',
+        'Fresh lemony goodness that lasts the full 45-60 minutes. No artificial sweetness, just pure citrus satisfaction.',
+        'Tangy but not overwhelming. Great alternative to sugary energy drinks when I need a quick mental boost.'
       ],
       'Wintergreen': [
-        'Classic wintergreen taste that reminds me of old-school gum.',
-        'Strong wintergreen flavor that I absolutely love. Very authentic.',
-        'The wintergreen is bold but not overwhelming. Perfect balance.',
-        'Great traditional flavor. Takes me back to childhood.',
-        'Excellent wintergreen taste that lasts throughout the entire use.'
+        'Classic americana flavor that brings back nostalgic memories. Bold wintergreen essence with smooth nicotine absorption.',
+        'Traditional mint family taste with sophisticated depth. These pouches deliver consistent satisfaction for experienced users.',
+        'Robust wintergreen character that doesn\'t fade. Perfect for outdoor work and cold weather activities.',
+        'Authentic old-school flavor profile. Strong enough to satisfy cravings but gentle on the gums.',
+        'Excellent minty-fresh experience with pharmaceutical-grade nicotine. Premium quality you can taste.'
       ],
       'Cinnamon': [
-        'Warm cinnamon spice that\'s comforting and satisfying.',
-        'Perfect amount of cinnamon heat. Not too spicy, just right.',
-        'Love the warming sensation. Great for cold weather.',
-        'The cinnamon flavor is authentic and well-balanced.',
-        'Smooth cinnamon taste that doesn\'t burn. Very pleasant.'
+        'Warm spicy comfort that\'s perfect for cozy evenings. Aromatic cinnamon with gentle heat sensation.',
+        'Holiday spice vibes all year round. Not too hot, just perfectly balanced warmth with smooth nicotine delivery.',
+        'Love the warming effect during winter months. These pouches provide comforting satisfaction without harshness.',
+        'Authentic cinnamon bark flavor without artificial burn. Great for stress relief and relaxation.',
+        'Smooth spicy taste that doesn\'t irritate. Perfect alternative to cinnamon gum with better nicotine control.'
+      ],
+      'Coffee': [
+        'Rich coffee essence that pairs perfectly with my morning routine. Smooth caffeine-free energy boost.',
+        'Bold roasted flavor without the jitters. These pouches provide steady focus for long work sessions.',
+        'Perfect coffee shop vibes in a convenient pouch. Great for travel when I can\'t get my usual brew.',
+        'Authentic espresso notes with clean nicotine delivery. No bitter aftertaste like some coffee products.',
+        'Morning ritual replacement that actually satisfies. Rich flavor depth with professional-grade nicotine.'
+      ],
+      'Spearmint': [
+        'Classic spearmint freshness that\'s crisp and clean. Perfect for post-meal breath confidence.',
+        'Gentle mint flavor that\'s not too intense. These pouches provide steady satisfaction for sensitive users.',
+        'Fresh garden mint taste with smooth texture. Great for social situations and close conversations.',
+        'Traditional spearmint with modern convenience. Long-lasting freshness without overwhelming coolness.',
+        'Pure minty goodness that refreshes naturally. Perfect balance of flavor and nicotine strength.'
+      ],
+      'Citrus': [
+        'Bright orange and lime blend that awakens the senses. Vitamin-rich flavor profile with smooth delivery.',
+        'Zesty citrus medley that energizes without crash. Perfect for outdoor activities and summer days.',
+        'Natural fruit essence with no artificial tang. These pouches provide uplifting satisfaction all day.',
+        'Sunshine in a pouch! Citrus burst helps combat fatigue during long drives and meetings.',
+        'Refreshing fruit blend that tastes like fresh-squeezed juice. Clean energy without the sugar.'
+      ],
+      'Berry': [
+        'Sweet mixed berry flavor with natural fruit essence. Antioxidant-rich taste without artificial colors.',
+        'Delicious berry medley that satisfies sweet cravings. These pouches provide smooth nicotine with fruit goodness.',
+        'Natural berry blend that tastes like fresh summer fruit. Perfect alternative to sugary snacks.',
+        'Rich berry flavor with no synthetic aftertaste. Great for dessert replacement with nicotine benefits.',
+        'Wholesome fruit taste that\'s both satisfying and healthy-feeling. Premium berry blend with quality nicotine.'
+      ],
+      'Vanilla': [
+        'Smooth vanilla bean flavor that\'s warm and comforting. Creamy taste without artificial sweetness.',
+        'Premium vanilla essence that pairs well with coffee breaks. These pouches provide gentle satisfaction.',
+        'Rich vanilla notes that remind me of quality ice cream. Perfect for stress relief and relaxation.',
+        'Subtle sweet flavor that\'s not overpowering. Great for users who prefer mild, comforting tastes.',
+        'Authentic vanilla bean with smooth nicotine absorption. Luxurious flavor experience in convenient form.'
+      ],
+      'Menthol': [
+        'Intense cooling effect that clears the sinuses. Medical-grade menthol with pharmaceutical nicotine delivery.',
+        'Maximum mint intensity for serious users. These pouches provide powerful refreshment and satisfaction.',
+        'Clinical-strength cooling that awakens all senses. Perfect for high-stress situations and focus.',
+        'Professional-grade menthol that doesn\'t overwhelm. Strong enough for experienced users, smooth delivery.',
+        'Arctic blast sensation with consistent nicotine release. Premium cooling experience that lasts.'
+      ],
+      'Espresso': [
+        'Bold espresso shot flavor without the caffeine crash. Rich coffee notes with smooth nicotine delivery.',
+        'Intense coffee shop experience in portable form. Perfect for coffee lovers who want nicotine benefits.',
+        'Dark roast intensity that satisfies coffee cravings. These pouches provide café-quality flavor depth.',
+        'Professional barista-level taste with clean nicotine. Great for productivity and mental focus.',
+        'Authentic Italian espresso essence without bitter aftertaste. Premium coffee experience with convenience.'
       ]
     }
     
     const strengthTemplates: { [key: string]: string[] } = {
       '3mg': [
-        'Perfect for beginners like me. Not too strong but definitely satisfying.',
-        'Great mild strength. I can use it throughout the day without any issues.',
-        'Ideal strength for someone transitioning from lighter products.',
-        'Just the right amount of nicotine. Helps with cravings without being harsh.',
-        'Smooth and gentle. Perfect introduction to nicotine pouches.'
+        'Perfect starter strength for nicotine beginners. Gentle absorption rate with zero harshness or throat irritation.',
+        'Mild nicotine level that provides subtle satisfaction without jitters. Great for transitioning from cigarettes gradually.',
+        'Low-dose option perfect for occasional use. Smooth delivery system helps with stress relief during busy workdays.',
+        'Gentle introduction to smokeless nicotine. Just enough to curb cravings without overwhelming sensation.',
+        'Beginner-friendly strength with consistent release. Perfect for social use and workplace discretion.'
       ],
       '6mg': [
-        'Perfect moderate strength for regular daily use.',
-        'Great balance - stronger than 3mg but not overwhelming like 9mg.',
-        'This strength hits the sweet spot for my needs.',
-        'Ideal for steady use throughout the day. Very consistent.',
-        'Just right for someone with moderate nicotine tolerance.'
+        'Moderate nicotine strength that hits the sweet spot. Balanced absorption for steady satisfaction throughout the day.',
+        'Medium-dose option perfect for regular users. Consistent nicotine delivery without peaks and valleys.',
+        'Standard strength that satisfies daily cravings. Professional-grade formulation provides reliable performance.',
+        'Intermediate level perfect for established users. Smooth nicotine curve with no uncomfortable spikes.',
+        'Versatile strength suitable for various tolerance levels. Dependable satisfaction for routine daily use.'
       ],
       '9mg': [
-        'Strong enough to satisfy even heavy users. Very effective.',
-        'Perfect for when I need a stronger hit. Really does the job.',
-        'Finally found a nicotine pouch that matches my tolerance level.',
-        'Strong but not harsh. Great for experienced users.',
-        'This strength is exactly what I was looking for. Very satisfying.'
+        'Strong nicotine dose for experienced users. High-absorption formula delivers powerful satisfaction quickly.',
+        'Maximum strength that actually works. Rapid nicotine uptake perfect for intense cravings and stress.',
+        'Heavy-duty option for serious users. Premium pharmaceutical-grade nicotine with fast-acting relief.',
+        'High-potency formula for established tolerance. Strong enough to satisfy without harsh side effects.',
+        'Advanced strength level with superior bioavailability. Perfect for users who need maximum effectiveness.'
       ],
       '12mg': [
-        'Maximum strength that really delivers. Perfect for heavy users.',
-        'Strong and effective. Exactly what experienced users need.',
-        'Powerful nicotine content that satisfies even the strongest cravings.',
-        'Finally a product that matches my high tolerance. Excellent.',
-        'Very strong but smooth. Perfect for those who need maximum effect.'
+        'Ultra-strong nicotine content for heavy users only. Medical-grade potency with clinical absorption rates.',
+        'Maximum dose formulation for extreme tolerance. Pharmaceutical strength provides instant craving relief.',
+        'Premium high-strength option for serious users. Advanced nicotine delivery system with rapid onset.',
+        'Professional-grade maximum potency. Ultra-concentrated formula for users with highest tolerance levels.',
+        'Extreme strength for experienced users only. Hospital-grade nicotine with optimal bioavailability.'
       ]
     }
     
