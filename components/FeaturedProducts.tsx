@@ -1,45 +1,13 @@
 'use client'
 
-import { ArrowRight, Star } from 'lucide-react'
+import { ArrowRight, Star, Shield, Truck } from 'lucide-react'
+import { getFeaturedProducts } from '@/data/products'
+import Link from 'next/link'
 
-const featuredProducts = [
-  {
-    id: 1,
-    name: 'Zyn Cool Mint 3mg',
-    price: 4.99,
-    originalPrice: 5.99,
-    image: 'https://via.placeholder.com/300x300/3B82F6/FFFFFF?text=Zyn',
-    rating: 4.8,
-    reviews: 234,
-    strength: '3mg',
-    flavor: 'Cool Mint',
-    badge: 'Best Seller'
-  },
-  {
-    id: 2,
-    name: 'Zyn Citrus 6mg',
-    price: 5.99,
-    originalPrice: 6.99,
-    image: 'https://via.placeholder.com/300x300/3B82F6/FFFFFF?text=Zyn',
-    rating: 4.7,
-    reviews: 189,
-    strength: '6mg',
-    flavor: 'Citrus',
-    badge: 'New'
-  },
-  {
-    id: 3,
-    name: 'Zyn Coffee 3mg',
-    price: 5.49,
-    originalPrice: 6.49,
-    image: 'https://via.placeholder.com/300x300/3B82F6/FFFFFF?text=Zyn',
-    rating: 4.6,
-    reviews: 156,
-    strength: '3mg',
-    flavor: 'Coffee',
-    badge: 'Popular'
-  }
-]
+const featuredProducts = getFeaturedProducts().slice(0, 3)
+
+// 为特色产品添加徽章
+const productBadges = ['Best Seller', 'Popular', 'New']
 
 export default function FeaturedProducts() {
   return (
@@ -66,7 +34,7 @@ export default function FeaturedProducts() {
               <div className="relative overflow-hidden">
                 <div className="aspect-square bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center relative overflow-hidden">
                   <img 
-                    src={product.image} 
+                    src={product.imageUrl || 'https://via.placeholder.com/300x300/3B82F6/FFFFFF?text=Zyn'} 
                     alt={product.name}
                     className="w-32 h-32 object-cover rounded-2xl shadow-lg transform group-hover:scale-110 transition-transform duration-500"
                   />
@@ -77,7 +45,7 @@ export default function FeaturedProducts() {
                 {/* 徽章 */}
                 <div className="absolute top-4 left-4">
                   <span className="premium-gradient text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg">
-                    {product.badge}
+                    {productBadges[index]}
                   </span>
                 </div>
                 
@@ -128,15 +96,30 @@ export default function FeaturedProducts() {
                   </div>
                 </div>
                 
+                {/* 购买保障 */}
+                <div className="flex items-center justify-center space-x-4 mb-4 text-xs text-gray-600">
+                  <div className="flex items-center">
+                    <Truck size={14} className="mr-1 text-blue-600" />
+                    <span>FREE shipping $25+</span>
+                  </div>
+                  <div className="flex items-center">
+                    <Shield size={14} className="mr-1 text-green-600" />
+                    <span>30-day return</span>
+                  </div>
+                </div>
+
                 {/* 按钮 */}
                 <div className="space-y-3">
                   <button className="w-full luxury-gradient text-white py-4 rounded-2xl font-bold hover:shadow-2xl transition-all duration-300 flex items-center justify-center group transform hover:scale-105">
                     <span>Add to Cart</span>
                     <ArrowRight size={18} className="ml-2 group-hover:translate-x-1 transition-transform" />
                   </button>
-                  <button className="w-full glass-effect text-gray-700 py-3 rounded-2xl font-medium hover:bg-gray-50 transition-colors">
-                    Quick View
-                  </button>
+                  <Link 
+                    href={`/${product.slug}`}
+                    className="w-full glass-effect text-gray-700 py-3 rounded-2xl font-medium hover:bg-gray-50 transition-colors flex items-center justify-center"
+                  >
+                    View Details
+                  </Link>
                 </div>
               </div>
             </div>
@@ -144,9 +127,13 @@ export default function FeaturedProducts() {
         </div>
         
         <div className="text-center mt-12">
-          <button className="bg-white text-blue-600 border border-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors">
+          <Link 
+            href="/products"
+            className="inline-flex items-center bg-white text-blue-600 border border-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors"
+          >
             View All Products
-          </button>
+            <ArrowRight size={18} className="ml-2" />
+          </Link>
         </div>
       </div>
     </section>

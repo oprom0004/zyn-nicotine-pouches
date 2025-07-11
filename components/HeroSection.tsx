@@ -108,12 +108,12 @@ export default function HeroSection() {
                 <div className="flex-1 glass-effect p-6 rounded-2xl text-white backdrop-blur-lg">
                   <Truck className="mb-3 text-pink-300" size={32} />
                   <h4 className="font-bold mb-1">Free Shipping</h4>
-                  <p className="text-xs text-gray-200">Orders over $50</p>
+                  <p className="text-xs text-gray-200">Orders over $25+</p>
                 </div>
                 <div className="flex-1 glass-effect p-6 rounded-2xl text-white backdrop-blur-lg">
                   <Award className="mb-3 text-yellow-300" size={32} />
-                  <h4 className="font-bold mb-1">Guarantee</h4>
-                  <p className="text-xs text-gray-200">30-day return</p>
+                  <h4 className="font-bold mb-1">Money Back</h4>
+                  <p className="text-xs text-gray-200">30-day guarantee</p>
                 </div>
               </div>
             </div>

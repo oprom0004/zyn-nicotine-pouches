@@ -152,9 +152,8 @@ export function useCart() {
 
 // Helper function to calculate shipping
 export function calculateShipping(subtotal: number): number {
-  if (subtotal >= 50) return 0 // Free shipping over $50
-  if (subtotal >= 25) return 5.99 // Standard shipping
-  return 9.99 // Express shipping for small orders
+  if (subtotal >= 25) return 0 // Free shipping over $25
+  return 5.99 // Standard shipping
 }
 
 // Helper function to format currency
@@ -179,11 +178,11 @@ export function calculateDiscount(cart: CartItem[]): number {
 
 // Helper function to check if eligible for free shipping
 export function isEligibleForFreeShipping(subtotal: number): boolean {
-  return subtotal >= 50
+  return subtotal >= 25
 }
 
 // Helper function to calculate amount needed for free shipping
 export function amountNeededForFreeShipping(subtotal: number): number {
   if (isEligibleForFreeShipping(subtotal)) return 0
-  return 50 - subtotal
+  return 25 - subtotal
 }

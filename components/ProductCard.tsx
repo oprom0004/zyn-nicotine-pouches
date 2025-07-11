@@ -3,7 +3,7 @@
 import { Product } from '@/types'
 import { useCart } from '@/contexts/CartContext'
 import { useNotificationHelpers } from '@/contexts/NotificationContext'
-import { Star, Heart, ShoppingCart } from 'lucide-react'
+import { Star, Heart, ShoppingCart, Truck, Shield } from 'lucide-react'
 import { useState } from 'react'
 import Link from 'next/link'
 
@@ -121,6 +121,18 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
           <p className="text-sm text-gray-600 line-clamp-2">
             {product.description}
           </p>
+
+          {/* Purchase Guarantees */}
+          <div className="flex items-center justify-center space-x-4 text-xs text-gray-500 py-2 border-t border-gray-100">
+            <div className="flex items-center">
+              <Truck size={12} className="mr-1 text-blue-600" />
+              <span>FREE $25+</span>
+            </div>
+            <div className="flex items-center">
+              <Shield size={12} className="mr-1 text-green-600" />
+              <span>30-day return</span>
+            </div>
+          </div>
 
           {/* Price & Add to Cart */}
           <div className="flex items-center justify-between pt-2">
