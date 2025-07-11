@@ -96,7 +96,7 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
             {/* Product Info */}
             <div>
               <h1 className="text-3xl font-bold text-gray-900 mb-4">
-                {product.name}
+                Zyn Nicotine pouches {product.flavor} {product.strength}
               </h1>
               
               <div className="flex items-center mb-4">
