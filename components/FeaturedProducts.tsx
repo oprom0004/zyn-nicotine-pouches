@@ -2,7 +2,10 @@
 
 import { ArrowRight, Star, Shield, Truck } from 'lucide-react'
 import { getFeaturedProducts } from '@/data/products'
+import { useCart } from '@/contexts/CartContext'
+import { useNotificationHelpers } from '@/contexts/NotificationContext'
 import Link from 'next/link'
+import { useState } from 'react'
 
 const featuredProducts = getFeaturedProducts().slice(0, 3)
 
@@ -10,6 +13,25 @@ const featuredProducts = getFeaturedProducts().slice(0, 3)
 const productBadges = ['Best Seller', 'Popular', 'New']
 
 export default function FeaturedProducts() {
+  const { addToCart } = useCart()
+  const { showSuccess } = useNotificationHelpers()
+  const [loadingStates, setLoadingStates] = useState<{[key: number]: boolean}>({})
+
+  const handleAddToCart = async (product: any, e: React.MouseEvent) => {
+    e.preventDefault() // 防止触发Link导航
+    e.stopPropagation()
+    
+    setLoadingStates(prev => ({ ...prev, [product.id]: true }))
+    
+    // 模拟API调用延迟
+    await new Promise(resolve => setTimeout(resolve, 300))
+    
+    addToCart(product)
+    showSuccess(`${product.name} added to cart!`)
+    
+    setLoadingStates(prev => ({ ...prev, [product.id]: false }))
+  }
+
   return (
     <section className="py-20 bg-gradient-to-br from-gray-50 via-white to-blue-50">
       <div className="container mx-auto px-4">
@@ -30,7 +52,7 @@ export default function FeaturedProducts() {
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {featuredProducts.map((product, index) => (
-            <div key={product.id} className="group luxury-card rounded-3xl overflow-hidden hover:scale-105 transition-all duration-500">
+            <Link key={product.id} href={`/${product.slug}`} className="group luxury-card rounded-3xl overflow-hidden hover:scale-105 transition-all duration-500 cursor-pointer">
               <div className="relative overflow-hidden">
                 <div className="aspect-square bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center relative overflow-hidden">
                   <img 
@@ -110,19 +132,26 @@ export default function FeaturedProducts() {
 
                 {/* 按钮 */}
                 <div className="space-y-3">
-                  <button className="w-full luxury-gradient text-white py-4 rounded-2xl font-bold hover:shadow-2xl transition-all duration-300 flex items-center justify-center group transform hover:scale-105">
-                    <span>Add to Cart</span>
-                    <ArrowRight size={18} className="ml-2 group-hover:translate-x-1 transition-transform" />
-                  </button>
-                  <Link 
-                    href={`/${product.slug}`}
-                    className="w-full glass-effect text-gray-700 py-3 rounded-2xl font-medium hover:bg-gray-50 transition-colors flex items-center justify-center"
+                  <button 
+                    onClick={(e) => handleAddToCart(product, e)}
+                    disabled={loadingStates[product.id]}
+                    className="w-full luxury-gradient text-white py-4 rounded-2xl font-bold hover:shadow-2xl transition-all duration-300 flex items-center justify-center group transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    View Details
-                  </Link>
+                    {loadingStates[product.id] ? (
+                      <div className="loading w-5 h-5"></div>
+                    ) : (
+                      <>
+                        <span>Add to Cart</span>
+                        <ArrowRight size={18} className="ml-2 group-hover:translate-x-1 transition-transform" />
+                      </>
+                    )}
+                  </button>
+                  <div className="w-full glass-effect text-gray-700 py-3 rounded-2xl font-medium hover:bg-gray-50 transition-colors flex items-center justify-center text-sm">
+                    Click anywhere to view details
+                  </div>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
         
