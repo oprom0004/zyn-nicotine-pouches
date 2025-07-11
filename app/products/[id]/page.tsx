@@ -1,6 +1,54 @@
 import { products } from '@/data/products'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
+import { Metadata } from 'next'
+
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+  const { id } = await params
+  
+  // 尝试按id查找产品
+  let product = products.find(p => p.id === parseInt(id))
+  
+  // 如果按id找不到，尝试按slug查找
+  if (!product) {
+    product = products.find(p => p.slug === id)
+  }
+
+  if (!product) {
+    return {
+      title: 'Product Not Found | Zyn Nicotine Pouches',
+      description: 'The nicotine pouch product you are looking for was not found.'
+    }
+  }
+
+  const title = `Buy Nicotine pouches ${product.flavor} ${product.strength} Online - Zyn, on your best flavor need`
+  const description = `Shop ${product.name} online. ${product.description} Premium tobacco-free nicotine pouches with ${product.strength} strength. Fast shipping. Adults 21+.`
+
+  return {
+    title,
+    description,
+    keywords: `nicotine pouches, ${product.flavor.toLowerCase()} nicotine pouches, ${product.strength} nicotine pouches, zyn nicotine pouches, tobacco-free nicotine pouches, buy nicotine pouches online`,
+    openGraph: {
+      title,
+      description,
+      type: 'product',
+      images: [
+        {
+          url: product.imageUrl || '/products/default.jpg',
+          width: 800,
+          height: 600,
+          alt: product.name,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [product.imageUrl || '/products/default.jpg'],
+    },
+  }
+}
 
 export default async function ProductPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
