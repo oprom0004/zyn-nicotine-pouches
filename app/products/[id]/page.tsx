@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
     openGraph: {
       title,
       description,
-      type: 'product',
+      type: 'website',
       images: [
         {
           url: product.imageUrl || '/products/default.jpg',
