@@ -79,10 +79,10 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default function MintFlavorsPage() {
-  // 只过滤mint相关产品
+  // 只过滤mint相关产品，排除Wintergreen
   const flavorProducts = products.filter(product => 
     ['Cool Mint', 'Menthol', 'Spearmint'].includes(product.flavor) ||
-    ['mint', 'spearmint'].includes(product.category.toLowerCase())
+    (['mint', 'spearmint'].includes(product.category.toLowerCase()) && !product.flavor.toLowerCase().includes('wintergreen'))
   )
 
   return (

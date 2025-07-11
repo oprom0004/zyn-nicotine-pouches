@@ -11,8 +11,10 @@ interface FlavorInfo {
   description: string
   h1: string
   seoDescription: string
+  flavorName: string
   benefits: string[]
   keywords: string[]
+  lsiKeywords: string[]
 }
 
 interface FlavorCategoryClientProps {
