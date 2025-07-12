@@ -26,27 +26,24 @@ interface FlavorCategoryClientProps {
 export default function FlavorCategoryClient({ flavor, flavorInfo, products }: FlavorCategoryClientProps) {
   const [sortBy, setSortBy] = useState('popular')
   const [selectedStrength, setSelectedStrength] = useState<string | null>(null)
-  const [selectedSpiceType, setSelectedSpiceType] = useState<string | null>(null)
   const [showStickyFilter, setShowStickyFilter] = useState(false)
 
-  // Scroll to products grid when filter is selected
+  // Scroll to products grid when filter is selected (mobile only)
   const scrollToProducts = () => {
-    const productsGrid = document.getElementById('products-grid')
-    if (productsGrid) {
-      productsGrid.scrollIntoView({ 
-        behavior: 'smooth', 
-        block: 'start' 
-      })
+    if (window.innerWidth < 768) {
+      const productsGrid = document.getElementById('products-grid')
+      if (productsGrid) {
+        productsGrid.scrollIntoView({ 
+          behavior: 'smooth', 
+          block: 'start' 
+        })
+      }
     }
   }
 
   // Get available strengths for this flavor
   const availableStrengths = Array.from(new Set(products.map(p => p.strength))).sort()
   
-  // Get available spice types
-  const spiceTypes = [
-    { name: 'Cinnamon', value: 'Cinnamon', count: products.filter(p => p.flavor === 'Cinnamon').length }
-  ].filter(type => type.count > 0)
   
   // Handle scroll for sticky mobile filter
   useEffect(() => {
@@ -60,11 +57,6 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
   
   // Filter and sort products
   let filteredProducts = products
-  
-  // Apply spice type filter
-  if (selectedSpiceType) {
-    filteredProducts = filteredProducts.filter(p => p.flavor === selectedSpiceType)
-  }
   
   // Apply strength filter
   if (selectedStrength) {
@@ -139,19 +131,19 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
         </div>
       </section>
 
-      {/* Spice Sub-Category Navigation */}
+      {/* Strength Sub-Category Navigation */}
       <section className="py-1 bg-gradient-to-r from-red-50 to-orange-50">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-              {/* All Spice Flavors Card */}
+              {/* All Strengths Card */}
               <div 
                 onClick={() => {
-                  setSelectedSpiceType(null)
+                  setSelectedStrength(null)
                   scrollToProducts()
                 }}
                 className={`cursor-pointer p-3 rounded-lg border-2 transition-all duration-300 hover:scale-105 ${
-                  !selectedSpiceType
+                  !selectedStrength
                     ? 'border-red-500 bg-red-50 shadow-lg'
                     : 'border-gray-200 bg-white hover:border-gray-300 hover:shadow-md'
                 }`}
@@ -160,38 +152,41 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
                   <div className="w-12 h-12 mx-auto mb-2 bg-red-600 rounded-full flex items-center justify-center">
                     <span className="text-white text-lg">🌟</span>
                   </div>
-                  <h3 className="font-semibold text-sm text-gray-900 mb-1">All Spice</h3>
+                  <h3 className="font-semibold text-sm text-gray-900 mb-1">All Strengths</h3>
                   <div className="text-xs text-gray-600">
                     {products.length} products
                   </div>
                 </div>
               </div>
 
-              {spiceTypes.slice(0, 7).map((spiceType) => {
-                const spiceEmoji = {
-                  'Cinnamon': '🔥'
-                }[spiceType.value] || '⭐'
+              {availableStrengths.slice(0, 7).map((strength) => {
+                const strengthCount = products.filter(p => p.strength === strength).length
+                const strengthEmoji = {
+                  '3mg': '💚',
+                  '6mg': '💙', 
+                  '9mg': '❤️'
+                }[strength] || '⭐'
 
                 return (
                   <div 
-                    key={spiceType.value}
+                    key={strength}
                     onClick={() => {
-                      setSelectedSpiceType(selectedSpiceType === spiceType.value ? null : spiceType.value)
+                      setSelectedStrength(selectedStrength === strength ? null : strength)
                       scrollToProducts()
                     }}
                     className={`cursor-pointer p-3 rounded-lg border-2 transition-all duration-300 hover:scale-105 ${
-                      selectedSpiceType === spiceType.value
+                      selectedStrength === strength
                         ? 'border-red-500 bg-red-50 shadow-lg'
                         : 'border-gray-200 bg-white hover:border-gray-300 hover:shadow-md'
                     }`}
                   >
                     <div className="text-center">
                       <div className="w-12 h-12 mx-auto mb-2 bg-gradient-to-br from-gray-100 to-gray-200 rounded-full flex items-center justify-center">
-                        <span className="text-lg">{spiceEmoji}</span>
+                        <span className="text-lg">{strengthEmoji}</span>
                       </div>
-                      <h3 className="font-semibold text-sm text-gray-900 mb-1">{spiceType.name}</h3>
+                      <h3 className="font-semibold text-sm text-gray-900 mb-1">{strength}</h3>
                       <div className="text-xs text-gray-600">
-                        {spiceType.count} products
+                        {strengthCount} products
                       </div>
                     </div>
                   </div>
@@ -206,33 +201,33 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
       {showStickyFilter && (
         <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white p-3 border-t shadow-lg animate-in slide-in-from-bottom duration-300">
           <div className="max-h-32 overflow-y-auto">
-            {/* Spice Type Pills */}
+            {/* Strength Pills */}
             <div className="flex flex-wrap gap-2">
               <button
                 onClick={() => {
-                  setSelectedSpiceType(null)
+                  setSelectedStrength(null)
                   scrollToProducts()
                 }}
                 className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
-                  !selectedSpiceType ? 'bg-red-600 text-white' : 'bg-white text-gray-700 border hover:bg-gray-50'
+                  !selectedStrength ? 'bg-red-600 text-white' : 'bg-white text-gray-700 border hover:bg-gray-50'
                 }`}
               >
-                All Spice
+                All Strengths
               </button>
-              {spiceTypes.map((spiceType) => (
+              {availableStrengths.map((strength) => (
                 <button
-                  key={spiceType.value}
+                  key={strength}
                   onClick={() => {
-                    setSelectedSpiceType(selectedSpiceType === spiceType.value ? null : spiceType.value)
+                    setSelectedStrength(selectedStrength === strength ? null : strength)
                     scrollToProducts()
                   }}
                   className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
-                    selectedSpiceType === spiceType.value 
+                    selectedStrength === strength 
                       ? 'bg-red-600 text-white' 
                       : 'bg-white text-gray-700 border hover:bg-gray-50'
                   }`}
                 >
-                  {spiceType.name}
+                  {strength}
                 </button>
               ))}
             </div>
@@ -247,34 +242,34 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
             {/* Filter Controls */}
             <div className="flex flex-wrap justify-between items-center mb-6 p-4 bg-white rounded-xl shadow-sm">
               <div className="flex flex-wrap items-center gap-3 mb-3 lg:mb-0">
-                <span className="font-medium text-gray-700">Filter by Type:</span>
+                <span className="font-medium text-gray-700">Filter by Strength:</span>
                 <button
                   onClick={() => {
-                    setSelectedSpiceType(null)
+                    setSelectedStrength(null)
                     scrollToProducts()
                   }}
                   className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
-                    !selectedSpiceType 
+                    !selectedStrength 
                       ? 'bg-red-600 text-white' 
                       : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                   }`}
                 >
-                  All Spice
+                  All Strengths
                 </button>
-                {spiceTypes.slice(0, 4).map(spiceType => (
+                {availableStrengths.map(strength => (
                   <button
-                    key={spiceType.value}
+                    key={strength}
                     onClick={() => {
-                      setSelectedSpiceType(spiceType.value)
+                      setSelectedStrength(strength)
                       scrollToProducts()
                     }}
                     className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
-                      selectedSpiceType === spiceType.value
+                      selectedStrength === strength
                         ? 'bg-red-600 text-white'
                         : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                     }`}
                   >
-                    {spiceType.name}
+                    {strength}
                   </button>
                 ))}
               </div>

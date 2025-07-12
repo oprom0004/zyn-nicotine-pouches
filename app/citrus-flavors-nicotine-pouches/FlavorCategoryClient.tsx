@@ -26,28 +26,24 @@ interface FlavorCategoryClientProps {
 export default function FlavorCategoryClient({ flavor, flavorInfo, products }: FlavorCategoryClientProps) {
   const [sortBy, setSortBy] = useState('popular')
   const [selectedStrength, setSelectedStrength] = useState<string | null>(null)
-  const [selectedCitrusType, setSelectedCitrusType] = useState<string | null>(null)
   const [showStickyFilter, setShowStickyFilter] = useState(false)
 
-  // Scroll to products grid when filter is selected
+  // Scroll to products grid when filter is selected (mobile only)
   const scrollToProducts = () => {
-    const productsGrid = document.getElementById('products-grid')
-    if (productsGrid) {
-      productsGrid.scrollIntoView({ 
-        behavior: 'smooth', 
-        block: 'start' 
-      })
+    if (window.innerWidth < 768) {
+      const productsGrid = document.getElementById('products-grid')
+      if (productsGrid) {
+        productsGrid.scrollIntoView({ 
+          behavior: 'smooth', 
+          block: 'start' 
+        })
+      }
     }
   }
 
   // Get available strengths for this flavor
   const availableStrengths = Array.from(new Set(products.map(p => p.strength))).sort()
   
-  // Get available citrus types
-  const citrusTypes = [
-    { name: 'Citrus', value: 'Citrus', count: products.filter(p => p.flavor === 'Citrus').length },
-    { name: 'Lemon', value: 'Lemon', count: products.filter(p => p.flavor === 'Lemon').length }
-  ].filter(type => type.count > 0)
   
   // Handle scroll for sticky mobile filter
   useEffect(() => {
@@ -61,11 +57,6 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
   
   // Filter and sort products
   let filteredProducts = products
-  
-  // Apply citrus type filter
-  if (selectedCitrusType) {
-    filteredProducts = filteredProducts.filter(p => p.flavor === selectedCitrusType)
-  }
   
   // Apply strength filter
   if (selectedStrength) {
@@ -140,16 +131,19 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
         </div>
       </section>
 
-      {/* Citrus Sub-Category Navigation */}
+      {/* Strength Sub-Category Navigation */}
       <section className="py-1 bg-gradient-to-r from-orange-50 to-yellow-50">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-              {/* All Citrus Flavors Card */}
+              {/* All Strengths Card */}
               <div 
-                onClick={() => setSelectedCitrusType(null)}
+                onClick={() => {
+                  setSelectedStrength(null)
+                  scrollToProducts()
+                }}
                 className={`cursor-pointer p-3 rounded-lg border-2 transition-all duration-300 hover:scale-105 ${
-                  !selectedCitrusType
+                  !selectedStrength
                     ? 'border-orange-500 bg-orange-50 shadow-lg'
                     : 'border-gray-200 bg-white hover:border-gray-300 hover:shadow-md'
                 }`}
@@ -158,36 +152,41 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
                   <div className="w-12 h-12 mx-auto mb-2 bg-orange-600 rounded-full flex items-center justify-center">
                     <span className="text-white text-lg">🌟</span>
                   </div>
-                  <h3 className="font-semibold text-sm text-gray-900 mb-1">All Citrus</h3>
+                  <h3 className="font-semibold text-sm text-gray-900 mb-1">All Strengths</h3>
                   <div className="text-xs text-gray-600">
                     {products.length} products
                   </div>
                 </div>
               </div>
 
-              {citrusTypes.slice(0, 7).map((citrusType) => {
-                const citrusEmoji = {
-                  'Citrus': '🍊',
-                  'Lemon': '🍋'
-                }[citrusType.value] || '⭐'
+              {availableStrengths.slice(0, 7).map((strength) => {
+                const strengthCount = products.filter(p => p.strength === strength).length
+                const strengthEmoji = {
+                  '3mg': '💚',
+                  '6mg': '💙', 
+                  '9mg': '❤️'
+                }[strength] || '⭐'
 
                 return (
                   <div 
-                    key={citrusType.value}
-                    onClick={() => setSelectedCitrusType(selectedCitrusType === citrusType.value ? null : citrusType.value)}
+                    key={strength}
+                    onClick={() => {
+                      setSelectedStrength(selectedStrength === strength ? null : strength)
+                      scrollToProducts()
+                    }}
                     className={`cursor-pointer p-3 rounded-lg border-2 transition-all duration-300 hover:scale-105 ${
-                      selectedCitrusType === citrusType.value
+                      selectedStrength === strength
                         ? 'border-orange-500 bg-orange-50 shadow-lg'
                         : 'border-gray-200 bg-white hover:border-gray-300 hover:shadow-md'
                     }`}
                   >
                     <div className="text-center">
                       <div className="w-12 h-12 mx-auto mb-2 bg-gradient-to-br from-gray-100 to-gray-200 rounded-full flex items-center justify-center">
-                        <span className="text-lg">{citrusEmoji}</span>
+                        <span className="text-lg">{strengthEmoji}</span>
                       </div>
-                      <h3 className="font-semibold text-sm text-gray-900 mb-1">{citrusType.name}</h3>
+                      <h3 className="font-semibold text-sm text-gray-900 mb-1">{strength}</h3>
                       <div className="text-xs text-gray-600">
-                        {citrusType.count} products
+                        {strengthCount} products
                       </div>
                     </div>
                   </div>
@@ -202,33 +201,33 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
       {showStickyFilter && (
         <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white p-3 border-t shadow-lg animate-in slide-in-from-bottom duration-300">
           <div className="max-h-32 overflow-y-auto">
-            {/* Citrus Type Pills */}
+            {/* Strength Pills */}
             <div className="flex flex-wrap gap-2">
               <button
                 onClick={() => {
-                  setSelectedCitrusType(null)
+                  setSelectedStrength(null)
                   scrollToProducts()
                 }}
                 className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
-                  !selectedCitrusType ? 'bg-orange-600 text-white' : 'bg-white text-gray-700 border hover:bg-gray-50'
+                  !selectedStrength ? 'bg-orange-600 text-white' : 'bg-white text-gray-700 border hover:bg-gray-50'
                 }`}
               >
-                All Citrus
+                All Strengths
               </button>
-              {citrusTypes.map((citrusType) => (
+              {availableStrengths.map((strength) => (
                 <button
-                  key={citrusType.value}
+                  key={strength}
                   onClick={() => {
-                    setSelectedCitrusType(selectedCitrusType === citrusType.value ? null : citrusType.value)
+                    setSelectedStrength(selectedStrength === strength ? null : strength)
                     scrollToProducts()
                   }}
                   className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
-                    selectedCitrusType === citrusType.value 
+                    selectedStrength === strength 
                       ? 'bg-orange-600 text-white' 
                       : 'bg-white text-gray-700 border hover:bg-gray-50'
                   }`}
                 >
-                  {citrusType.name}
+                  {strength}
                 </button>
               ))}
             </div>
@@ -243,28 +242,34 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
             {/* Filter Controls */}
             <div className="flex flex-wrap justify-between items-center mb-6 p-4 bg-white rounded-xl shadow-sm">
               <div className="flex flex-wrap items-center gap-3 mb-3 lg:mb-0">
-                <span className="font-medium text-gray-700">Filter by Type:</span>
+                <span className="font-medium text-gray-700">Filter by Strength:</span>
                 <button
-                  onClick={() => setSelectedCitrusType(null)}
+                  onClick={() => {
+                    setSelectedStrength(null)
+                    scrollToProducts()
+                  }}
                   className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
-                    !selectedCitrusType 
+                    !selectedStrength 
                       ? 'bg-orange-600 text-white' 
                       : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                   }`}
                 >
-                  All Citrus
+                  All Strengths
                 </button>
-                {citrusTypes.slice(0, 4).map(citrusType => (
+                {availableStrengths.map(strength => (
                   <button
-                    key={citrusType.value}
-                    onClick={() => setSelectedCitrusType(citrusType.value)}
+                    key={strength}
+                    onClick={() => {
+                      setSelectedStrength(strength)
+                      scrollToProducts()
+                    }}
                     className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
-                      selectedCitrusType === citrusType.value
+                      selectedStrength === strength
                         ? 'bg-orange-600 text-white'
                         : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                     }`}
                   >
-                    {citrusType.name}
+                    {strength}
                   </button>
                 ))}
               </div>

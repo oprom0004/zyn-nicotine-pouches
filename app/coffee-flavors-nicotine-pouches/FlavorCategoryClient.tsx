@@ -26,28 +26,30 @@ interface FlavorCategoryClientProps {
 export default function FlavorCategoryClient({ flavor, flavorInfo, products }: FlavorCategoryClientProps) {
   const [sortBy, setSortBy] = useState('popular')
   const [selectedStrength, setSelectedStrength] = useState<string | null>(null)
-  const [selectedCoffeeType, setSelectedCoffeeType] = useState<string | null>(null)
   const [showStickyFilter, setShowStickyFilter] = useState(false)
 
-  // Scroll to products grid when filter is selected
+  // Scroll to products grid when filter is selected (mobile only)
   const scrollToProducts = () => {
-    const productsGrid = document.getElementById('products-grid')
-    if (productsGrid) {
-      productsGrid.scrollIntoView({ 
-        behavior: 'smooth', 
-        block: 'start' 
-      })
+    if (window.innerWidth < 768) {
+      const productsGrid = document.getElementById('products-grid')
+      if (productsGrid) {
+        productsGrid.scrollIntoView({ 
+          behavior: 'smooth', 
+          block: 'start' 
+        })
+      }
     }
   }
 
   // Get available strengths for this flavor
   const availableStrengths = Array.from(new Set(products.map(p => p.strength))).sort()
   
-  // Get available coffee types
-  const coffeeTypes = [
-    { name: 'Coffee', value: 'Coffee', count: products.filter(p => p.flavor === 'Coffee').length },
-    { name: 'Espresso', value: 'Espresso', count: products.filter(p => p.flavor === 'Espresso').length }
-  ].filter(type => type.count > 0)
+  // Get available strengths with counts
+  const strengthOptions = availableStrengths.map(strength => ({
+    name: strength,
+    value: strength,
+    count: products.filter(p => p.strength === strength).length
+  }))
   
   // Handle scroll for sticky mobile filter
   useEffect(() => {
@@ -61,11 +63,6 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
   
   // Filter and sort products
   let filteredProducts = products
-  
-  // Apply coffee type filter
-  if (selectedCoffeeType) {
-    filteredProducts = filteredProducts.filter(p => p.flavor === selectedCoffeeType)
-  }
   
   // Apply strength filter
   if (selectedStrength) {
@@ -140,19 +137,19 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
         </div>
       </section>
 
-      {/* Coffee Sub-Category Navigation */}
+      {/* Strength Sub-Category Navigation */}
       <section className="py-1 bg-gradient-to-r from-amber-50 to-orange-50">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-              {/* All Coffee Flavors Card */}
+              {/* All Strengths Card */}
               <div 
                 onClick={() => {
-                  setSelectedCoffeeType(null)
+                  setSelectedStrength(null)
                   scrollToProducts()
                 }}
                 className={`cursor-pointer p-3 rounded-lg border-2 transition-all duration-300 hover:scale-105 ${
-                  !selectedCoffeeType
+                  !selectedStrength
                     ? 'border-amber-500 bg-amber-50 shadow-lg'
                     : 'border-gray-200 bg-white hover:border-gray-300 hover:shadow-md'
                 }`}
@@ -161,39 +158,42 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
                   <div className="w-12 h-12 mx-auto mb-2 bg-amber-600 rounded-full flex items-center justify-center">
                     <span className="text-white text-lg">🌟</span>
                   </div>
-                  <h3 className="font-semibold text-sm text-gray-900 mb-1">All Coffee</h3>
+                  <h3 className="font-semibold text-sm text-gray-900 mb-1">All Strengths</h3>
                   <div className="text-xs text-gray-600">
                     {products.length} products
                   </div>
                 </div>
               </div>
 
-              {coffeeTypes.slice(0, 7).map((coffeeType) => {
-                const coffeeEmoji = {
-                  'Coffee': '☕',
-                  'Espresso': '☕'
-                }[coffeeType.value] || '⭐'
+              {strengthOptions.slice(0, 7).map((strength) => {
+                const strengthEmoji = {
+                  '1mg': '🟢',
+                  '2mg': '🟡', 
+                  '3mg': '🟠',
+                  '4mg': '🔴',
+                  '6mg': '🟣'
+                }[strength.value] || '⭐'
 
                 return (
                   <div 
-                    key={coffeeType.value}
+                    key={strength.value}
                     onClick={() => {
-                      setSelectedCoffeeType(selectedCoffeeType === coffeeType.value ? null : coffeeType.value)
+                      setSelectedStrength(selectedStrength === strength.value ? null : strength.value)
                       scrollToProducts()
                     }}
                     className={`cursor-pointer p-3 rounded-lg border-2 transition-all duration-300 hover:scale-105 ${
-                      selectedCoffeeType === coffeeType.value
+                      selectedStrength === strength.value
                         ? 'border-amber-500 bg-amber-50 shadow-lg'
                         : 'border-gray-200 bg-white hover:border-gray-300 hover:shadow-md'
                     }`}
                   >
                     <div className="text-center">
                       <div className="w-12 h-12 mx-auto mb-2 bg-gradient-to-br from-gray-100 to-gray-200 rounded-full flex items-center justify-center">
-                        <span className="text-lg">{coffeeEmoji}</span>
+                        <span className="text-lg">{strengthEmoji}</span>
                       </div>
-                      <h3 className="font-semibold text-sm text-gray-900 mb-1">{coffeeType.name}</h3>
+                      <h3 className="font-semibold text-sm text-gray-900 mb-1">{strength.name}</h3>
                       <div className="text-xs text-gray-600">
-                        {coffeeType.count} products
+                        {strength.count} products
                       </div>
                     </div>
                   </div>
@@ -208,33 +208,33 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
       {showStickyFilter && (
         <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white p-3 border-t shadow-lg animate-in slide-in-from-bottom duration-300">
           <div className="max-h-32 overflow-y-auto">
-            {/* Coffee Type Pills */}
+            {/* Strength Pills */}
             <div className="flex flex-wrap gap-2">
               <button
                 onClick={() => {
-                  setSelectedCoffeeType(null)
+                  setSelectedStrength(null)
                   scrollToProducts()
                 }}
                 className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
-                  !selectedCoffeeType ? 'bg-amber-600 text-white' : 'bg-white text-gray-700 border hover:bg-gray-50'
+                  !selectedStrength ? 'bg-amber-600 text-white' : 'bg-white text-gray-700 border hover:bg-gray-50'
                 }`}
               >
-                All Coffee
+                All Strengths
               </button>
-              {coffeeTypes.map((coffeeType) => (
+              {strengthOptions.map((strength) => (
                 <button
-                  key={coffeeType.value}
+                  key={strength.value}
                   onClick={() => {
-                    setSelectedCoffeeType(selectedCoffeeType === coffeeType.value ? null : coffeeType.value)
+                    setSelectedStrength(selectedStrength === strength.value ? null : strength.value)
                     scrollToProducts()
                   }}
                   className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
-                    selectedCoffeeType === coffeeType.value 
+                    selectedStrength === strength.value 
                       ? 'bg-amber-600 text-white' 
                       : 'bg-white text-gray-700 border hover:bg-gray-50'
                   }`}
                 >
-                  {coffeeType.name}
+                  {strength.name}
                 </button>
               ))}
             </div>
@@ -249,34 +249,34 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
             {/* Filter Controls */}
             <div className="flex flex-wrap justify-between items-center mb-6 p-4 bg-white rounded-xl shadow-sm">
               <div className="flex flex-wrap items-center gap-3 mb-3 lg:mb-0">
-                <span className="font-medium text-gray-700">Filter by Type:</span>
+                <span className="font-medium text-gray-700">Filter by Strength:</span>
                 <button
                   onClick={() => {
-                    setSelectedCoffeeType(null)
+                    setSelectedStrength(null)
                     scrollToProducts()
                   }}
                   className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
-                    !selectedCoffeeType 
+                    !selectedStrength 
                       ? 'bg-amber-600 text-white' 
                       : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                   }`}
                 >
-                  All Coffee
+                  All Strengths
                 </button>
-                {coffeeTypes.slice(0, 4).map(coffeeType => (
+                {strengthOptions.slice(0, 4).map(strength => (
                   <button
-                    key={coffeeType.value}
+                    key={strength.value}
                     onClick={() => {
-                      setSelectedCoffeeType(coffeeType.value)
+                      setSelectedStrength(strength.value)
                       scrollToProducts()
                     }}
                     className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
-                      selectedCoffeeType === coffeeType.value
+                      selectedStrength === strength.value
                         ? 'bg-amber-600 text-white'
                         : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                     }`}
                   >
-                    {coffeeType.name}
+                    {strength.name}
                   </button>
                 ))}
               </div>
