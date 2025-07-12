@@ -190,61 +190,50 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
         </div>
       </section>
 
-      {/* Mobile Sticky Filter Bar */}
-      <div className="lg:hidden sticky top-0 z-50 bg-white shadow-sm border-b border-gray-200 px-4 py-3">
-        <div className="flex items-center gap-3 overflow-x-auto scrollbar-hide">
-          {/* Mint Type Quick Filter */}
-          <div className="flex items-center gap-2 flex-shrink-0">
-            <span className="text-xs font-medium text-gray-700 whitespace-nowrap">Type:</span>
+      {/* Mobile Quick Filter Bar - Simplified */}
+      <div className="md:hidden bg-gray-50 p-3 border-b">
+        <div className="flex flex-wrap gap-2">
+          {/* Type Pills */}
+          <button
+            onClick={() => setSelectedMintType(null)}
+            className={`px-3 py-1 rounded-full text-xs font-medium ${
+              !selectedMintType ? 'bg-blue-600 text-white' : 'bg-white text-gray-700 border'
+            }`}
+          >
+            All Mint
+          </button>
+          {mintTypes.map((mintType) => (
             <button
-              onClick={() => setSelectedMintType(null)}
-              className={`px-3 py-1 rounded-full text-xs font-medium transition-colors whitespace-nowrap ${
-                !selectedMintType
-                  ? 'bg-blue-600 text-white'
-                  : 'bg-gray-100 text-gray-700'
+              key={mintType.value}
+              onClick={() => setSelectedMintType(selectedMintType === mintType.value ? null : mintType.value)}
+              className={`px-3 py-1 rounded-full text-xs font-medium ${
+                selectedMintType === mintType.value 
+                  ? 'bg-blue-600 text-white' 
+                  : 'bg-white text-gray-700 border'
               }`}
             >
-              All
+              {mintType.name}
             </button>
-            {mintTypes.map((mintType) => (
-              <button
-                key={mintType.value}
-                onClick={() => setSelectedMintType(selectedMintType === mintType.value ? null : mintType.value)}
-                className={`px-3 py-1 rounded-full text-xs font-medium transition-colors whitespace-nowrap ${
-                  selectedMintType === mintType.value
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-gray-100 text-gray-700'
-                }`}
-              >
-                {mintType.name}
-              </button>
-            ))}
-          </div>
+          ))}
           
-          {/* Divider */}
-          <div className="w-px h-4 bg-gray-300 flex-shrink-0"></div>
-          
-          {/* Strength Quick Filter */}
-          <div className="flex items-center gap-2 flex-shrink-0">
-            <span className="text-xs font-medium text-gray-700 whitespace-nowrap">Strength:</span>
+          {/* Strength Pills */}
+          <div className="w-full border-t pt-2 mt-1">
             <button
               onClick={() => setSelectedStrength(null)}
-              className={`px-3 py-1 rounded-full text-xs font-medium transition-colors whitespace-nowrap ${
-                !selectedStrength
-                  ? 'bg-green-600 text-white'
-                  : 'bg-gray-100 text-gray-700'
+              className={`px-3 py-1 rounded-full text-xs font-medium mr-2 ${
+                !selectedStrength ? 'bg-green-600 text-white' : 'bg-white text-gray-700 border'
               }`}
             >
-              All
+              All Strengths
             </button>
             {availableStrengths.map(strength => (
               <button
                 key={strength}
                 onClick={() => setSelectedStrength(strength)}
-                className={`px-3 py-1 rounded-full text-xs font-medium transition-colors whitespace-nowrap ${
-                  selectedStrength === strength
-                    ? 'bg-green-600 text-white'
-                    : 'bg-gray-100 text-gray-700'
+                className={`px-3 py-1 rounded-full text-xs font-medium mr-2 mb-1 ${
+                  selectedStrength === strength 
+                    ? 'bg-green-600 text-white' 
+                    : 'bg-white text-gray-700 border'
                 }`}
               >
                 {strength}
