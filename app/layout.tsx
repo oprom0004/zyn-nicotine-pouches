@@ -116,9 +116,10 @@ export const metadata: Metadata = {
     ],
   },
   manifest: '/site.webmanifest',
-  alternates: {
-    canonical: 'https://nicotinepoucheszyn.com',
-  },
+  // canonical URL should be set per page, not globally
+  // alternates: {
+  //   canonical: 'https://nicotinepoucheszyn.com',
+  // },
   verification: {
     google: 'your-google-verification-code',
     yandex: 'your-yandex-verification-code',

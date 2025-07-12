@@ -1,4 +1,17 @@
 import Link from 'next/link'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Page Not Found - Zyn Nicotine Pouches',
+  description: 'The page you are looking for could not be found. Browse our premium tobacco-free nicotine pouches or return to our homepage.',
+  robots: {
+    index: false,  // 不索引404页面
+    follow: true,  // 但可以跟踪链接
+    noarchive: true,
+    nosnippet: true,
+  },
+  // 注意：404页面不应该设置canonical标签
+}
 
 export default function NotFound() {
   const popularProducts = [
