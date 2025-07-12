@@ -5,9 +5,9 @@ import ProductCard from '@/components/ProductCard'
 import ProductFilter from '@/components/ProductFilter'
 import { products } from '@/data/products'
 import { Product, FilterState } from '@/types'
-import { ShoppingCart, Star, Truck, Shield } from 'lucide-react'
+import { ShoppingCart, Star, Truck, Shield, Award, CheckCircle } from 'lucide-react'
 
-export default function NicotinePouchesClient() {
+export default function BuyClient() {
   const [filteredProducts, setFilteredProducts] = useState<Product[]>(products)
   const [filters, setFilters] = useState<FilterState>({
     strength: null,
@@ -124,48 +124,52 @@ export default function NicotinePouchesClient() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Hero Section */}
-      <section className="py-12 bg-gradient-to-br from-blue-600 to-blue-800 text-white">
+      {/* Hero Section - Conversion Focused */}
+      <section className="py-12 bg-gradient-to-br from-green-600 to-blue-700 text-white">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
+          <div className="max-w-5xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              Buy Nicotine Pouches Online For Sale
+              Buy Tobacco-Free Nicotine Pouches Online For Sale
             </h1>
-            <p className="text-xl md:text-2xl mb-6 text-blue-100">
+            <p className="text-xl md:text-2xl mb-6 text-green-100">
               Premium tobacco-free nicotine pouches in multiple flavors & strengths
             </p>
             
+            {/* Key Benefits */}
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+              <div className="flex items-center justify-center p-3 bg-white/15 rounded-xl backdrop-blur-sm">
+                <Shield className="mr-2" size={20} />
+                <span className="font-medium">100% Tobacco-Free</span>
+              </div>
+              <div className="flex items-center justify-center p-3 bg-white/15 rounded-xl backdrop-blur-sm">
+                <Truck className="mr-2" size={20} />
+                <span className="font-medium">Fast Shipping</span>
+              </div>
+              <div className="flex items-center justify-center p-3 bg-white/15 rounded-xl backdrop-blur-sm">
+                <Award className="mr-2" size={20} />
+                <span className="font-medium">Premium Quality</span>
+              </div>
+              <div className="flex items-center justify-center p-3 bg-white/15 rounded-xl backdrop-blur-sm">
+                <CheckCircle className="mr-2" size={20} />
+                <span className="font-medium">Adults 21+</span>
+              </div>
+            </div>
+            
             {/* Social Proof */}
-            <div className="flex flex-wrap justify-center items-center gap-6 mb-6 p-4 bg-white/10 rounded-xl backdrop-blur-sm">
+            <div className="flex flex-wrap justify-center items-center gap-6 p-4 bg-white/10 rounded-xl backdrop-blur-sm">
               <div className="flex items-center text-white">
                 <Star className="text-yellow-400 mr-2" size={20} fill="currentColor" />
                 <span className="font-bold">{avgRating.toFixed(1)}</span>
                 <span className="ml-1">({totalReviews.toLocaleString()} reviews)</span>
               </div>
               <div className="flex items-center text-white">
-                <ShoppingCart className="text-green-400 mr-2" size={20} />
+                <ShoppingCart className="text-green-300 mr-2" size={20} />
                 <span className="font-bold">{inStockCount}</span>
                 <span className="ml-1">products in stock</span>
               </div>
               <div className="flex items-center text-white">
                 <Truck className="text-blue-300 mr-2" size={20} />
                 <span className="font-medium">FREE shipping over $25</span>
-              </div>
-            </div>
-
-            {/* USPs */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
-              <div className="flex items-center justify-center p-3 bg-white/10 rounded-lg backdrop-blur-sm">
-                <Shield className="mr-2" size={20} />
-                <span className="font-medium">Tobacco-Free</span>
-              </div>
-              <div className="flex items-center justify-center p-3 bg-white/10 rounded-lg backdrop-blur-sm">
-                <Star className="mr-2" size={20} />
-                <span className="font-medium">Premium Quality</span>
-              </div>
-              <div className="flex items-center justify-center p-3 bg-white/10 rounded-lg backdrop-blur-sm">
-                <Truck className="mr-2" size={20} />
-                <span className="font-medium">Fast Delivery</span>
               </div>
             </div>
           </div>
@@ -206,10 +210,10 @@ export default function NicotinePouchesClient() {
               <div className="text-center py-20">
                 <div className="text-6xl mb-4">🔍</div>
                 <h3 className="text-2xl font-semibold text-gray-900 mb-2">
-                  No nicotine pouches found
+                  No tobacco-free nicotine pouches found
                 </h3>
                 <p className="text-gray-600 mb-6">
-                  Try adjusting your filters or search terms to find the perfect nicotine pouches for sale
+                  Try adjusting your filters to find the perfect tobacco-free nicotine pouches for sale
                 </p>
                 <button
                   onClick={clearFilters}
@@ -233,7 +237,7 @@ export default function NicotinePouchesClient() {
             {/* Results Summary */}
             {!isLoading && filteredProducts.length > 0 && (
               <div className="mt-8 text-center text-gray-600">
-                Showing {filteredProducts.length} of {products.length} premium nicotine pouches for sale
+                Showing {filteredProducts.length} of {products.length} premium tobacco-free nicotine pouches for sale
               </div>
             )}
 
@@ -241,22 +245,27 @@ export default function NicotinePouchesClient() {
             {!isLoading && (
               <div className="mt-12 bg-white rounded-lg p-8 shadow-sm">
                 <h2 className="text-2xl font-bold text-gray-900 mb-4">
-                  Why Buy Our Nicotine Pouches Online?
+                  Why Buy Tobacco-Free Nicotine Pouches Online?
                 </h2>
                 <div className="prose max-w-none text-gray-600">
                   <p className="mb-4">
-                    When you buy nicotine pouches online from our store, you're getting premium tobacco-free 
-                    products designed for adult users 21+. Our nicotine pouches for sale include popular 
-                    brands like Zyn in various flavors and strengths.
+                    When you buy tobacco-free nicotine pouches online from our store, you're getting premium 
+                    products designed for adult users 21+. Our tobacco-free nicotine pouches for sale include 
+                    popular Zyn collection in various flavors and strengths.
                   </p>
                   <p className="mb-4">
-                    Shop our complete selection of nicotine pouches online with confidence. We offer mint, 
+                    Shop our complete selection of tobacco-free nicotine pouches online with confidence. We offer mint, 
                     citrus, berry, and wintergreen flavors in 3mg, 6mg, and 9mg strengths. All products 
-                    are genuine, fresh, and ship fast.
+                    are 100% tobacco-free, fresh, and ship fast.
+                  </p>
+                  <p className="mb-4">
+                    <strong>Why choose tobacco-free nicotine pouches?</strong> Unlike traditional tobacco products, 
+                    our tobacco-free pouches contain no tobacco leaf, providing a cleaner nicotine experience 
+                    without smoke, spit, or tobacco taste.
                   </p>
                   <p>
-                    Looking to buy nicotine pouches online? Browse our collection above to find the perfect 
-                    tobacco-free nicotine pouches for your needs. Free shipping on orders over $25.
+                    Looking to buy tobacco-free nicotine pouches online? Browse our Zyn collection above to find the perfect 
+                    tobacco-free nicotine pouches for your needs. Free shipping on orders over $25. Adults 21+ only.
                   </p>
                 </div>
               </div>

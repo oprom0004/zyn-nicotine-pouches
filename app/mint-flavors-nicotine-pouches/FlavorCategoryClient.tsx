@@ -97,7 +97,7 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
             <nav className="text-sm text-gray-500 mb-3">
               <Link href="/" className="hover:text-blue-600">Home</Link>
               <span className="mx-2">/</span>
-              <Link href="/nicotine-pouches" className="hover:text-blue-600">Nicotine Pouches</Link>
+              <Link href="/buy" className="hover:text-blue-600">Buy Nicotine Pouches</Link>
               <span className="mx-2">/</span>
               <span className="capitalize font-medium">{flavorInfo.title}</span>
             </nav>

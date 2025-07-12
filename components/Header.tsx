@@ -17,7 +17,7 @@ export default function Header() {
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0)
 
   const navigation = [
-    { name: 'Collection', href: '/nicotine-pouches' },
+    { name: 'Collection', href: '/buy' },
     { name: 'About', href: '/about' },
     { name: 'Experience', href: '/contact' },
   ]

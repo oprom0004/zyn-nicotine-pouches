@@ -10,12 +10,22 @@ const nextConfig = {
     return [
       {
         source: '/products',
-        destination: '/nicotine-pouches',
+        destination: '/buy',
         permanent: true,
       },
       {
         source: '/products/:path*',
-        destination: '/nicotine-pouches/:path*',
+        destination: '/buy/:path*',
+        permanent: true,
+      },
+      {
+        source: '/nicotine-pouches',
+        destination: '/buy',
+        permanent: true,
+      },
+      {
+        source: '/nicotine-pouches/:path*',
+        destination: '/buy/:path*',
         permanent: true,
       },
     ]
