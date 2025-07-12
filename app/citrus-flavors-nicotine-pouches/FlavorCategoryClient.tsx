@@ -87,12 +87,12 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Hero Section with Conversion Elements */}
-      <section className="py-16 bg-gradient-to-br from-white to-blue-50">
+      {/* Hero Section with Conversion Elements - Compressed */}
+      <section className="py-4 bg-gradient-to-br from-white to-orange-50">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             {/* Breadcrumb for SEO */}
-            <nav className="text-sm text-gray-500 mb-6">
+            <nav className="text-sm text-gray-500 mb-3">
               <Link href="/" className="hover:text-blue-600">Home</Link>
               <span className="mx-2">/</span>
               <Link href="/products" className="hover:text-blue-600">Products</Link>
@@ -100,16 +100,16 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
               <span className="capitalize font-medium">{flavorInfo.title}</span>
             </nav>
 
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
               {flavorInfo.h1}
             </h1>
             
-            <p className="text-xl text-gray-600 mb-8 leading-relaxed">
+            <p className="text-lg text-gray-600 mb-4 leading-relaxed">
               {flavorInfo.description}
             </p>
 
-            {/* Social Proof Bar */}
-            <div className="flex flex-wrap justify-center items-center gap-8 mb-8 p-6 bg-white rounded-2xl shadow-sm">
+            {/* Social Proof Bar - Compressed */}
+            <div className="flex flex-wrap justify-center items-center gap-4 mb-3 p-3 bg-white rounded-lg shadow-sm">
               <div className="flex items-center text-gray-700">
                 <Star className="text-yellow-400 mr-2" size={20} fill="currentColor" />
                 <span className="font-bold">{avgRating.toFixed(1)}</span>
@@ -250,7 +250,91 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
         </div>
       )}
 
-      {/* Flavor Benefits Section */}
+      {/* Products Section with Conversion Optimization - Moved Up */}
+      <section className="py-6">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            {/* Filter Controls */}
+            <div className="flex flex-wrap justify-between items-center mb-6 p-4 bg-white rounded-xl shadow-sm">
+              <div className="flex flex-wrap items-center gap-3 mb-3 lg:mb-0">
+                <span className="font-medium text-gray-700">Filter by Strength:</span>
+                <button
+                  onClick={() => setSelectedStrength(null)}
+                  className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
+                    !selectedStrength 
+                      ? 'bg-orange-600 text-white' 
+                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  }`}
+                >
+                  All Strengths
+                </button>
+                {availableStrengths.map(strength => (
+                  <button
+                    key={strength}
+                    onClick={() => setSelectedStrength(strength)}
+                    className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
+                      selectedStrength === strength
+                        ? 'bg-orange-600 text-white'
+                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    }`}
+                  >
+                    {strength}
+                  </button>
+                ))}
+              </div>
+
+              <div className="flex items-center gap-4">
+                <span className="font-medium text-gray-700">Sort by:</span>
+                <select
+                  value={sortBy}
+                  onChange={(e) => setSortBy(e.target.value)}
+                  className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                >
+                  <option value="popular">Most Popular</option>
+                  <option value="rating">Highest Rated</option>
+                  <option value="price-low">Price: Low to High</option>
+                  <option value="price-high">Price: High to Low</option>
+                </select>
+              </div>
+            </div>
+
+            {/* Urgency/Scarcity Element - Compact */}
+            <div className="bg-gradient-to-r from-orange-500 to-yellow-500 text-white p-2 rounded-lg mb-4 text-center">
+              <div className="flex items-center justify-center text-sm">
+                <TrendingUp className="mr-1" size={16} />
+                <span className="font-bold">High Demand:</span>
+                <span className="ml-1">{filteredProducts.filter(p => p.inStock).length} citrus flavor products selling fast this week!</span>
+              </div>
+            </div>
+
+            {/* Products Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {filteredProducts.map((product, index) => (
+                <ProductCard 
+                  key={product.id} 
+                  product={product} 
+                  index={index}
+                />
+              ))}
+            </div>
+
+            {/* Results Count */}
+            <div className="text-center mt-8 text-gray-600">
+              Showing {filteredProducts.length} of {products.length} premium citrus flavor nicotine pouches
+            </div>
+            
+            {/* Debug Info - Remove in production */}
+            {process.env.NODE_ENV === 'development' && (
+              <div className="text-center mt-4 text-xs text-gray-400">
+                Debug: Total products passed: {products.length} | 
+                Products: {products.map(p => p.name).join(', ')}
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* Flavor Benefits Section - Moved After Products */}
       <section className="py-12 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
@@ -265,90 +349,6 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
                 </div>
               ))}
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Products Section with Conversion Optimization */}
-      <section className="py-12">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            {/* Filter Controls */}
-            <div className="flex flex-wrap justify-between items-center mb-8 p-6 bg-white rounded-2xl shadow-sm">
-              <div className="flex flex-wrap items-center gap-4 mb-4 lg:mb-0">
-                <span className="font-medium text-gray-700">Filter by Strength:</span>
-                <button
-                  onClick={() => setSelectedStrength(null)}
-                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                    !selectedStrength 
-                      ? 'bg-blue-600 text-white' 
-                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                  }`}
-                >
-                  All Strengths
-                </button>
-                {availableStrengths.map(strength => (
-                  <button
-                    key={strength}
-                    onClick={() => setSelectedStrength(strength)}
-                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                      selectedStrength === strength
-                        ? 'bg-blue-600 text-white'
-                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                    }`}
-                  >
-                    {strength}
-                  </button>
-                ))}
-              </div>
-
-              <div className="flex items-center gap-4">
-                <span className="font-medium text-gray-700">Sort by:</span>
-                <select
-                  value={sortBy}
-                  onChange={(e) => setSortBy(e.target.value)}
-                  className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                >
-                  <option value="popular">Most Popular</option>
-                  <option value="rating">Highest Rated</option>
-                  <option value="price-low">Price: Low to High</option>
-                  <option value="price-high">Price: High to Low</option>
-                </select>
-              </div>
-            </div>
-
-            {/* Urgency/Scarcity Element */}
-            <div className="bg-gradient-to-r from-orange-500 to-red-500 text-white p-4 rounded-lg mb-8 text-center">
-              <div className="flex items-center justify-center">
-                <TrendingUp className="mr-2" size={20} />
-                <span className="font-bold">High Demand:</span>
-                <span className="ml-2">{filteredProducts.filter(p => p.inStock).length} products selling fast this week!</span>
-              </div>
-            </div>
-
-            {/* Products Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredProducts.map((product, index) => (
-                <ProductCard 
-                  key={product.id} 
-                  product={product} 
-                  index={index}
-                />
-              ))}
-            </div>
-
-            {/* Results Count */}
-            <div className="text-center mt-8 text-gray-600">
-              Showing {filteredProducts.length} of {products.length} {flavorInfo.flavorName} nicotine pouches
-            </div>
-            
-            {/* Debug Info - Remove in production */}
-            {process.env.NODE_ENV === 'development' && (
-              <div className="text-center mt-4 text-xs text-gray-400">
-                Debug: Total products passed: {products.length} | 
-                Products: {products.map(p => p.name).join(', ')}
-              </div>
-            )}
           </div>
         </div>
       </section>
