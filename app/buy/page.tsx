@@ -29,7 +29,13 @@ export const metadata: Metadata = {
     'purchase tobacco-free pouches',
     'order nicotine pouches online',
     'best nicotine pouches online',
-    'affordable nicotine pouches'
+    'affordable nicotine pouches',
+    'nicotine pouches near me',
+    'tobacco free pouches near me',
+    'zyn pouches near me',
+    'buy nicotine pouches near me',
+    'nicotine pouches store near me',
+    'where to buy nicotine pouches near me'
   ].join(', '),
   openGraph: {
     title: 'Buy Tobacco-Free Nicotine Pouches Online For Sale | Zyn Collection',

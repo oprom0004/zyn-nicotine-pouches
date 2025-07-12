@@ -307,6 +307,53 @@ export default function BuyClient() {
                     </p>
                   </div>
                 </div>
+
+                <div className="bg-gradient-to-r from-orange-50 to-yellow-50 rounded-lg p-8">
+                  <h2 className="text-2xl font-bold text-gray-900 mb-4">
+                    Can't Find Nicotine Pouches Near Me? Buy Online Instead
+                  </h2>
+                  <div className="prose max-w-none text-gray-700">
+                    <p className="mb-4">
+                      Searching for "nicotine pouches near me" or "tobacco free pouches near me"? Many customers 
+                      discover that buying nicotine pouches online offers significant advantages over visiting 
+                      local stores. Here's why shopping online beats searching for Zyn pouches near me.
+                    </p>
+                    <div className="grid md:grid-cols-2 gap-6 mt-6">
+                      <div>
+                        <h3 className="text-lg font-semibold text-gray-900 mb-2">🏪 Local Store Limitations</h3>
+                        <ul className="text-gray-600 space-y-1">
+                          <li>• Limited flavor selection in stock</li>
+                          <li>• Higher prices due to retail markup</li>
+                          <li>• Inconsistent availability</li>
+                          <li>• May not carry tobacco-free options</li>
+                          <li>• Time spent driving to multiple stores</li>
+                        </ul>
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-semibold text-gray-900 mb-2">🚀 Online Shopping Advantages</h3>
+                        <ul className="text-gray-600 space-y-1">
+                          <li>• Complete selection always available</li>
+                          <li>• Competitive online pricing</li>
+                          <li>• Fast delivery to your door</li>
+                          <li>• Read reviews before purchasing</li>
+                          <li>• Shop 24/7 from home convenience</li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div className="mt-6 p-4 bg-white rounded-lg border-l-4 border-blue-500">
+                      <h4 className="font-semibold text-gray-900 mb-2">🌍 We Ship Nationwide</h4>
+                      <p className="text-gray-600 text-sm">
+                        Instead of searching "where to buy nicotine pouches near me," order online and get delivery 
+                        to your area. Most orders arrive faster than a trip to the local tobacco store, with better 
+                        selection and prices. Free shipping on orders over $25.
+                      </p>
+                    </div>
+                    <p className="mt-4 text-sm font-medium text-gray-800">
+                      Stop searching for "nicotine pouches store near me" - shop our complete Zyn collection online 
+                      for the best prices, selection, and convenience. Adults 21+ only.
+                    </p>
+                  </div>
+                </div>
               </div>
             )}
           </div>
