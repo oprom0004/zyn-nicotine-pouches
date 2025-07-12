@@ -120,10 +120,10 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
       </section>
 
       {/* Mint Sub-Category Navigation - Ultra Compact */}
-      <section className="py-3 bg-gradient-to-r from-green-50 to-blue-50">
+      <section className="py-2 bg-gradient-to-r from-green-50 to-blue-50">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-base font-bold text-gray-900 text-center mb-3">
+            <h2 className="text-base font-bold text-gray-900 text-center mb-2">
               Choose Your Mint Flavor
             </h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
@@ -195,16 +195,16 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
       </section>
 
       {/* Products Section with Conversion Optimization */}
-      <section className="py-12">
+      <section className="py-6">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             {/* Filter Controls */}
-            <div className="flex flex-wrap justify-between items-center mb-8 p-6 bg-white rounded-2xl shadow-sm">
-              <div className="flex flex-wrap items-center gap-4 mb-4 lg:mb-0">
+            <div className="flex flex-wrap justify-between items-center mb-6 p-4 bg-white rounded-xl shadow-sm">
+              <div className="flex flex-wrap items-center gap-3 mb-3 lg:mb-0">
                 <span className="font-medium text-gray-700">Filter by Strength:</span>
                 <button
                   onClick={() => setSelectedStrength(null)}
-                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                  className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
                     !selectedStrength 
                       ? 'bg-blue-600 text-white' 
                       : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -216,7 +216,7 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
                   <button
                     key={strength}
                     onClick={() => setSelectedStrength(strength)}
-                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                    className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
                       selectedStrength === strength
                         ? 'bg-blue-600 text-white'
                         : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
