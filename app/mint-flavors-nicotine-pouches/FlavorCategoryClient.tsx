@@ -212,18 +212,6 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
                 </div>
               ))}
             </div>
-            
-            {/* Clear Filter Button */}
-            {selectedMintType && (
-              <div className="text-center mt-6">
-                <button
-                  onClick={() => setSelectedMintType(null)}
-                  className="px-6 py-3 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
-                >
-                  Show All Mint Flavors ({products.length} products)
-                </button>
-              </div>
-            )}
           </div>
         </div>
       </section>
