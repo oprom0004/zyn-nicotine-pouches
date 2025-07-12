@@ -12,6 +12,7 @@ export default function Header() {
   const [isCartOpen, setIsCartOpen] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isFlavorsOpen, setIsFlavorsOpen] = useState(false)
+  const [isStrengthsOpen, setIsStrengthsOpen] = useState(false)
   const { cart } = useCart()
 
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0)
@@ -27,6 +28,12 @@ export default function Header() {
     { name: 'Citrus Flavors', href: '/citrus-flavors-nicotine-pouches', emoji: '🍊', description: 'Zesty & Vibrant' },
     { name: 'Berry Flavors', href: '/berry-flavors-nicotine-pouches', emoji: '🫐', description: 'Sweet & Fruity' },
     { name: 'Wintergreen Flavors', href: '/wintergreen-flavors-nicotine-pouches', emoji: '🌲', description: 'Fresh & Crisp' }
+  ]
+
+  const strengthCategories = [
+    { name: '3mg Nicotine Pouches', href: '/3mg-nicotine-pouches', emoji: '💚', description: 'Mild & Gentle' },
+    { name: '6mg Nicotine Pouches', href: '/6mg-nicotine-pouches', emoji: '💙', description: 'Balanced & Popular' },
+    { name: '9mg Nicotine Pouches', href: '/9mg-nicotine-pouches', emoji: '❤️', description: 'Strong & Powerful' }
   ]
 
   return (
@@ -90,6 +97,47 @@ export default function Header() {
                               {flavor.name}
                             </div>
                             <div className="text-sm text-gray-500">{flavor.description}</div>
+                          </div>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* Strengths Dropdown */}
+              <div className="relative">
+                <button
+                  onMouseEnter={() => setIsStrengthsOpen(true)}
+                  onMouseLeave={() => setIsStrengthsOpen(false)}
+                  className="relative text-gray-700 hover:text-gray-900 font-medium transition-all duration-300 group flex items-center space-x-1"
+                >
+                  <span>Strengths</span>
+                  <ChevronDown size={16} className={`transition-transform duration-300 ${isStrengthsOpen ? 'rotate-180' : ''}`} />
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 luxury-gradient transition-all duration-300 group-hover:w-full"></span>
+                </button>
+                
+                {/* Dropdown Menu */}
+                {isStrengthsOpen && (
+                  <div 
+                    className="absolute top-full left-0 mt-2 w-72 bg-white rounded-2xl shadow-2xl border border-gray-100 py-4 z-50"
+                    onMouseEnter={() => setIsStrengthsOpen(true)}
+                    onMouseLeave={() => setIsStrengthsOpen(false)}
+                  >
+                    {strengthCategories.map((strength) => (
+                      <Link
+                        key={strength.name}
+                        href={strength.href}
+                        className="block px-6 py-3 hover:bg-gray-50 transition-colors duration-200 group"
+                        onClick={() => setIsStrengthsOpen(false)}
+                      >
+                        <div className="flex items-center space-x-3">
+                          <span className="text-2xl">{strength.emoji}</span>
+                          <div>
+                            <div className="font-medium text-gray-900 group-hover:text-blue-600 transition-colors">
+                              {strength.name}
+                            </div>
+                            <div className="text-sm text-gray-500">{strength.description}</div>
                           </div>
                         </div>
                       </Link>

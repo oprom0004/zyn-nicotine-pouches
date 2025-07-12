@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 
-const categories = [
+const flavorCategories = [
   {
     id: 1,
     name: 'Mint Flavors',
@@ -46,22 +46,60 @@ const categories = [
   }
 ]
 
+const strengthCategories = [
+  {
+    id: 1,
+    name: '3mg Nicotine Pouches',
+    description: 'Mild & gentle for beginners',
+    emoji: '💚',
+    productCount: 8,
+    color: 'bg-gradient-to-br from-green-100 to-emerald-100',
+    href: '/3mg-nicotine-pouches',
+    textColor: 'text-green-800'
+  },
+  {
+    id: 2,
+    name: '6mg Nicotine Pouches',
+    description: 'Balanced & most popular',
+    emoji: '💙',
+    productCount: 10,
+    color: 'bg-gradient-to-br from-blue-100 to-indigo-100',
+    href: '/6mg-nicotine-pouches',
+    textColor: 'text-blue-800'
+  },
+  {
+    id: 3,
+    name: '9mg Nicotine Pouches',
+    description: 'Strong & powerful',
+    emoji: '❤️',
+    productCount: 4,
+    color: 'bg-gradient-to-br from-red-100 to-pink-100',
+    href: '/9mg-nicotine-pouches',
+    textColor: 'text-red-800'
+  }
+]
+
 export default function Categories() {
   return (
     <section className="py-16 bg-gradient-to-br from-gray-50 to-blue-50">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            Shop by <span className="gradient-text">Flavor Category</span>
+            Shop by <span className="gradient-text">Category</span>
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto text-lg">
-            Discover our premium nicotine pouch flavors, each crafted to deliver 
+            Discover our premium nicotine pouches by flavor or strength, each crafted to deliver 
             a unique and satisfying tobacco-free experience.
           </p>
         </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {categories.map((category) => (
+
+        {/* Flavor Categories */}
+        <div className="mb-16">
+          <h3 className="text-2xl font-bold text-gray-900 text-center mb-8">
+            Shop by <span className="gradient-text">Flavor</span>
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {flavorCategories.map((category) => (
             <Link 
               key={category.id} 
               href={category.href}
@@ -96,6 +134,50 @@ export default function Categories() {
               </div>
             </Link>
           ))}
+        </div>
+
+        {/* Strength Categories */}
+        <div className="mb-16">
+          <h3 className="text-2xl font-bold text-gray-900 text-center mb-8">
+            Shop by <span className="gradient-text">Strength</span>
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+            {strengthCategories.map((category) => (
+              <Link 
+                key={category.id} 
+                href={category.href}
+                className="group block"
+              >
+                <div className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden transform hover:scale-105">
+                  <div className={`${category.color} p-8 text-center`}>
+                    {/* Emoji Icon */}
+                    <div className="w-20 h-20 mx-auto mb-4 bg-white rounded-full flex items-center justify-center shadow-lg">
+                      <span className="text-4xl">{category.emoji}</span>
+                    </div>
+                    
+                    <h3 className={`text-xl font-bold ${category.textColor} mb-2 group-hover:scale-105 transition-transform`}>
+                      {category.name}
+                    </h3>
+                    <p className="text-gray-700 text-sm mb-3 font-medium">
+                      {category.description}
+                    </p>
+                    <div className="inline-flex items-center px-3 py-1 bg-white rounded-full shadow-sm">
+                      <span className={`${category.textColor} text-sm font-bold`}>
+                        {category.productCount} products
+                      </span>
+                    </div>
+                  </div>
+                  
+                  <div className="p-6 bg-white">
+                    <div className="flex items-center justify-center text-blue-600 hover:text-blue-700 font-bold group-hover:translate-x-1 transition-all duration-300">
+                      <span>Shop {category.name.split(' ')[0]}</span>
+                      <ArrowRight size={18} className="ml-2 group-hover:scale-110 transition-transform" />
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
 
         {/* Call to Action */}
