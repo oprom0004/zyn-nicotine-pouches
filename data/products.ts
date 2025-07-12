@@ -16,7 +16,7 @@ export const products: Product[] = [
     featured: true,
     description: "Experience the refreshing coolness of our signature Cool Mint flavor with a gentle 3mg nicotine strength.",
     ingredients: ["Nicotine", "Plant-based fibers", "Flavoring", "Sweeteners"],
-    imageUrl: "/products/cool-mint-3mg.jpg",
+    imageUrl: "/products/mint/zyn-cool-mint-3mg.svg",
     slug: "zyn-cool-mint-3mg"
   },
   {
@@ -33,7 +33,7 @@ export const products: Product[] = [
     featured: true,
     description: "Our most popular strength combined with the classic Cool Mint flavor for the perfect balance.",
     ingredients: ["Nicotine", "Plant-based fibers", "Flavoring", "Sweeteners"],
-    imageUrl: "/products/cool-mint-6mg.jpg",
+    imageUrl: "/products/mint/zyn-cool-mint-6mg.svg",
     slug: "zyn-cool-mint-6mg"
   },
   {
@@ -50,7 +50,7 @@ export const products: Product[] = [
     featured: false,
     description: "Maximum strength Cool Mint for experienced users seeking a stronger nicotine experience.",
     ingredients: ["Nicotine", "Plant-based fibers", "Flavoring", "Sweeteners"],
-    imageUrl: "/products/cool-mint-9mg.jpg",
+    imageUrl: "/products/mint/zyn-cool-mint-9mg.svg",
     slug: "zyn-cool-mint-9mg"
   },
 
@@ -69,7 +69,7 @@ export const products: Product[] = [
     featured: true,
     description: "Bright and zesty citrus flavor with a smooth 3mg nicotine delivery.",
     ingredients: ["Nicotine", "Plant-based fibers", "Natural citrus flavoring", "Sweeteners"],
-    imageUrl: "/products/citrus-3mg.jpg",
+    imageUrl: "/products/citrus/zyn-citrus-3mg.svg",
     slug: "zyn-citrus-3mg"
   },
   {
@@ -86,7 +86,7 @@ export const products: Product[] = [
     featured: false,
     description: "Energizing citrus burst with medium nicotine strength for all-day satisfaction.",
     ingredients: ["Nicotine", "Plant-based fibers", "Natural citrus flavoring", "Sweeteners"],
-    imageUrl: "/products/citrus-6mg.jpg",
+    imageUrl: "/products/citrus/zyn-citrus-6mg.svg",
     slug: "zyn-citrus-6mg"
   },
 
@@ -105,7 +105,7 @@ export const products: Product[] = [
     featured: false,
     description: "Rich coffee flavor perfect for morning routines with gentle nicotine strength.",
     ingredients: ["Nicotine", "Plant-based fibers", "Natural coffee flavoring", "Sweeteners"],
-    imageUrl: "/products/coffee-3mg.jpg",
+    imageUrl: "/products/coffee/zyn-coffee-3mg.svg",
     slug: "zyn-coffee-3mg"
   },
   {
@@ -122,7 +122,7 @@ export const products: Product[] = [
     featured: true,
     description: "Bold coffee taste with moderate nicotine strength - perfect for coffee lovers.",
     ingredients: ["Nicotine", "Plant-based fibers", "Natural coffee flavoring", "Sweeteners"],
-    imageUrl: "/products/coffee-6mg.jpg",
+    imageUrl: "/products/coffee/zyn-coffee-6mg.svg",
     slug: "zyn-coffee-6mg"
   },
   {
@@ -158,7 +158,7 @@ export const products: Product[] = [
     featured: false,
     description: "Classic spearmint freshness with a gentle nicotine touch.",
     ingredients: ["Nicotine", "Plant-based fibers", "Natural spearmint flavoring", "Sweeteners"],
-    imageUrl: "/products/spearmint-3mg.jpg",
+    imageUrl: "/products/spearmint/zyn-spearmint-3mg.svg",
     slug: "zyn-spearmint-3mg"
   },
   {
@@ -175,7 +175,7 @@ export const products: Product[] = [
     featured: false,
     description: "Refreshing spearmint with balanced nicotine strength for long-lasting freshness.",
     ingredients: ["Nicotine", "Plant-based fibers", "Natural spearmint flavoring", "Sweeteners"],
-    imageUrl: "/products/spearmint-6mg.jpg",
+    imageUrl: "/products/spearmint/zyn-spearmint-6mg.svg",
     slug: "zyn-spearmint-6mg"
   },
 
@@ -194,7 +194,7 @@ export const products: Product[] = [
     featured: false,
     description: "Cool wintergreen flavor with a gentle nicotine strength. Currently restocking.",
     ingredients: ["Nicotine", "Plant-based fibers", "Natural wintergreen flavoring", "Sweeteners"],
-    imageUrl: "/products/wintergreen-3mg.jpg",
+    imageUrl: "/products/wintergreen/zyn-wintergreen-3mg.svg",
     slug: "zyn-wintergreen-3mg"
   },
   {
@@ -211,7 +211,7 @@ export const products: Product[] = [
     featured: false,
     description: "Traditional wintergreen taste with medium nicotine strength.",
     ingredients: ["Nicotine", "Plant-based fibers", "Natural wintergreen flavoring", "Sweeteners"],
-    imageUrl: "/products/wintergreen-6mg.jpg",
+    imageUrl: "/products/wintergreen/zyn-wintergreen-6mg.svg",
     slug: "zyn-wintergreen-6mg"
   },
 
@@ -266,7 +266,7 @@ export const products: Product[] = [
     featured: false,
     description: "Warm and spicy cinnamon flavor with a gentle nicotine kick.",
     ingredients: ["Nicotine", "Plant-based fibers", "Natural cinnamon flavoring", "Sweeteners"],
-    imageUrl: "/products/cinnamon-3mg.jpg",
+    imageUrl: "/products/spice/zyn-cinnamon-3mg.svg",
     slug: "zyn-cinnamon-3mg"
   },
   {
@@ -283,7 +283,7 @@ export const products: Product[] = [
     featured: false,
     description: "Bold cinnamon spice with medium nicotine strength for a warming experience.",
     ingredients: ["Nicotine", "Plant-based fibers", "Natural cinnamon flavoring", "Sweeteners"],
-    imageUrl: "/products/cinnamon-6mg.jpg",
+    imageUrl: "/products/spice/zyn-cinnamon-6mg.svg",
     slug: "zyn-cinnamon-6mg"
   },
 
@@ -302,7 +302,7 @@ export const products: Product[] = [
     featured: false,
     description: "Smooth vanilla flavor with gentle nicotine strength for a sweet experience.",
     ingredients: ["Nicotine", "Plant-based fibers", "Natural vanilla flavoring", "Sweeteners"],
-    imageUrl: "/products/vanilla-3mg.jpg",
+    imageUrl: "/products/sweet/zyn-vanilla-3mg.svg",
     slug: "zyn-vanilla-3mg"
   },
   {
@@ -319,7 +319,7 @@ export const products: Product[] = [
     featured: false,
     description: "Creamy vanilla taste with moderate nicotine strength.",
     ingredients: ["Nicotine", "Plant-based fibers", "Natural vanilla flavoring", "Sweeteners"],
-    imageUrl: "/products/vanilla-6mg.jpg",
+    imageUrl: "/products/sweet/zyn-vanilla-6mg.svg",
     slug: "zyn-vanilla-6mg"
   },
 

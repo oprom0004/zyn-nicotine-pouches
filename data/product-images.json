@@ -1,0 +1,149 @@
+{
+  "cool-mint-3mg": {
+    "webp": "/products/mint/cool-mint-3mg.webp",
+    "svg": "/products/mint/cool-mint-3mg.svg",
+    "category": "mint",
+    "flavor": "cool-mint",
+    "strength": "3mg"
+  },
+  "cool-mint-6mg": {
+    "webp": "/products/mint/cool-mint-6mg.webp",
+    "svg": "/products/mint/cool-mint-6mg.svg",
+    "category": "mint",
+    "flavor": "cool-mint",
+    "strength": "6mg"
+  },
+  "cool-mint-9mg": {
+    "webp": "/products/mint/cool-mint-9mg.webp",
+    "svg": "/products/mint/cool-mint-9mg.svg",
+    "category": "mint",
+    "flavor": "cool-mint",
+    "strength": "9mg"
+  },
+  "peppermint-3mg": {
+    "webp": "/products/mint/peppermint-3mg.webp",
+    "svg": "/products/mint/peppermint-3mg.svg",
+    "category": "mint",
+    "flavor": "peppermint",
+    "strength": "3mg"
+  },
+  "peppermint-6mg": {
+    "webp": "/products/mint/peppermint-6mg.webp",
+    "svg": "/products/mint/peppermint-6mg.svg",
+    "category": "mint",
+    "flavor": "peppermint",
+    "strength": "6mg"
+  },
+  "spearmint-3mg": {
+    "webp": "/products/spearmint/spearmint-3mg.webp",
+    "svg": "/products/spearmint/spearmint-3mg.svg",
+    "category": "spearmint",
+    "flavor": "spearmint",
+    "strength": "3mg"
+  },
+  "spearmint-6mg": {
+    "webp": "/products/spearmint/spearmint-6mg.webp",
+    "svg": "/products/spearmint/spearmint-6mg.svg",
+    "category": "spearmint",
+    "flavor": "spearmint",
+    "strength": "6mg"
+  },
+  "wintergreen-3mg": {
+    "webp": "/products/wintergreen/wintergreen-3mg.webp",
+    "svg": "/products/wintergreen/wintergreen-3mg.svg",
+    "category": "wintergreen",
+    "flavor": "wintergreen",
+    "strength": "3mg"
+  },
+  "wintergreen-6mg": {
+    "webp": "/products/wintergreen/wintergreen-6mg.webp",
+    "svg": "/products/wintergreen/wintergreen-6mg.svg",
+    "category": "wintergreen",
+    "flavor": "wintergreen",
+    "strength": "6mg"
+  },
+  "citrus-3mg": {
+    "webp": "/products/citrus/citrus-3mg.webp",
+    "svg": "/products/citrus/citrus-3mg.svg",
+    "category": "citrus",
+    "flavor": "citrus",
+    "strength": "3mg"
+  },
+  "citrus-6mg": {
+    "webp": "/products/citrus/citrus-6mg.webp",
+    "svg": "/products/citrus/citrus-6mg.svg",
+    "category": "citrus",
+    "flavor": "citrus",
+    "strength": "6mg"
+  },
+  "coffee-3mg": {
+    "webp": "/products/coffee/coffee-3mg.webp",
+    "svg": "/products/coffee/coffee-3mg.svg",
+    "category": "coffee",
+    "flavor": "coffee",
+    "strength": "3mg"
+  },
+  "coffee-6mg": {
+    "webp": "/products/coffee/coffee-6mg.webp",
+    "svg": "/products/coffee/coffee-6mg.svg",
+    "category": "coffee",
+    "flavor": "coffee",
+    "strength": "6mg"
+  },
+  "chill-3mg": {
+    "webp": "/products/mint/chill-3mg.webp",
+    "svg": "/products/mint/chill-3mg.svg",
+    "category": "mint",
+    "flavor": "chill",
+    "strength": "3mg"
+  },
+  "chill-6mg": {
+    "webp": "/products/mint/chill-6mg.webp",
+    "svg": "/products/mint/chill-6mg.svg",
+    "category": "mint",
+    "flavor": "chill",
+    "strength": "6mg"
+  },
+  "smooth-3mg": {
+    "webp": "/products/sweet/smooth-3mg.webp",
+    "svg": "/products/sweet/smooth-3mg.svg",
+    "category": "sweet",
+    "flavor": "smooth",
+    "strength": "3mg"
+  },
+  "smooth-6mg": {
+    "webp": "/products/sweet/smooth-6mg.webp",
+    "svg": "/products/sweet/smooth-6mg.svg",
+    "category": "sweet",
+    "flavor": "smooth",
+    "strength": "6mg"
+  },
+  "cinnamon-3mg": {
+    "webp": "/products/spice/cinnamon-3mg.webp",
+    "svg": "/products/spice/cinnamon-3mg.svg",
+    "category": "spice",
+    "flavor": "cinnamon",
+    "strength": "3mg"
+  },
+  "cinnamon-6mg": {
+    "webp": "/products/spice/cinnamon-6mg.webp",
+    "svg": "/products/spice/cinnamon-6mg.svg",
+    "category": "spice",
+    "flavor": "cinnamon",
+    "strength": "6mg"
+  },
+  "vanilla-3mg": {
+    "webp": "/products/sweet/vanilla-3mg.webp",
+    "svg": "/products/sweet/vanilla-3mg.svg",
+    "category": "sweet",
+    "flavor": "vanilla",
+    "strength": "3mg"
+  },
+  "vanilla-6mg": {
+    "webp": "/products/sweet/vanilla-6mg.webp",
+    "svg": "/products/sweet/vanilla-6mg.svg",
+    "category": "sweet",
+    "flavor": "vanilla",
+    "strength": "6mg"
+  }
+}
