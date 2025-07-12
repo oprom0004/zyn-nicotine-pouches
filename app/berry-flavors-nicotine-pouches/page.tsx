@@ -79,11 +79,9 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default function BerryFlavorsPage() {
-  // 只过滤berry相关产品
+  // 过滤berry类别产品
   const flavorProducts = products.filter(product => 
-    product.flavor.toLowerCase().includes('berry') ||
-    product.category.toLowerCase().includes('berry') ||
-    product.category.toLowerCase().includes('fruit')
+    product.category === 'berry'
   )
 
   return (

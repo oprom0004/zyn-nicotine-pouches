@@ -79,10 +79,9 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default function CitrusFlavorsPage() {
-  // 只过滤citrus相关产品
+  // 过滤citrus类别产品
   const flavorProducts = products.filter(product => 
-    product.flavor.toLowerCase().includes('citrus') ||
-    product.category.toLowerCase().includes('citrus')
+    product.category === 'citrus'
   )
 
   return (

@@ -79,9 +79,9 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default function WintergreenFlavorsPage() {
-  // 只过滤wintergreen相关产品
+  // 过滤wintergreen类别产品
   const flavorProducts = products.filter(product => 
-    product.flavor.toLowerCase().includes('wintergreen')
+    product.category === 'wintergreen'
   )
 
   return (
