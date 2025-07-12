@@ -82,7 +82,7 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             {/* Breadcrumb for SEO */}
-            <nav className="text-sm text-gray-500 mb-6">
+            <nav className="text-sm text-gray-500 mb-4">
               <Link href="/" className="hover:text-blue-600">Home</Link>
               <span className="mx-2">/</span>
               <Link href="/products" className="hover:text-blue-600">Products</Link>
@@ -119,18 +119,18 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
         </div>
       </section>
 
-      {/* Mint Sub-Category Navigation - Compact with Images */}
-      <section className="py-4 bg-gradient-to-r from-green-50 to-blue-50">
+      {/* Mint Sub-Category Navigation - Ultra Compact */}
+      <section className="py-3 bg-gradient-to-r from-green-50 to-blue-50">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-lg font-bold text-gray-900 text-center mb-4">
+            <h2 className="text-base font-bold text-gray-900 text-center mb-3">
               Choose Your Mint Flavor
             </h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
               {/* All Mint Flavors Card */}
               <div 
                 onClick={() => setSelectedMintType(null)}
-                className={`cursor-pointer p-4 rounded-xl border-2 transition-all duration-300 hover:scale-105 ${
+                className={`cursor-pointer p-3 rounded-lg border-2 transition-all duration-300 hover:scale-105 ${
                   !selectedMintType
                     ? 'border-blue-500 bg-blue-50 shadow-lg'
                     : 'border-gray-200 bg-white hover:border-gray-300 hover:shadow-md'
@@ -138,10 +138,10 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
               >
                 <div className="text-center">
                   {/* Icon placeholder for All Mint */}
-                  <div className="w-16 h-16 mx-auto mb-3 bg-gradient-to-br from-green-400 to-blue-500 rounded-full flex items-center justify-center">
-                    <span className="text-white text-2xl">🌿</span>
+                  <div className="w-12 h-12 mx-auto mb-2 bg-gradient-to-br from-green-400 to-blue-500 rounded-full flex items-center justify-center">
+                    <span className="text-white text-lg">🌿</span>
                   </div>
-                  <h3 className="font-bold text-gray-900 mb-1">All Mint</h3>
+                  <h3 className="font-semibold text-sm text-gray-900 mb-1">All Mint</h3>
                   <div className="text-xs text-gray-600">
                     {products.length} products
                   </div>
@@ -152,7 +152,7 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
                 <div 
                   key={mintType.value}
                   onClick={() => setSelectedMintType(selectedMintType === mintType.value ? null : mintType.value)}
-                  className={`cursor-pointer p-4 rounded-xl border-2 transition-all duration-300 hover:scale-105 ${
+                  className={`cursor-pointer p-3 rounded-lg border-2 transition-all duration-300 hover:scale-105 ${
                     selectedMintType === mintType.value
                       ? 'border-blue-500 bg-blue-50 shadow-lg'
                       : 'border-gray-200 bg-white hover:border-gray-300 hover:shadow-md'
@@ -160,35 +160,31 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
                 >
                   <div className="text-center">
                     {/* Product images/icons */}
-                    <div className="w-16 h-16 mx-auto mb-3 rounded-full flex items-center justify-center overflow-hidden">
+                    <div className="w-12 h-12 mx-auto mb-2 rounded-full flex items-center justify-center overflow-hidden">
                       {mintType.value === 'Cool Mint' && (
                         <div className="w-full h-full bg-gradient-to-br from-blue-400 to-cyan-500 flex items-center justify-center">
-                          <span className="text-white text-2xl">❄️</span>
+                          <span className="text-white text-lg">❄️</span>
                         </div>
                       )}
                       {mintType.value === 'Spearmint' && (
                         <div className="w-full h-full bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center">
-                          <span className="text-white text-2xl">🌱</span>
+                          <span className="text-white text-lg">🌱</span>
                         </div>
                       )}
                       {mintType.value === 'Menthol' && (
                         <div className="w-full h-full bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center">
-                          <span className="text-white text-2xl">💨</span>
+                          <span className="text-white text-lg">💨</span>
                         </div>
                       )}
                     </div>
-                    <h3 className="font-bold text-gray-900 mb-1">{mintType.name}</h3>
-                    <div className="text-xs text-gray-500 mb-2">
-                      {mintType.value === 'Cool Mint' && 'Classic refreshing mint flavor'}
-                      {mintType.value === 'Spearmint' && 'Sweet, fresh spearmint taste'}
-                      {mintType.value === 'Menthol' && 'Intense menthol cooling'}
+                    <h3 className="font-semibold text-sm text-gray-900 mb-1">{mintType.name}</h3>
+                    <div className="text-xs text-gray-500 mb-1">
+                      {mintType.value === 'Cool Mint' && 'Classic refreshing'}
+                      {mintType.value === 'Spearmint' && 'Sweet & fresh'}
+                      {mintType.value === 'Menthol' && 'Intense cooling'}
                     </div>
-                    <div className="text-xs text-gray-600 mb-1">
+                    <div className="text-xs text-gray-600">
                       {mintType.count} products
-                    </div>
-                    {/* Coming Soon Badge - smaller */}
-                    <div className="text-xs text-blue-600">
-                      🔜 专页即将上线
                     </div>
                   </div>
                 </div>
