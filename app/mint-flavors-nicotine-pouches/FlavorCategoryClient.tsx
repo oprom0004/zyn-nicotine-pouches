@@ -118,13 +118,10 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
           </div>
         </div>
       </section>
-      {/* Mint Sub-Category Navigation - Ultra Compact */}
+      {/* Mint Sub-Category Navigation - No Title */}
       <section className="py-2 bg-gradient-to-r from-green-50 to-blue-50">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-base font-bold text-gray-900 text-center mb-2">
-              Choose Your Mint Flavor
-            </h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
               {/* All Mint Flavors Card */}
               <div 
