@@ -133,7 +133,7 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
       <section className="py-1 bg-gradient-to-r from-orange-50 to-yellow-50">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
               {/* All Citrus Flavors Card */}
               <div 
                 onClick={() => setSelectedCitrusType(null)}
@@ -144,8 +144,8 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
                 }`}
               >
                 <div className="text-center">
-                  <div className="w-12 h-12 mx-auto mb-2 bg-gradient-to-br from-orange-400 to-yellow-500 rounded-full flex items-center justify-center">
-                    <span className="text-white text-lg">🍊</span>
+                  <div className="w-12 h-12 mx-auto mb-2 bg-orange-600 rounded-full flex items-center justify-center">
+                    <span className="text-white text-lg">🌟</span>
                   </div>
                   <h3 className="font-semibold text-sm text-gray-900 mb-1">All Citrus</h3>
                   <div className="text-xs text-gray-600">
@@ -154,40 +154,34 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
                 </div>
               </div>
 
-              {citrusTypes.map((citrusType) => (
-                <div 
-                  key={citrusType.value}
-                  onClick={() => setSelectedCitrusType(selectedCitrusType === citrusType.value ? null : citrusType.value)}
-                  className={`cursor-pointer p-3 rounded-lg border-2 transition-all duration-300 hover:scale-105 ${
-                    selectedCitrusType === citrusType.value
-                      ? 'border-orange-500 bg-orange-50 shadow-lg'
-                      : 'border-gray-200 bg-white hover:border-gray-300 hover:shadow-md'
-                  }`}
-                >
-                  <div className="text-center">
-                    <div className="w-12 h-12 mx-auto mb-2 rounded-full flex items-center justify-center overflow-hidden">
-                      {citrusType.value === 'Citrus' && (
-                        <div className="w-full h-full bg-gradient-to-br from-orange-400 to-orange-500 flex items-center justify-center">
-                          <span className="text-white text-lg">🍊</span>
-                        </div>
-                      )}
-                      {citrusType.value === 'Lemon' && (
-                        <div className="w-full h-full bg-gradient-to-br from-yellow-400 to-yellow-500 flex items-center justify-center">
-                          <span className="text-white text-lg">🍋</span>
-                        </div>
-                      )}
-                    </div>
-                    <h3 className="font-semibold text-sm text-gray-900 mb-1">{citrusType.name}</h3>
-                    <div className="text-xs text-gray-500 mb-1">
-                      {citrusType.value === 'Citrus' && 'Classic citrus zest'}
-                      {citrusType.value === 'Lemon' && 'Fresh lemon tang'}
-                    </div>
-                    <div className="text-xs text-gray-600">
-                      {citrusType.count} products
+              {citrusTypes.slice(0, 7).map((citrusType) => {
+                const citrusEmoji = {
+                  'Citrus': '🍊',
+                  'Lemon': '🍋'
+                }[citrusType.value] || '⭐'
+
+                return (
+                  <div 
+                    key={citrusType.value}
+                    onClick={() => setSelectedCitrusType(selectedCitrusType === citrusType.value ? null : citrusType.value)}
+                    className={`cursor-pointer p-3 rounded-lg border-2 transition-all duration-300 hover:scale-105 ${
+                      selectedCitrusType === citrusType.value
+                        ? 'border-orange-500 bg-orange-50 shadow-lg'
+                        : 'border-gray-200 bg-white hover:border-gray-300 hover:shadow-md'
+                    }`}
+                  >
+                    <div className="text-center">
+                      <div className="w-12 h-12 mx-auto mb-2 bg-gradient-to-br from-gray-100 to-gray-200 rounded-full flex items-center justify-center">
+                        <span className="text-lg">{citrusEmoji}</span>
+                      </div>
+                      <h3 className="font-semibold text-sm text-gray-900 mb-1">{citrusType.name}</h3>
+                      <div className="text-xs text-gray-600">
+                        {citrusType.count} products
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                )
+              })}
             </div>
           </div>
         </div>
@@ -197,8 +191,8 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
       {showStickyFilter && (
         <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white p-3 border-t shadow-lg animate-in slide-in-from-bottom duration-300">
           <div className="max-h-32 overflow-y-auto">
-            {/* Type Pills */}
-            <div className="flex flex-wrap gap-2 mb-2">
+            {/* Citrus Type Pills */}
+            <div className="flex flex-wrap gap-2">
               <button
                 onClick={() => setSelectedCitrusType(null)}
                 className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
@@ -221,31 +215,6 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
                 </button>
               ))}
             </div>
-            
-            {/* Strength Pills */}
-            <div className="flex flex-wrap gap-2">
-              <button
-                onClick={() => setSelectedStrength(null)}
-                className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
-                  !selectedStrength ? 'bg-green-600 text-white' : 'bg-white text-gray-700 border hover:bg-gray-50'
-                }`}
-              >
-                All Strengths
-              </button>
-              {availableStrengths.map(strength => (
-                <button
-                  key={strength}
-                  onClick={() => setSelectedStrength(strength)}
-                  className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
-                    selectedStrength === strength 
-                      ? 'bg-green-600 text-white' 
-                      : 'bg-white text-gray-700 border hover:bg-gray-50'
-                  }`}
-                >
-                  {strength}
-                </button>
-              ))}
-            </div>
           </div>
         </div>
       )}
@@ -257,28 +226,28 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
             {/* Filter Controls */}
             <div className="flex flex-wrap justify-between items-center mb-6 p-4 bg-white rounded-xl shadow-sm">
               <div className="flex flex-wrap items-center gap-3 mb-3 lg:mb-0">
-                <span className="font-medium text-gray-700">Filter by Strength:</span>
+                <span className="font-medium text-gray-700">Filter by Type:</span>
                 <button
-                  onClick={() => setSelectedStrength(null)}
+                  onClick={() => setSelectedCitrusType(null)}
                   className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
-                    !selectedStrength 
+                    !selectedCitrusType 
                       ? 'bg-orange-600 text-white' 
                       : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                   }`}
                 >
-                  All Strengths
+                  All Citrus
                 </button>
-                {availableStrengths.map(strength => (
+                {citrusTypes.slice(0, 4).map(citrusType => (
                   <button
-                    key={strength}
-                    onClick={() => setSelectedStrength(strength)}
+                    key={citrusType.value}
+                    onClick={() => setSelectedCitrusType(citrusType.value)}
                     className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
-                      selectedStrength === strength
+                      selectedCitrusType === citrusType.value
                         ? 'bg-orange-600 text-white'
                         : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                     }`}
                   >
-                    {strength}
+                    {citrusType.name}
                   </button>
                 ))}
               </div>
@@ -322,14 +291,6 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
             <div className="text-center mt-8 text-gray-600">
               Showing {filteredProducts.length} of {products.length} premium citrus flavor nicotine pouches
             </div>
-            
-            {/* Debug Info - Remove in production */}
-            {process.env.NODE_ENV === 'development' && (
-              <div className="text-center mt-4 text-xs text-gray-400">
-                Debug: Total products passed: {products.length} | 
-                Products: {products.map(p => p.name).join(', ')}
-              </div>
-            )}
           </div>
         </div>
       </section>
@@ -341,13 +302,17 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
             <h2 className="text-3xl font-bold text-gray-900 text-center mb-12">
               Why Choose {flavorInfo.title}?
             </h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {flavorInfo.benefits.map((benefit, index) => (
-                <div key={index} className="text-center p-6 bg-gray-50 rounded-2xl">
-                  <CheckCircle className="text-green-600 mx-auto mb-4" size={32} />
-                  <h3 className="font-semibold text-gray-900 mb-2">{benefit}</h3>
-                </div>
-              ))}
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {flavorInfo.benefits.map((benefit, index) => {
+                const icons = [CheckCircle, Shield, Award, TrendingUp, Users, Star]
+                const IconComponent = icons[index % icons.length]
+                return (
+                  <div key={index} className="text-center p-6 bg-gray-50 rounded-2xl">
+                    <IconComponent className="text-orange-600 mx-auto mb-4" size={32} />
+                    <h3 className="font-semibold text-gray-900 mb-2">{benefit}</h3>
+                  </div>
+                )
+              })}
             </div>
           </div>
         </div>
