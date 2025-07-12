@@ -202,38 +202,40 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
         </div>
       </section>
 
-      {/* Mobile Sticky Filter Bar - Only show when scrolled */}
+      {/* Mobile Bottom Sticky Filter Bar - Only show when scrolled */}
       {showStickyFilter && (
-        <div className="md:hidden fixed top-0 left-0 right-0 z-50 bg-white p-3 border-b shadow-lg animate-in slide-in-from-top duration-300">
-          <div className="flex flex-wrap gap-2">
+        <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white p-3 border-t shadow-lg animate-in slide-in-from-bottom duration-300">
+          <div className="max-h-32 overflow-y-auto">
             {/* Type Pills */}
-            <button
-              onClick={() => setSelectedMintType(null)}
-              className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
-                !selectedMintType ? 'bg-blue-600 text-white' : 'bg-white text-gray-700 border hover:bg-gray-50'
-              }`}
-            >
-              All Mint
-            </button>
-            {mintTypes.map((mintType) => (
+            <div className="flex flex-wrap gap-2 mb-2">
               <button
-                key={mintType.value}
-                onClick={() => setSelectedMintType(selectedMintType === mintType.value ? null : mintType.value)}
+                onClick={() => setSelectedMintType(null)}
                 className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
-                  selectedMintType === mintType.value 
-                    ? 'bg-blue-600 text-white' 
-                    : 'bg-white text-gray-700 border hover:bg-gray-50'
+                  !selectedMintType ? 'bg-blue-600 text-white' : 'bg-white text-gray-700 border hover:bg-gray-50'
                 }`}
               >
-                {mintType.name}
+                All Mint
               </button>
-            ))}
+              {mintTypes.map((mintType) => (
+                <button
+                  key={mintType.value}
+                  onClick={() => setSelectedMintType(selectedMintType === mintType.value ? null : mintType.value)}
+                  className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
+                    selectedMintType === mintType.value 
+                      ? 'bg-blue-600 text-white' 
+                      : 'bg-white text-gray-700 border hover:bg-gray-50'
+                  }`}
+                >
+                  {mintType.name}
+                </button>
+              ))}
+            </div>
             
             {/* Strength Pills */}
-            <div className="w-full border-t pt-2 mt-1">
+            <div className="flex flex-wrap gap-2">
               <button
                 onClick={() => setSelectedStrength(null)}
-                className={`px-3 py-1 rounded-full text-xs font-medium mr-2 transition-colors ${
+                className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
                   !selectedStrength ? 'bg-green-600 text-white' : 'bg-white text-gray-700 border hover:bg-gray-50'
                 }`}
               >
@@ -243,7 +245,7 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
                 <button
                   key={strength}
                   onClick={() => setSelectedStrength(strength)}
-                  className={`px-3 py-1 rounded-full text-xs font-medium mr-2 mb-1 transition-colors ${
+                  className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
                     selectedStrength === strength 
                       ? 'bg-green-600 text-white' 
                       : 'bg-white text-gray-700 border hover:bg-gray-50'
