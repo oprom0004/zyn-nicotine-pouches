@@ -10,6 +10,7 @@ import { Card, CardContent, CardFooter } from '@/components/ui/Card'
 import Button from '@/components/ui/Button'
 import { StockBadge, DiscountBadge, FeaturedBadge, StrengthBadge, FlavorBadge } from '@/components/ui/Badge'
 import SEOImage from '@/components/SEOImage'
+import { redirectToZyloProduct } from '@/utils/zylo-mapping'
 
 interface ProductCardProps {
   product: Product
@@ -22,6 +23,7 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
   const [isWishlisted, setIsWishlisted] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
 
+  // 临时方案：跳转到Zylo网站而不是添加到购物车
   const handleAddToCart = async (e: React.MouseEvent) => {
     e.preventDefault() // Prevent navigation when clicking the button
     e.stopPropagation()
@@ -30,13 +32,16 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
     
     setIsLoading(true)
     
-    // Simulate API call delay
-    await new Promise(resolve => setTimeout(resolve, 300))
-    
-    addToCart(product)
-    showSuccess(`${product.name} added to cart!`)
-    
-    setIsLoading(false)
+    try {
+      // 跳转到Zylo对应的产品页面
+      redirectToZyloProduct(product.flavor)
+      showSuccess(`Redirecting to ${product.flavor} nicotine pouches...`)
+    } catch (error) {
+      console.error('Failed to redirect to Zylo:', error)
+      showSuccess('Opening product page...')
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   const handleWishlistToggle = (e: React.MouseEvent) => {
@@ -170,7 +175,7 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
             onClick={handleAddToCart}
             leftIcon={<ShoppingCart className="w-4 h-4" />}
           >
-            {!product.inStock ? 'Out of Stock' : 'Add to Cart'}
+            {!product.inStock ? 'Out of Stock' : 'Buy Now'}
           </Button>
         </CardFooter>
 
