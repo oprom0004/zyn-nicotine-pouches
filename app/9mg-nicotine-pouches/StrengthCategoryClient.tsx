@@ -28,6 +28,17 @@ export default function StrengthCategoryClient({ strength, strengthInfo, product
   const [selectedFlavor, setSelectedFlavor] = useState<string | null>(null)
   const [showStickyFilter, setShowStickyFilter] = useState(false)
 
+  // Scroll to products grid when filter is selected
+  const scrollToProducts = () => {
+    const productsGrid = document.getElementById('products-grid')
+    if (productsGrid) {
+      productsGrid.scrollIntoView({ 
+        behavior: 'smooth', 
+        block: 'start' 
+      })
+    }
+  }
+
   // Get available flavors for this strength
   const availableFlavors = Array.from(new Set(products.map(p => p.flavor))).sort()
   
@@ -228,7 +239,10 @@ export default function StrengthCategoryClient({ strength, strengthInfo, product
             {/* Flavor Pills */}
             <div className="flex flex-wrap gap-2">
               <button
-                onClick={() => setSelectedFlavor(null)}
+                onClick={() => {
+                  setSelectedFlavor(null)
+                  scrollToProducts()
+                }}
                 className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
                   !selectedFlavor ? `${theme.primary} text-white` : 'bg-white text-gray-700 border hover:bg-gray-50'
                 }`}
@@ -238,7 +252,10 @@ export default function StrengthCategoryClient({ strength, strengthInfo, product
               {availableFlavors.map((flavor) => (
                 <button
                   key={flavor}
-                  onClick={() => setSelectedFlavor(selectedFlavor === flavor ? null : flavor)}
+                  onClick={() => {
+                    setSelectedFlavor(selectedFlavor === flavor ? null : flavor)
+                    scrollToProducts()
+                  }}
                   className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
                     selectedFlavor === flavor 
                       ? `${theme.primary} text-white`
@@ -311,7 +328,7 @@ export default function StrengthCategoryClient({ strength, strengthInfo, product
             </div>
 
             {/* Products Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div id="products-grid" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredProducts.map((product, index) => (
                 <ProductCard 
                   key={product.id} 

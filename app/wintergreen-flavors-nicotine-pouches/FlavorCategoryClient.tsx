@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Product } from '@/types'
 import ProductCard from '@/components/ProductCard'
 import { Star, Shield, Truck, Award, TrendingUp, Users, CheckCircle } from 'lucide-react'
@@ -26,6 +26,28 @@ interface FlavorCategoryClientProps {
 export default function FlavorCategoryClient({ flavor, flavorInfo, products }: FlavorCategoryClientProps) {
   const [sortBy, setSortBy] = useState('popular')
   const [selectedStrength, setSelectedStrength] = useState<string | null>(null)
+  const [showStickyFilter, setShowStickyFilter] = useState(false)
+
+  // Scroll to products grid when filter is selected
+  const scrollToProducts = () => {
+    const productsGrid = document.getElementById('products-grid')
+    if (productsGrid) {
+      productsGrid.scrollIntoView({ 
+        behavior: 'smooth', 
+        block: 'start' 
+      })
+    }
+  }
+
+  // Handle scroll for sticky mobile filter
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowStickyFilter(window.scrollY > 400)
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   // Get available strengths for this flavor
   const availableStrengths = Array.from(new Set(products.map(p => p.strength))).sort()
@@ -112,7 +134,10 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
               <div className="flex flex-wrap items-center gap-3 mb-3 lg:mb-0">
                 <span className="font-medium text-gray-700">Filter by Strength:</span>
                 <button
-                  onClick={() => setSelectedStrength(null)}
+                  onClick={() => {
+                    setSelectedStrength(null)
+                    scrollToProducts()
+                  }}
                   className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
                     !selectedStrength 
                       ? 'bg-green-600 text-white' 
@@ -124,7 +149,10 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
                 {availableStrengths.map(strength => (
                   <button
                     key={strength}
-                    onClick={() => setSelectedStrength(strength)}
+                    onClick={() => {
+                      setSelectedStrength(strength)
+                      scrollToProducts()
+                    }}
                     className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
                       selectedStrength === strength
                         ? 'bg-green-600 text-white'
@@ -161,7 +189,7 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
             </div>
 
             {/* Products Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div id="products-grid" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredProducts.map((product, index) => (
                 <ProductCard 
                   key={product.id} 
@@ -186,6 +214,44 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
           </div>
         </div>
       </section>
+
+      {/* Mobile Bottom Sticky Filter Bar - Only show when scrolled */}
+      {showStickyFilter && (
+        <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white p-3 border-t shadow-lg animate-in slide-in-from-bottom duration-300">
+          <div className="max-h-32 overflow-y-auto">
+            {/* Strength Pills */}
+            <div className="flex flex-wrap gap-2">
+              <button
+                onClick={() => {
+                  setSelectedStrength(null)
+                  scrollToProducts()
+                }}
+                className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
+                  !selectedStrength ? 'bg-green-600 text-white' : 'bg-white text-gray-700 border hover:bg-gray-50'
+                }`}
+              >
+                All Strengths
+              </button>
+              {availableStrengths.map(strength => (
+                <button
+                  key={strength}
+                  onClick={() => {
+                    setSelectedStrength(strength)
+                    scrollToProducts()
+                  }}
+                  className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
+                    selectedStrength === strength 
+                      ? 'bg-green-600 text-white' 
+                      : 'bg-white text-gray-700 border hover:bg-gray-50'
+                  }`}
+                >
+                  {strength}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Flavor Benefits Section - Moved After Products */}
       <section className="py-12 bg-white">

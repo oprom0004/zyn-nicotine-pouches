@@ -29,6 +29,17 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
   const [selectedMintType, setSelectedMintType] = useState<string | null>(null)
   const [showStickyFilter, setShowStickyFilter] = useState(false)
 
+  // Scroll to products grid when filter is selected
+  const scrollToProducts = () => {
+    const productsGrid = document.getElementById('products-grid')
+    if (productsGrid) {
+      productsGrid.scrollIntoView({ 
+        behavior: 'smooth', 
+        block: 'start' 
+      })
+    }
+  }
+
   // Get available strengths for this flavor
   const availableStrengths = Array.from(new Set(products.map(p => p.strength))).sort()
   
@@ -209,7 +220,10 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
             {/* Type Pills */}
             <div className="flex flex-wrap gap-2 mb-2">
               <button
-                onClick={() => setSelectedMintType(null)}
+                onClick={() => {
+                  setSelectedMintType(null)
+                  scrollToProducts()
+                }}
                 className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
                   !selectedMintType ? 'bg-blue-600 text-white' : 'bg-white text-gray-700 border hover:bg-gray-50'
                 }`}
@@ -219,7 +233,10 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
               {mintTypes.map((mintType) => (
                 <button
                   key={mintType.value}
-                  onClick={() => setSelectedMintType(selectedMintType === mintType.value ? null : mintType.value)}
+                  onClick={() => {
+                    setSelectedMintType(selectedMintType === mintType.value ? null : mintType.value)
+                    scrollToProducts()
+                  }}
                   className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
                     selectedMintType === mintType.value 
                       ? 'bg-blue-600 text-white' 
@@ -234,7 +251,10 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
             {/* Strength Pills */}
             <div className="flex flex-wrap gap-2">
               <button
-                onClick={() => setSelectedStrength(null)}
+                onClick={() => {
+                  setSelectedStrength(null)
+                  scrollToProducts()
+                }}
                 className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
                   !selectedStrength ? 'bg-green-600 text-white' : 'bg-white text-gray-700 border hover:bg-gray-50'
                 }`}
@@ -244,7 +264,10 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
               {availableStrengths.map(strength => (
                 <button
                   key={strength}
-                  onClick={() => setSelectedStrength(strength)}
+                  onClick={() => {
+                    setSelectedStrength(strength)
+                    scrollToProducts()
+                  }}
                   className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
                     selectedStrength === strength 
                       ? 'bg-green-600 text-white' 
@@ -317,7 +340,7 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
             </div>
 
             {/* Products Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div id="products-grid" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredProducts.map((product, index) => (
                 <ProductCard 
                   key={product.id} 

@@ -29,6 +29,17 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
   const [selectedCitrusType, setSelectedCitrusType] = useState<string | null>(null)
   const [showStickyFilter, setShowStickyFilter] = useState(false)
 
+  // Scroll to products grid when filter is selected
+  const scrollToProducts = () => {
+    const productsGrid = document.getElementById('products-grid')
+    if (productsGrid) {
+      productsGrid.scrollIntoView({ 
+        behavior: 'smooth', 
+        block: 'start' 
+      })
+    }
+  }
+
   // Get available strengths for this flavor
   const availableStrengths = Array.from(new Set(products.map(p => p.strength))).sort()
   
@@ -194,7 +205,10 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
             {/* Citrus Type Pills */}
             <div className="flex flex-wrap gap-2">
               <button
-                onClick={() => setSelectedCitrusType(null)}
+                onClick={() => {
+                  setSelectedCitrusType(null)
+                  scrollToProducts()
+                }}
                 className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
                   !selectedCitrusType ? 'bg-orange-600 text-white' : 'bg-white text-gray-700 border hover:bg-gray-50'
                 }`}
@@ -204,7 +218,10 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
               {citrusTypes.map((citrusType) => (
                 <button
                   key={citrusType.value}
-                  onClick={() => setSelectedCitrusType(selectedCitrusType === citrusType.value ? null : citrusType.value)}
+                  onClick={() => {
+                    setSelectedCitrusType(selectedCitrusType === citrusType.value ? null : citrusType.value)
+                    scrollToProducts()
+                  }}
                   className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
                     selectedCitrusType === citrusType.value 
                       ? 'bg-orange-600 text-white' 
@@ -277,7 +294,7 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
             </div>
 
             {/* Products Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div id="products-grid" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredProducts.map((product, index) => (
                 <ProductCard 
                   key={product.id} 
