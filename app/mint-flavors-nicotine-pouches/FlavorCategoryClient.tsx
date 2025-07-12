@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Product } from '@/types'
 import ProductCard from '@/components/ProductCard'
 import { Star, Shield, Truck, Award, TrendingUp, Users, CheckCircle } from 'lucide-react'
@@ -27,6 +27,7 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
   const [sortBy, setSortBy] = useState('popular')
   const [selectedStrength, setSelectedStrength] = useState<string | null>(null)
   const [selectedMintType, setSelectedMintType] = useState<string | null>(null)
+  const [showStickyFilter, setShowStickyFilter] = useState(false)
 
   // Get available strengths for this flavor
   const availableStrengths = Array.from(new Set(products.map(p => p.strength))).sort()
@@ -37,6 +38,17 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
     { name: 'Spearmint', value: 'Spearmint', count: products.filter(p => p.flavor === 'Spearmint').length },
     { name: 'Menthol', value: 'Menthol', count: products.filter(p => p.flavor === 'Menthol').length }
   ].filter(type => type.count > 0)
+
+  // Handle scroll for sticky mobile filter
+  useEffect(() => {
+    const handleScroll = () => {
+      // Show sticky filter when scrolled past the hero section (around 400px)
+      setShowStickyFilter(window.scrollY > 400)
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
   
   // Filter and sort products
   let filteredProducts = products
@@ -190,58 +202,60 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
         </div>
       </section>
 
-      {/* Mobile Quick Filter Bar - Simplified */}
-      <div className="md:hidden bg-gray-50 p-3 border-b">
-        <div className="flex flex-wrap gap-2">
-          {/* Type Pills */}
-          <button
-            onClick={() => setSelectedMintType(null)}
-            className={`px-3 py-1 rounded-full text-xs font-medium ${
-              !selectedMintType ? 'bg-blue-600 text-white' : 'bg-white text-gray-700 border'
-            }`}
-          >
-            All Mint
-          </button>
-          {mintTypes.map((mintType) => (
+      {/* Mobile Sticky Filter Bar - Only show when scrolled */}
+      {showStickyFilter && (
+        <div className="md:hidden fixed top-0 left-0 right-0 z-50 bg-white p-3 border-b shadow-lg animate-in slide-in-from-top duration-300">
+          <div className="flex flex-wrap gap-2">
+            {/* Type Pills */}
             <button
-              key={mintType.value}
-              onClick={() => setSelectedMintType(selectedMintType === mintType.value ? null : mintType.value)}
-              className={`px-3 py-1 rounded-full text-xs font-medium ${
-                selectedMintType === mintType.value 
-                  ? 'bg-blue-600 text-white' 
-                  : 'bg-white text-gray-700 border'
+              onClick={() => setSelectedMintType(null)}
+              className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
+                !selectedMintType ? 'bg-blue-600 text-white' : 'bg-white text-gray-700 border hover:bg-gray-50'
               }`}
             >
-              {mintType.name}
+              All Mint
             </button>
-          ))}
-          
-          {/* Strength Pills */}
-          <div className="w-full border-t pt-2 mt-1">
-            <button
-              onClick={() => setSelectedStrength(null)}
-              className={`px-3 py-1 rounded-full text-xs font-medium mr-2 ${
-                !selectedStrength ? 'bg-green-600 text-white' : 'bg-white text-gray-700 border'
-              }`}
-            >
-              All Strengths
-            </button>
-            {availableStrengths.map(strength => (
+            {mintTypes.map((mintType) => (
               <button
-                key={strength}
-                onClick={() => setSelectedStrength(strength)}
-                className={`px-3 py-1 rounded-full text-xs font-medium mr-2 mb-1 ${
-                  selectedStrength === strength 
-                    ? 'bg-green-600 text-white' 
-                    : 'bg-white text-gray-700 border'
+                key={mintType.value}
+                onClick={() => setSelectedMintType(selectedMintType === mintType.value ? null : mintType.value)}
+                className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
+                  selectedMintType === mintType.value 
+                    ? 'bg-blue-600 text-white' 
+                    : 'bg-white text-gray-700 border hover:bg-gray-50'
                 }`}
               >
-                {strength}
+                {mintType.name}
               </button>
             ))}
+            
+            {/* Strength Pills */}
+            <div className="w-full border-t pt-2 mt-1">
+              <button
+                onClick={() => setSelectedStrength(null)}
+                className={`px-3 py-1 rounded-full text-xs font-medium mr-2 transition-colors ${
+                  !selectedStrength ? 'bg-green-600 text-white' : 'bg-white text-gray-700 border hover:bg-gray-50'
+                }`}
+              >
+                All Strengths
+              </button>
+              {availableStrengths.map(strength => (
+                <button
+                  key={strength}
+                  onClick={() => setSelectedStrength(strength)}
+                  className={`px-3 py-1 rounded-full text-xs font-medium mr-2 mb-1 transition-colors ${
+                    selectedStrength === strength 
+                      ? 'bg-green-600 text-white' 
+                      : 'bg-white text-gray-700 border hover:bg-gray-50'
+                  }`}
+                >
+                  {strength}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
       {/* Products Section with Conversion Optimization */}
       <section className="py-6">
