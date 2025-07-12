@@ -26,14 +26,30 @@ interface FlavorCategoryClientProps {
 export default function FlavorCategoryClient({ flavor, flavorInfo, products }: FlavorCategoryClientProps) {
   const [sortBy, setSortBy] = useState('popular')
   const [selectedStrength, setSelectedStrength] = useState<string | null>(null)
+  const [selectedMintType, setSelectedMintType] = useState<string | null>(null)
 
   // Get available strengths for this flavor
   const availableStrengths = Array.from(new Set(products.map(p => p.strength))).sort()
   
+  // Get available mint types
+  const mintTypes = [
+    { name: 'Cool Mint', value: 'Cool Mint', count: products.filter(p => p.flavor === 'Cool Mint').length },
+    { name: 'Spearmint', value: 'Spearmint', count: products.filter(p => p.flavor === 'Spearmint').length },
+    { name: 'Menthol', value: 'Menthol', count: products.filter(p => p.flavor === 'Menthol').length }
+  ].filter(type => type.count > 0)
+  
   // Filter and sort products
-  let filteredProducts = selectedStrength 
-    ? products.filter(p => p.strength === selectedStrength)
-    : products
+  let filteredProducts = products
+  
+  // Apply mint type filter
+  if (selectedMintType) {
+    filteredProducts = filteredProducts.filter(p => p.flavor === selectedMintType)
+  }
+  
+  // Apply strength filter
+  if (selectedStrength) {
+    filteredProducts = filteredProducts.filter(p => p.strength === selectedStrength)
+  }
 
   // Sort products based on selection
   switch (sortBy) {
@@ -118,6 +134,61 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
                 </div>
               ))}
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Mint Sub-Category Navigation */}
+      <section className="py-8 bg-gradient-to-r from-green-50 to-blue-50">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-2xl font-bold text-gray-900 text-center mb-8">
+              Explore Different Mint Flavor Types
+            </h2>
+            <div className="grid md:grid-cols-3 gap-6">
+              {mintTypes.map((mintType) => (
+                <div 
+                  key={mintType.value}
+                  onClick={() => setSelectedMintType(selectedMintType === mintType.value ? null : mintType.value)}
+                  className={`cursor-pointer p-6 rounded-2xl border-2 transition-all duration-300 hover:scale-105 ${
+                    selectedMintType === mintType.value
+                      ? 'border-blue-500 bg-blue-50 shadow-lg'
+                      : 'border-gray-200 bg-white hover:border-gray-300 hover:shadow-md'
+                  }`}
+                >
+                  <div className="text-center">
+                    <h3 className="text-xl font-bold text-gray-900 mb-2">{mintType.name}</h3>
+                    <div className="text-sm text-gray-600 mb-4">
+                      {mintType.count} {mintType.count === 1 ? 'product' : 'products'} available
+                    </div>
+                    <div className="text-sm text-gray-500">
+                      {mintType.value === 'Cool Mint' && 'Classic refreshing mint flavor with cooling sensation'}
+                      {mintType.value === 'Spearmint' && 'Sweet, fresh spearmint with natural cooling effect'}
+                      {mintType.value === 'Menthol' && 'Intense menthol cooling for maximum freshness'}
+                    </div>
+                    <div className={`mt-4 px-4 py-2 rounded-lg text-sm font-medium ${
+                      selectedMintType === mintType.value
+                        ? 'bg-blue-600 text-white'
+                        : 'bg-gray-100 text-gray-700'
+                    }`}>
+                      {selectedMintType === mintType.value ? 'Selected' : 'Click to Filter'}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            
+            {/* Clear Filter Button */}
+            {selectedMintType && (
+              <div className="text-center mt-6">
+                <button
+                  onClick={() => setSelectedMintType(null)}
+                  className="px-6 py-3 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
+                >
+                  Show All Mint Flavors ({products.length} products)
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </section>
