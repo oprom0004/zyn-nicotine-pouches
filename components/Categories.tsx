@@ -100,40 +100,41 @@ export default function Categories() {
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {flavorCategories.map((category) => (
-            <Link 
-              key={category.id} 
-              href={category.href}
-              className="group block"
-            >
-              <div className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden transform hover:scale-105">
-                <div className={`${category.color} p-8 text-center`}>
-                  {/* Emoji Icon */}
-                  <div className="w-20 h-20 mx-auto mb-4 bg-white rounded-full flex items-center justify-center shadow-lg">
-                    <span className="text-4xl">{category.emoji}</span>
+              <Link 
+                key={category.id} 
+                href={category.href}
+                className="group block"
+              >
+                <div className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden transform hover:scale-105">
+                  <div className={`${category.color} p-8 text-center`}>
+                    {/* Emoji Icon */}
+                    <div className="w-20 h-20 mx-auto mb-4 bg-white rounded-full flex items-center justify-center shadow-lg">
+                      <span className="text-4xl">{category.emoji}</span>
+                    </div>
+                    
+                    <h3 className={`text-xl font-bold ${category.textColor} mb-2 group-hover:scale-105 transition-transform`}>
+                      {category.name}
+                    </h3>
+                    <p className="text-gray-700 text-sm mb-3 font-medium">
+                      {category.description}
+                    </p>
+                    <div className="inline-flex items-center px-3 py-1 bg-white rounded-full shadow-sm">
+                      <span className={`${category.textColor} text-sm font-bold`}>
+                        {category.productCount} products
+                      </span>
+                    </div>
                   </div>
                   
-                  <h3 className={`text-xl font-bold ${category.textColor} mb-2 group-hover:scale-105 transition-transform`}>
-                    {category.name}
-                  </h3>
-                  <p className="text-gray-700 text-sm mb-3 font-medium">
-                    {category.description}
-                  </p>
-                  <div className="inline-flex items-center px-3 py-1 bg-white rounded-full shadow-sm">
-                    <span className={`${category.textColor} text-sm font-bold`}>
-                      {category.productCount} products
-                    </span>
+                  <div className="p-6 bg-white">
+                    <div className="flex items-center justify-center text-blue-600 hover:text-blue-700 font-bold group-hover:translate-x-1 transition-all duration-300">
+                      <span>Explore Flavors</span>
+                      <ArrowRight size={18} className="ml-2 group-hover:scale-110 transition-transform" />
+                    </div>
                   </div>
                 </div>
-                
-                <div className="p-6 bg-white">
-                  <div className="flex items-center justify-center text-blue-600 hover:text-blue-700 font-bold group-hover:translate-x-1 transition-all duration-300">
-                    <span>Explore Flavors</span>
-                    <ArrowRight size={18} className="ml-2 group-hover:scale-110 transition-transform" />
-                  </div>
-                </div>
-              </div>
-            </Link>
-          ))}
+              </Link>
+            ))}
+          </div>
         </div>
 
         {/* Strength Categories */}
