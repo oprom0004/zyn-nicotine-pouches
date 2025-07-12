@@ -224,35 +224,7 @@ export default function StrengthCategoryClient({ strength, strengthInfo, product
       {/* Mobile Bottom Sticky Filter Bar */}
       {showStickyFilter && (
         <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white p-3 border-t shadow-lg animate-in slide-in-from-bottom duration-300">
-          <div className="max-h-36 overflow-y-auto">
-            {/* Strength Pills */}
-            <div className="flex flex-wrap gap-2 mb-2">
-              <Link 
-                href="/3mg-nicotine-pouches"
-                className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
-                  strength === '3mg' ? 'bg-green-600 text-white' : 'bg-white text-gray-700 border hover:bg-gray-50'
-                }`}
-              >
-                3mg
-              </Link>
-              <Link 
-                href="/6mg-nicotine-pouches"
-                className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
-                  strength === '6mg' ? 'bg-blue-600 text-white' : 'bg-white text-gray-700 border hover:bg-gray-50'
-                }`}
-              >
-                6mg
-              </Link>
-              <Link 
-                href="/9mg-nicotine-pouches"
-                className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
-                  strength === '9mg' ? 'bg-red-600 text-white' : 'bg-white text-gray-700 border hover:bg-gray-50'
-                }`}
-              >
-                9mg
-              </Link>
-            </div>
-            
+          <div className="max-h-32 overflow-y-auto">
             {/* Flavor Pills */}
             <div className="flex flex-wrap gap-2">
               <button
