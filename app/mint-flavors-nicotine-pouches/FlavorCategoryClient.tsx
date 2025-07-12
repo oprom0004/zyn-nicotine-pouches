@@ -118,7 +118,6 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
           </div>
         </div>
       </section>
-
       {/* Mint Sub-Category Navigation - Ultra Compact */}
       <section className="py-2 bg-gradient-to-r from-green-50 to-blue-50">
         <div className="container mx-auto px-4">
@@ -242,17 +241,17 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
               </div>
             </div>
 
-            {/* Urgency/Scarcity Element */}
-            <div className="bg-gradient-to-r from-orange-500 to-red-500 text-white p-4 rounded-lg mb-8 text-center">
-              <div className="flex items-center justify-center">
-                <TrendingUp className="mr-2" size={20} />
+            {/* Urgency/Scarcity Element - Compact */}
+            <div className="bg-gradient-to-r from-orange-500 to-red-500 text-white p-2 rounded-lg mb-4 text-center">
+              <div className="flex items-center justify-center text-sm">
+                <TrendingUp className="mr-1" size={16} />
                 <span className="font-bold">High Demand:</span>
-                <span className="ml-2">{filteredProducts.filter(p => p.inStock).length} mint flavor products selling fast this week!</span>
+                <span className="ml-1">{filteredProducts.filter(p => p.inStock).length} mint flavor products selling fast this week!</span>
               </div>
             </div>
 
             {/* Products Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredProducts.map((product, index) => (
                 <ProductCard 
                   key={product.id} 
