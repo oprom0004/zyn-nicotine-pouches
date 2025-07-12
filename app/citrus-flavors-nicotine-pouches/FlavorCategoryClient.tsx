@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Product } from '@/types'
 import ProductCard from '@/components/ProductCard'
 import { Star, Shield, Truck, Award, TrendingUp, Users, CheckCircle } from 'lucide-react'
@@ -26,14 +26,40 @@ interface FlavorCategoryClientProps {
 export default function FlavorCategoryClient({ flavor, flavorInfo, products }: FlavorCategoryClientProps) {
   const [sortBy, setSortBy] = useState('popular')
   const [selectedStrength, setSelectedStrength] = useState<string | null>(null)
+  const [selectedCitrusType, setSelectedCitrusType] = useState<string | null>(null)
+  const [showStickyFilter, setShowStickyFilter] = useState(false)
 
   // Get available strengths for this flavor
   const availableStrengths = Array.from(new Set(products.map(p => p.strength))).sort()
   
+  // Get available citrus types
+  const citrusTypes = [
+    { name: 'Citrus', value: 'Citrus', count: products.filter(p => p.flavor === 'Citrus').length },
+    { name: 'Lemon', value: 'Lemon', count: products.filter(p => p.flavor === 'Lemon').length }
+  ].filter(type => type.count > 0)
+  
+  // Handle scroll for sticky mobile filter
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowStickyFilter(window.scrollY > 400)
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+  
   // Filter and sort products
-  let filteredProducts = selectedStrength 
-    ? products.filter(p => p.strength === selectedStrength)
-    : products
+  let filteredProducts = products
+  
+  // Apply citrus type filter
+  if (selectedCitrusType) {
+    filteredProducts = filteredProducts.filter(p => p.flavor === selectedCitrusType)
+  }
+  
+  // Apply strength filter
+  if (selectedStrength) {
+    filteredProducts = filteredProducts.filter(p => p.strength === selectedStrength)
+  }
 
   // Sort products based on selection
   switch (sortBy) {
@@ -102,6 +128,127 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
           </div>
         </div>
       </section>
+
+      {/* Citrus Sub-Category Navigation */}
+      <section className="py-1 bg-gradient-to-r from-orange-50 to-yellow-50">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+              {/* All Citrus Flavors Card */}
+              <div 
+                onClick={() => setSelectedCitrusType(null)}
+                className={`cursor-pointer p-3 rounded-lg border-2 transition-all duration-300 hover:scale-105 ${
+                  !selectedCitrusType
+                    ? 'border-orange-500 bg-orange-50 shadow-lg'
+                    : 'border-gray-200 bg-white hover:border-gray-300 hover:shadow-md'
+                }`}
+              >
+                <div className="text-center">
+                  <div className="w-12 h-12 mx-auto mb-2 bg-gradient-to-br from-orange-400 to-yellow-500 rounded-full flex items-center justify-center">
+                    <span className="text-white text-lg">🍊</span>
+                  </div>
+                  <h3 className="font-semibold text-sm text-gray-900 mb-1">All Citrus</h3>
+                  <div className="text-xs text-gray-600">
+                    {products.length} products
+                  </div>
+                </div>
+              </div>
+
+              {citrusTypes.map((citrusType) => (
+                <div 
+                  key={citrusType.value}
+                  onClick={() => setSelectedCitrusType(selectedCitrusType === citrusType.value ? null : citrusType.value)}
+                  className={`cursor-pointer p-3 rounded-lg border-2 transition-all duration-300 hover:scale-105 ${
+                    selectedCitrusType === citrusType.value
+                      ? 'border-orange-500 bg-orange-50 shadow-lg'
+                      : 'border-gray-200 bg-white hover:border-gray-300 hover:shadow-md'
+                  }`}
+                >
+                  <div className="text-center">
+                    <div className="w-12 h-12 mx-auto mb-2 rounded-full flex items-center justify-center overflow-hidden">
+                      {citrusType.value === 'Citrus' && (
+                        <div className="w-full h-full bg-gradient-to-br from-orange-400 to-orange-500 flex items-center justify-center">
+                          <span className="text-white text-lg">🍊</span>
+                        </div>
+                      )}
+                      {citrusType.value === 'Lemon' && (
+                        <div className="w-full h-full bg-gradient-to-br from-yellow-400 to-yellow-500 flex items-center justify-center">
+                          <span className="text-white text-lg">🍋</span>
+                        </div>
+                      )}
+                    </div>
+                    <h3 className="font-semibold text-sm text-gray-900 mb-1">{citrusType.name}</h3>
+                    <div className="text-xs text-gray-500 mb-1">
+                      {citrusType.value === 'Citrus' && 'Classic citrus zest'}
+                      {citrusType.value === 'Lemon' && 'Fresh lemon tang'}
+                    </div>
+                    <div className="text-xs text-gray-600">
+                      {citrusType.count} products
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Mobile Bottom Sticky Filter Bar */}
+      {showStickyFilter && (
+        <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white p-3 border-t shadow-lg animate-in slide-in-from-bottom duration-300">
+          <div className="max-h-32 overflow-y-auto">
+            {/* Type Pills */}
+            <div className="flex flex-wrap gap-2 mb-2">
+              <button
+                onClick={() => setSelectedCitrusType(null)}
+                className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
+                  !selectedCitrusType ? 'bg-orange-600 text-white' : 'bg-white text-gray-700 border hover:bg-gray-50'
+                }`}
+              >
+                All Citrus
+              </button>
+              {citrusTypes.map((citrusType) => (
+                <button
+                  key={citrusType.value}
+                  onClick={() => setSelectedCitrusType(selectedCitrusType === citrusType.value ? null : citrusType.value)}
+                  className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
+                    selectedCitrusType === citrusType.value 
+                      ? 'bg-orange-600 text-white' 
+                      : 'bg-white text-gray-700 border hover:bg-gray-50'
+                  }`}
+                >
+                  {citrusType.name}
+                </button>
+              ))}
+            </div>
+            
+            {/* Strength Pills */}
+            <div className="flex flex-wrap gap-2">
+              <button
+                onClick={() => setSelectedStrength(null)}
+                className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
+                  !selectedStrength ? 'bg-green-600 text-white' : 'bg-white text-gray-700 border hover:bg-gray-50'
+                }`}
+              >
+                All Strengths
+              </button>
+              {availableStrengths.map(strength => (
+                <button
+                  key={strength}
+                  onClick={() => setSelectedStrength(strength)}
+                  className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
+                    selectedStrength === strength 
+                      ? 'bg-green-600 text-white' 
+                      : 'bg-white text-gray-700 border hover:bg-gray-50'
+                  }`}
+                >
+                  {strength}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Flavor Benefits Section */}
       <section className="py-12 bg-white">
