@@ -69,7 +69,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     'mint-flavors-nicotine-pouches',
     'wintergreen-flavors-nicotine-pouches', 
     'citrus-flavors-nicotine-pouches',
-    'berry-flavors-nicotine-pouches'
+    'berry-flavors-nicotine-pouches',
+    'spearmint-flavors-nicotine-pouches',
+    'coffee-flavors-nicotine-pouches',
+    'sweet-flavors-nicotine-pouches',
+    'spice-flavors-nicotine-pouches'
   ].map((flavor) => ({
     url: `${baseUrl}/${flavor}`,
     lastModified: new Date(),
@@ -77,5 +81,30 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.9,
   }))
 
-  return [...staticPages, ...productPages, ...categoryPages, ...strengthPages, ...flavorPages]
+  // Strength category pages  
+  const strengthCategoryPages = [
+    '3mg-nicotine-pouches',
+    '6mg-nicotine-pouches', 
+    '9mg-nicotine-pouches'
+  ].map((strength) => ({
+    url: `${baseUrl}/${strength}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: 0.8,
+  }))
+
+  // Policy pages
+  const policyPages = [
+    'privacy',
+    'terms',
+    'shipping',
+    'returns'
+  ].map((page) => ({
+    url: `${baseUrl}/${page}`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly' as const,
+    priority: 0.6,
+  }))
+
+  return [...staticPages, ...productPages, ...categoryPages, ...strengthPages, ...flavorPages, ...strengthCategoryPages, ...policyPages]
 }

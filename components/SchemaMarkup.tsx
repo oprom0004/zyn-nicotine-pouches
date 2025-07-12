@@ -226,9 +226,13 @@ export default function SchemaMarkup() {
           "name": "By Flavor",
           "itemListElement": [
             {"@type": "Offer", "name": "Mint Nicotine Pouches"},
+            {"@type": "Offer", "name": "Spearmint Nicotine Pouches"},
             {"@type": "Offer", "name": "Citrus Nicotine Pouches"},
             {"@type": "Offer", "name": "Berry Nicotine Pouches"},
-            {"@type": "Offer", "name": "Wintergreen Nicotine Pouches"}
+            {"@type": "Offer", "name": "Wintergreen Nicotine Pouches"},
+            {"@type": "Offer", "name": "Coffee Nicotine Pouches"},
+            {"@type": "Offer", "name": "Sweet Nicotine Pouches"},
+            {"@type": "Offer", "name": "Spice Nicotine Pouches"}
           ]
         }
       ]

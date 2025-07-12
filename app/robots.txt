@@ -1,0 +1,41 @@
+User-agent: *
+Allow: /
+
+# Disallow admin and private areas
+Disallow: /admin/
+Disallow: /private/
+Disallow: /checkout/
+Disallow: /cart/
+Disallow: /search?
+Disallow: /api/
+
+# Allow important pages
+Allow: /products
+Allow: /buy
+Allow: /about
+Allow: /contact
+Allow: /privacy
+Allow: /terms
+Allow: /shipping
+Allow: /returns
+
+# Flavor category pages
+Allow: /mint-flavors-nicotine-pouches
+Allow: /citrus-flavors-nicotine-pouches
+Allow: /berry-flavors-nicotine-pouches
+Allow: /wintergreen-flavors-nicotine-pouches
+Allow: /spearmint-flavors-nicotine-pouches
+Allow: /coffee-flavors-nicotine-pouches
+Allow: /sweet-flavors-nicotine-pouches
+Allow: /spice-flavors-nicotine-pouches
+
+# Strength category pages
+Allow: /3mg-nicotine-pouches
+Allow: /6mg-nicotine-pouches
+Allow: /9mg-nicotine-pouches
+
+# Crawl delay to be respectful
+Crawl-delay: 1
+
+# Sitemap location
+Sitemap: https://nicotinepoucheszyn.com/sitemap.xml
