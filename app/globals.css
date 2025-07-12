@@ -2,8 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&display=swap');
+/* 字体已通过Next.js优化加载，移除CSS @import以提升性能 */
 
 * {
   box-sizing: border-box;
@@ -15,11 +14,22 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
   line-height: 1.6;
   color: #0f0f23;
   background: #ffffff;
   scroll-behavior: smooth;
+}
+
+/* 字体变量定义 */
+.font-display {
+  font-family: var(--font-playfair), serif;
+}
+
+/* 字体优化 */
+.font-optimized {
+  font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
+  text-rendering: optimizeLegibility;
 }
 
 /* 时尚电商风格 */

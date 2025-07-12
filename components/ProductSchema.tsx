@@ -14,8 +14,8 @@ export default function ProductSchema({ product }: ProductSchemaProps) {
     "name": product.name,
     "description": product.description || `${product.name} - Premium tobacco-free nicotine pouch with ${product.flavor} flavor and ${product.strength} nicotine strength. Smokeless and discreet nicotine satisfaction for adults 21+.`,
     "image": [
-      `https://nicotinepoucheszyn.com${product.image}`,
-      `https://nicotinepoucheszyn.com${product.image}`, // Add multiple angles if available
+      `https://nicotinepoucheszyn.com${product.imageUrl}`,
+      `https://nicotinepoucheszyn.com${product.imageUrl}`, // Add multiple angles if available
     ],
     "sku": product.id.toString(),
     "mpn": `ZYN-${product.id}`,

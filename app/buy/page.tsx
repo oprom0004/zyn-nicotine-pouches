@@ -4,9 +4,6 @@ import BuyClient from './BuyClient'
 export const metadata: Metadata = {
   title: 'Buy Tobacco-Free Nicotine Pouches Online For Sale | Zyn Collection',
   description: 'Buy premium tobacco-free nicotine pouches online for sale. Shop Zyn collection in mint, citrus, berry flavors. 3mg, 6mg, 9mg strengths. Fast shipping. Adults 21+.',
-  alternates: {
-    canonical: 'https://nicotinepoucheszyn.com/buy',
-  },
   keywords: [
     'buy tobacco-free nicotine pouches online',
     'tobacco-free nicotine pouches for sale',

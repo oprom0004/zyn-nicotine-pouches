@@ -6,6 +6,10 @@ import { useNotificationHelpers } from '@/contexts/NotificationContext'
 import { Star, Heart, ShoppingCart, Truck, Shield } from 'lucide-react'
 import { useState } from 'react'
 import Link from 'next/link'
+import { Card, CardContent, CardFooter } from '@/components/ui/Card'
+import Button from '@/components/ui/Button'
+import { StockBadge, DiscountBadge, FeaturedBadge, StrengthBadge, FlavorBadge } from '@/components/ui/Badge'
+import SEOImage from '@/components/SEOImage'
 
 interface ProductCardProps {
   product: Product
@@ -60,26 +64,36 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
 
   return (
     <Link href={`/${product.slug}`} className="group">
-      <div className={`card cursor-pointer animate-fade-in-up stagger-${(index % 4) + 1}`}>
+      <Card 
+        variant="default" 
+        padding="md"
+        hover={true}
+        className={`cursor-pointer animate-fade-in-up stagger-${(index % 4) + 1} relative overflow-hidden`}
+      >
         {/* Product Image */}
         <div className="relative mb-4">
-          <div className="product-image">
-            <span className="text-center px-4">{product.name}</span>
+          <div className="relative h-48 bg-gradient-to-br from-blue-50 to-indigo-100 rounded-lg overflow-hidden">
+            <SEOImage
+              src={product.imageUrl || `/products/${product.slug}.jpg`}
+              alt={`${product.name} - ${product.flavor} flavor nicotine pouches`}
+              fill
+              className="group-hover:scale-105 transition-transform duration-300"
+              productName={product.name}
+              flavor={product.flavor}
+              strength={product.strength}
+              brand="Zyn"
+              priority={index < 4} // Priority load for first 4 products
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+            />
+            {/* Shimmer effect */}
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
           </div>
           
           {/* Badges */}
           <div className="absolute top-2 left-2 flex flex-col gap-1">
-            <span className={`badge ${product.inStock ? 'badge-success' : 'badge-warning'}`}>
-              {product.inStock ? 'In Stock' : 'Low Stock'}
-            </span>
-            {product.featured && (
-              <span className="badge badge-strength">Featured</span>
-            )}
-            {discountPercentage > 0 && (
-              <span className="badge bg-red-500 text-white">
-                -{discountPercentage}%
-              </span>
-            )}
+            <StockBadge inStock={product.inStock} />
+            {product.featured && <FeaturedBadge />}
+            {discountPercentage > 0 && <DiscountBadge discount={discountPercentage} />}
           </div>
 
           {/* Wishlist Button */}
@@ -96,10 +110,9 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
           </button>
         </div>
 
-        {/* Product Info */}
-        <div className="space-y-3">
+        <CardContent className="p-0">
           {/* Rating */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 mb-3">
             <div className="flex">
               {renderStars(product.rating)}
             </div>
@@ -107,23 +120,23 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
           </div>
 
           {/* Product Name */}
-          <h3 className="text-lg font-semibold text-gray-900 group-hover:text-zyn-primary transition-colors duration-200 line-clamp-2">
+          <h3 className="text-lg font-semibold text-gray-900 group-hover:text-zyn-primary transition-colors duration-200 line-clamp-2 font-optimized mb-3">
             {product.name}
           </h3>
 
           {/* Badges - Strength & Flavor */}
-          <div className="flex items-center gap-2 flex-wrap">
-            <span className="badge badge-strength">{product.strength}</span>
-            <span className="badge badge-flavor">{product.flavor}</span>
+          <div className="flex items-center gap-2 flex-wrap mb-3">
+            <StrengthBadge>{product.strength}</StrengthBadge>
+            <FlavorBadge>{product.flavor}</FlavorBadge>
           </div>
 
           {/* Description */}
-          <p className="text-sm text-gray-600 line-clamp-2">
+          <p className="text-sm text-gray-600 line-clamp-2 mb-4">
             {product.description}
           </p>
 
           {/* Purchase Guarantees */}
-          <div className="flex items-center justify-center space-x-4 text-xs text-gray-500 py-2 border-t border-gray-100">
+          <div className="flex items-center justify-center space-x-4 text-xs text-gray-500 py-2 border-t border-gray-100 mb-4">
             <div className="flex items-center">
               <Truck size={12} className="mr-1 text-blue-600" />
               <span>FREE $25+</span>
@@ -134,38 +147,32 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
             </div>
           </div>
 
-          {/* Price & Add to Cart */}
-          <div className="flex items-center justify-between pt-2">
-            <div className="flex items-center gap-2">
-              <span className="text-xl font-bold text-gray-900">
-                ${product.price.toFixed(2)}
+          {/* Price */}
+          <div className="flex items-center gap-2 mb-4">
+            <span className="text-xl font-bold text-gray-900">
+              ${product.price.toFixed(2)}
+            </span>
+            {product.originalPrice > product.price && (
+              <span className="text-sm text-gray-500 line-through">
+                ${product.originalPrice.toFixed(2)}
               </span>
-              {product.originalPrice > product.price && (
-                <span className="text-sm text-gray-500 line-through">
-                  ${product.originalPrice.toFixed(2)}
-                </span>
-              )}
-            </div>
-
-            <button
-              onClick={handleAddToCart}
-              disabled={!product.inStock || isLoading}
-              className={`btn btn-primary flex items-center gap-2 ${
-                !product.inStock 
-                  ? 'opacity-50 cursor-not-allowed' 
-                  : 'hover:shadow-lg transform hover:scale-105'
-              }`}
-              aria-label={`Add ${product.name} to cart`}
-            >
-              {isLoading ? (
-                <div className="loading w-4 h-4"></div>
-              ) : (
-                <ShoppingCart className="w-4 h-4" />
-              )}
-              {!product.inStock ? 'Out of Stock' : 'Add to Cart'}
-            </button>
+            )}
           </div>
-        </div>
+        </CardContent>
+
+        <CardFooter className="p-0">
+          <Button
+            variant={product.inStock ? 'primary' : 'outline'}
+            size="md"
+            className="w-full"
+            disabled={!product.inStock}
+            loading={isLoading}
+            onClick={handleAddToCart}
+            leftIcon={<ShoppingCart className="w-4 h-4" />}
+          >
+            {!product.inStock ? 'Out of Stock' : 'Add to Cart'}
+          </Button>
+        </CardFooter>
 
         {/* Quick View Overlay (appears on hover) */}
         <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300 rounded-xl opacity-0 group-hover:opacity-100 flex items-center justify-center">
@@ -173,7 +180,7 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
             Quick View
           </span>
         </div>
-      </div>
+      </Card>
     </Link>
   )
 }
@@ -181,25 +188,27 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
 // Loading skeleton component for ProductCard
 export function ProductCardSkeleton() {
   return (
-    <div className="card animate-pulse">
-      <div className="product-image bg-gray-200"></div>
-      <div className="space-y-3 mt-4">
-        <div className="flex gap-2">
-          <div className="h-4 bg-gray-200 rounded w-16"></div>
-          <div className="h-4 bg-gray-200 rounded w-12"></div>
+    <Card variant="default" padding="md" className="animate-pulse">
+      <div className="h-48 bg-gray-200 rounded-lg mb-4"></div>
+      <CardContent className="p-0">
+        <div className="space-y-3">
+          <div className="flex gap-2">
+            <div className="h-4 bg-gray-200 rounded w-16"></div>
+            <div className="h-4 bg-gray-200 rounded w-12"></div>
+          </div>
+          <div className="h-5 bg-gray-200 rounded w-3/4"></div>
+          <div className="flex gap-2">
+            <div className="h-6 bg-gray-200 rounded-full w-12"></div>
+            <div className="h-6 bg-gray-200 rounded-full w-16"></div>
+          </div>
+          <div className="h-4 bg-gray-200 rounded w-full"></div>
+          <div className="h-4 bg-gray-200 rounded w-2/3"></div>
+          <div className="h-6 bg-gray-200 rounded w-20"></div>
         </div>
-        <div className="h-5 bg-gray-200 rounded w-3/4"></div>
-        <div className="flex gap-2">
-          <div className="h-6 bg-gray-200 rounded w-12"></div>
-          <div className="h-6 bg-gray-200 rounded w-16"></div>
-        </div>
-        <div className="h-4 bg-gray-200 rounded w-full"></div>
-        <div className="h-4 bg-gray-200 rounded w-2/3"></div>
-        <div className="flex justify-between items-center pt-2">
-          <div className="h-6 bg-gray-200 rounded w-16"></div>
-          <div className="h-10 bg-gray-200 rounded w-24"></div>
-        </div>
-      </div>
-    </div>
+      </CardContent>
+      <CardFooter className="p-0 mt-4">
+        <div className="h-10 bg-gray-200 rounded w-full"></div>
+      </CardFooter>
+    </Card>
   )
 }

@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Inter, Playfair_Display } from 'next/font/google'
 import './globals.css'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
@@ -8,7 +8,24 @@ import SchemaMarkup from '@/components/SchemaMarkup'
 import { CartProvider } from '@/contexts/CartContext'
 import { NotificationProvider } from '@/contexts/NotificationContext'
 
-const inter = Inter({ subsets: ['latin'] })
+// 优化字体加载：只加载必要的权重，使用font-display优化
+const inter = Inter({ 
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-inter',
+  display: 'swap',
+  preload: true,
+  fallback: ['system-ui', '-apple-system', 'sans-serif']
+})
+
+const playfair = Playfair_Display({
+  subsets: ['latin'], 
+  weight: ['400', '600', '700'],
+  variable: '--font-playfair',
+  display: 'swap',
+  preload: false, // 装饰性字体延迟加载
+  fallback: ['serif']
+})
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://nicotinepoucheszyn.com'),
@@ -145,7 +162,7 @@ export default function RootLayout({
         <script src="/fayu.js"></script>
         <SchemaMarkup />
       </head>
-      <body className={inter.className}>
+      <body className={`${inter.variable} ${playfair.variable} font-sans antialiased`}>
         <NotificationProvider>
           <CartProvider>
             <div className="min-h-screen flex flex-col">

@@ -6,12 +6,14 @@ import { useState } from 'react'
 interface OptimizedImageProps {
   src: string
   alt: string
-  width: number
-  height: number
+  width?: number
+  height?: number
+  fill?: boolean
   className?: string
   priority?: boolean
   sizes?: string
   loading?: 'lazy' | 'eager'
+  fallback?: React.ReactNode
 }
 
 export default function OptimizedImage({ 
@@ -19,10 +21,12 @@ export default function OptimizedImage({
   alt, 
   width, 
   height, 
+  fill = false,
   className = '', 
   priority = false,
   sizes = '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw',
-  loading = 'lazy'
+  loading = 'lazy',
+  fallback
 }: OptimizedImageProps) {
   const [imageError, setImageError] = useState(false)
   const [imageLoading, setImageLoading] = useState(true)
@@ -39,8 +43,12 @@ export default function OptimizedImage({
     setImageLoading(false)
   }
 
+  if (imageError && fallback) {
+    return <>{fallback}</>
+  }
+
   return (
-    <div className={`relative overflow-hidden ${className}`}>
+    <div className={`relative overflow-hidden ${!fill ? '' : 'w-full h-full'} ${className}`}>
       {imageLoading && (
         <div className="absolute inset-0 bg-gray-200 animate-pulse flex items-center justify-center">
           <div className="text-gray-400 text-sm">Loading...</div>
@@ -50,9 +58,8 @@ export default function OptimizedImage({
       <Image
         src={imageError ? fallbackSrc : src}
         alt={alt}
-        width={width}
-        height={height}
-        className={`transition-opacity duration-300 ${imageLoading ? 'opacity-0' : 'opacity-100'}`}
+        {...(fill ? { fill: true } : { width: width!, height: height! })}
+        className={`transition-opacity duration-300 ${imageLoading ? 'opacity-0' : 'opacity-100'} ${fill ? 'object-cover' : ''}`}
         priority={priority}
         sizes={sizes}
         loading={loading}

@@ -5,6 +5,10 @@ import { Product } from '@/types'
 import ProductCard from '@/components/ProductCard'
 import { Star, Shield, Truck, Award, TrendingUp, Users, CheckCircle } from 'lucide-react'
 import Link from 'next/link'
+import { Card } from '@/components/ui/Card'
+import Button from '@/components/ui/Button'
+import Select from '@/components/ui/Select'
+import Badge from '@/components/ui/Badge'
 
 interface FlavorInfo {
   title: string
@@ -202,32 +206,28 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
           <div className="max-h-32 overflow-y-auto">
             {/* Strength Pills */}
             <div className="flex flex-wrap gap-2">
-              <button
+              <Button
+                variant={!selectedStrength ? 'primary' : 'outline'}
+                size="sm"
                 onClick={() => {
                   setSelectedStrength(null)
                   scrollToProducts()
                 }}
-                className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
-                  !selectedStrength ? 'bg-pink-600 text-white' : 'bg-white text-gray-700 border hover:bg-gray-50'
-                }`}
               >
                 All Strengths
-              </button>
+              </Button>
               {availableStrengths.map((strength) => (
-                <button
+                <Button
                   key={strength}
+                  variant={selectedStrength === strength ? 'primary' : 'outline'}
+                  size="sm"
                   onClick={() => {
                     setSelectedStrength(selectedStrength === strength ? null : strength)
                     scrollToProducts()
                   }}
-                  className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
-                    selectedStrength === strength 
-                      ? 'bg-pink-600 text-white' 
-                      : 'bg-white text-gray-700 border hover:bg-gray-50'
-                  }`}
                 >
                   {strength}
-                </button>
+                </Button>
               ))}
             </div>
           </div>
@@ -239,54 +239,50 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             {/* Filter Controls */}
-            <div className="flex flex-wrap justify-between items-center mb-6 p-4 bg-white rounded-xl shadow-sm">
-              <div className="flex flex-wrap items-center gap-3 mb-3 lg:mb-0">
-                <span className="font-medium text-gray-700">Filter by Strength:</span>
-                <button
-                  onClick={() => {
-                    setSelectedStrength(null)
-                    scrollToProducts()
-                  }}
-                  className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
-                    !selectedStrength 
-                      ? 'bg-pink-600 text-white' 
-                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                  }`}
-                >
-                  All Strengths
-                </button>
-                {availableStrengths.map(strength => (
-                  <button
-                    key={strength}
+            <Card variant="default" padding="md" className="mb-6">
+              <div className="flex flex-wrap justify-between items-center">
+                <div className="flex flex-wrap items-center gap-3 mb-3 lg:mb-0">
+                  <span className="font-medium text-gray-700">Filter by Strength:</span>
+                  <Button
+                    variant={!selectedStrength ? 'primary' : 'ghost'}
+                    size="sm"
                     onClick={() => {
-                      setSelectedStrength(strength)
+                      setSelectedStrength(null)
                       scrollToProducts()
                     }}
-                    className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
-                      selectedStrength === strength
-                        ? 'bg-pink-600 text-white'
-                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                    }`}
                   >
-                    {strength}
-                  </button>
-                ))}
-              </div>
+                    All Strengths
+                  </Button>
+                  {availableStrengths.map(strength => (
+                    <Button
+                      key={strength}
+                      variant={selectedStrength === strength ? 'primary' : 'ghost'}
+                      size="sm"
+                      onClick={() => {
+                        setSelectedStrength(strength)
+                        scrollToProducts()
+                      }}
+                    >
+                      {strength}
+                    </Button>
+                  ))}
+                </div>
 
-              <div className="flex items-center gap-4">
-                <span className="font-medium text-gray-700">Sort by:</span>
-                <select
-                  value={sortBy}
-                  onChange={(e) => setSortBy(e.target.value)}
-                  className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500"
-                >
-                  <option value="popular">Most Popular</option>
-                  <option value="rating">Highest Rated</option>
-                  <option value="price-low">Price: Low to High</option>
-                  <option value="price-high">Price: High to Low</option>
-                </select>
+                <div className="flex items-center gap-4">
+                  <Select
+                    value={sortBy}
+                    onChange={(e) => setSortBy(e.target.value)}
+                    options={[
+                      { value: 'popular', label: 'Most Popular' },
+                      { value: 'rating', label: 'Highest Rated' },
+                      { value: 'price-low', label: 'Price: Low to High' },
+                      { value: 'price-high', label: 'Price: High to Low' }
+                    ]}
+                    selectSize="sm"
+                  />
+                </div>
               </div>
-            </div>
+            </Card>
 
             {/* Urgency/Scarcity Element - Compact */}
             <div className="bg-gradient-to-r from-pink-500 to-purple-500 text-white p-2 rounded-lg mb-4 text-center">
