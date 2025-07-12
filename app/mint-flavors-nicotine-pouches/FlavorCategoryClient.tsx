@@ -175,7 +175,7 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
               <div className="flex items-center justify-center">
                 <TrendingUp className="mr-2" size={20} />
                 <span className="font-bold">High Demand:</span>
-                <span className="ml-2">{filteredProducts.filter(p => p.inStock).length} products selling fast this week!</span>
+                <span className="ml-2">{filteredProducts.filter(p => p.inStock).length} mint flavor products selling fast this week!</span>
               </div>
             </div>
 
@@ -192,7 +192,7 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
 
             {/* Results Count */}
             <div className="text-center mt-8 text-gray-600">
-              Showing {filteredProducts.length} of {products.length} {flavorInfo.flavorName} nicotine pouches
+              Showing {filteredProducts.length} of {products.length} premium mint flavor nicotine pouches
             </div>
             
             {/* Debug Info - Remove in production */}
@@ -234,30 +234,62 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
         </div>
       </section>
 
+      {/* Mint Flavor Education Section */}
+      <section className="py-12 bg-blue-50">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-3xl font-bold text-gray-900 mb-8">
+              Why Choose Mint Flavor Nicotine Pouches?
+            </h2>
+            <p className="text-lg text-gray-700 mb-6 leading-relaxed">
+              Mint flavor nicotine pouches offer the perfect balance of refreshing taste and nicotine satisfaction. 
+              Our mint flavor collection includes cool mint, spearmint, and menthol varieties, each delivering 
+              a unique mint flavor experience that lasts for hours.
+            </p>
+            <p className="text-gray-600 leading-relaxed">
+              Whether you prefer the classic cool mint flavor or the intense menthol sensation, our mint flavor 
+              nicotine pouches provide consistent quality and authentic taste. Every mint flavor pouch is 
+              tobacco-free and designed for adults seeking a premium mint flavor alternative.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* FAQ Section for SEO */}
       <section className="py-12 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-3xl font-bold text-gray-900 text-center mb-12">
-              Frequently Asked Questions About {flavorInfo.title}
+              Frequently Asked Questions About Mint Flavor Nicotine Pouches
             </h2>
             <div className="space-y-6">
               <div className="bg-white p-6 rounded-lg">
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                  What makes {flavor} nicotine pouches special?
+                  What makes mint flavor nicotine pouches special?
                 </h3>
                 <p className="text-gray-600">
-                  Our {flavor} nicotine pouches offer a unique flavor profile that provides 
-                  long-lasting taste satisfaction. Made with premium ingredients and tobacco-free formulation.
+                  Our mint flavor nicotine pouches offer authentic mint taste with cooling sensation that provides 
+                  long-lasting satisfaction. Each mint flavor variety is crafted with premium ingredients and tobacco-free formulation 
+                  for the ultimate mint flavor experience.
                 </p>
               </div>
               <div className="bg-white p-6 rounded-lg">
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                  What strengths are available in {flavor} pouches?
+                  What mint flavor varieties are available?
                 </h3>
                 <p className="text-gray-600">
-                  We offer {flavor} nicotine pouches in {availableStrengths.join(', ')} strengths 
+                  We offer mint flavor nicotine pouches in cool mint, spearmint, and menthol varieties. 
+                  Each mint flavor type is available in {availableStrengths.join(', ')} strengths 
                   to suit different preferences and experience levels.
+                </p>
+              </div>
+              <div className="bg-white p-6 rounded-lg">
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                  How long does the mint flavor last?
+                </h3>
+                <p className="text-gray-600">
+                  Our mint flavor nicotine pouches are designed to deliver consistent mint flavor for 30-60 minutes. 
+                  The mint flavor intensity remains strong throughout use, providing fresh breath and cooling sensation.
                 </p>
               </div>
             </div>

@@ -4,15 +4,15 @@ import FlavorCategoryClient from './FlavorCategoryClient'
 
 const flavorInfo = {
   title: 'Mint Flavors Nicotine Pouches',
-  description: 'Discover our premium mint flavors nicotine pouches collection. Cool, refreshing mint flavor tobacco-free pouches in multiple strengths.',
+  description: 'Discover our premium mint flavors nicotine pouches collection. Each mint flavor offers a cool, refreshing tobacco-free experience in multiple strengths.',
   h1: 'Premium Mint Flavors Nicotine Pouches Collection',
-  seoDescription: 'Shop the best mint flavors nicotine pouches online. Cool, refreshing tobacco-free mint pouches available in 3mg, 6mg, 9mg, 12mg strengths. Free shipping over $25.',
+  seoDescription: 'Shop the best mint flavors nicotine pouches online. Our mint flavor collection includes cool mint, spearmint, and menthol varieties in 3mg, 6mg, 9mg strengths. Free shipping over $25.',
   flavorName: 'mint',
   benefits: [
-    'Refreshing mint flavor',
-    'Long-lasting taste',
-    'Instantly fresh breath',
-    'Perfect for daily use'
+    'Authentic mint flavor experience',
+    'Long-lasting mint flavor satisfaction', 
+    'Instantly fresh breath with mint flavor',
+    'Premium mint flavor for daily use'
   ],
   keywords: [
     'mint flavors nicotine pouches',
