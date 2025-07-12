@@ -77,12 +77,12 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Hero Section with Conversion Elements - Compressed */}
-      <section className="py-6 bg-gradient-to-br from-white to-blue-50">
+      {/* Hero Section with Conversion Elements - Ultra Compressed */}
+      <section className="py-4 bg-gradient-to-br from-white to-blue-50">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             {/* Breadcrumb for SEO */}
-            <nav className="text-sm text-gray-500 mb-4">
+            <nav className="text-sm text-gray-500 mb-3">
               <Link href="/" className="hover:text-blue-600">Home</Link>
               <span className="mx-2">/</span>
               <Link href="/products" className="hover:text-blue-600">Products</Link>
@@ -90,16 +90,16 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
               <span className="capitalize font-medium">{flavorInfo.title}</span>
             </nav>
 
-            <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
               {flavorInfo.h1}
             </h1>
             
-            <p className="text-lg text-gray-600 mb-6 leading-relaxed">
+            <p className="text-lg text-gray-600 mb-4 leading-relaxed">
               {flavorInfo.description}
             </p>
 
-            {/* Social Proof Bar - Compressed */}
-            <div className="flex flex-wrap justify-center items-center gap-6 mb-6 p-4 bg-white rounded-xl shadow-sm">
+            {/* Social Proof Bar - Ultra Compressed */}
+            <div className="flex flex-wrap justify-center items-center gap-4 mb-3 p-3 bg-white rounded-lg shadow-sm">
               <div className="flex items-center text-gray-700">
                 <Star className="text-yellow-400 mr-2" size={20} fill="currentColor" />
                 <span className="font-bold">{avgRating.toFixed(1)}</span>
@@ -118,8 +118,8 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
           </div>
         </div>
       </section>
-      {/* Mint Sub-Category Navigation - No Title */}
-      <section className="py-2 bg-gradient-to-r from-green-50 to-blue-50">
+      {/* Mint Sub-Category Navigation - Minimal Padding */}
+      <section className="py-1 bg-gradient-to-r from-green-50 to-blue-50">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
