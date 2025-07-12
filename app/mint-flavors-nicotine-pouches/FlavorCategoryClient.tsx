@@ -191,11 +191,11 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
       </section>
 
       {/* Mobile Sticky Filter Bar */}
-      <div className="lg:hidden sticky top-0 z-10 bg-white border-b border-gray-200 px-4 py-2">
-        <div className="flex items-center gap-2 overflow-x-auto">
+      <div className="lg:hidden sticky top-0 z-50 bg-white shadow-sm border-b border-gray-200 px-4 py-3">
+        <div className="flex items-center gap-3 overflow-x-auto scrollbar-hide">
           {/* Mint Type Quick Filter */}
-          <div className="flex items-center gap-2 min-w-0">
-            <span className="text-sm font-medium text-gray-700 whitespace-nowrap">Type:</span>
+          <div className="flex items-center gap-2 flex-shrink-0">
+            <span className="text-xs font-medium text-gray-700 whitespace-nowrap">Type:</span>
             <button
               onClick={() => setSelectedMintType(null)}
               className={`px-3 py-1 rounded-full text-xs font-medium transition-colors whitespace-nowrap ${
@@ -222,11 +222,11 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
           </div>
           
           {/* Divider */}
-          <div className="w-px h-6 bg-gray-300"></div>
+          <div className="w-px h-4 bg-gray-300 flex-shrink-0"></div>
           
           {/* Strength Quick Filter */}
-          <div className="flex items-center gap-2 min-w-0">
-            <span className="text-sm font-medium text-gray-700 whitespace-nowrap">Strength:</span>
+          <div className="flex items-center gap-2 flex-shrink-0">
+            <span className="text-xs font-medium text-gray-700 whitespace-nowrap">Strength:</span>
             <button
               onClick={() => setSelectedStrength(null)}
               className={`px-3 py-1 rounded-full text-xs font-medium transition-colors whitespace-nowrap ${
