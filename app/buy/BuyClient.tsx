@@ -243,30 +243,69 @@ export default function BuyClient() {
 
             {/* SEO Content Section */}
             {!isLoading && (
-              <div className="mt-12 bg-white rounded-lg p-8 shadow-sm">
-                <h2 className="text-2xl font-bold text-gray-900 mb-4">
-                  Why Buy Tobacco-Free Nicotine Pouches Online?
-                </h2>
-                <div className="prose max-w-none text-gray-600">
-                  <p className="mb-4">
-                    When you buy tobacco-free nicotine pouches online from our store, you're getting premium 
-                    products designed for adult users 21+. Our tobacco-free nicotine pouches for sale include 
-                    popular Zyn collection in various flavors and strengths.
-                  </p>
-                  <p className="mb-4">
-                    Shop our complete selection of tobacco-free nicotine pouches online with confidence. We offer mint, 
-                    citrus, berry, and wintergreen flavors in 3mg, 6mg, and 9mg strengths. All products 
-                    are 100% tobacco-free, fresh, and ship fast.
-                  </p>
-                  <p className="mb-4">
-                    <strong>Why choose tobacco-free nicotine pouches?</strong> Unlike traditional tobacco products, 
-                    our tobacco-free pouches contain no tobacco leaf, providing a cleaner nicotine experience 
-                    without smoke, spit, or tobacco taste.
-                  </p>
-                  <p>
-                    Looking to buy tobacco-free nicotine pouches online? Browse our Zyn collection above to find the perfect 
-                    tobacco-free nicotine pouches for your needs. Free shipping on orders over $25. Adults 21+ only.
-                  </p>
+              <div className="mt-12 space-y-8">
+                <div className="bg-white rounded-lg p-8 shadow-sm">
+                  <h2 className="text-2xl font-bold text-gray-900 mb-4">
+                    Why Buy Tobacco-Free Nicotine Pouches Online?
+                  </h2>
+                  <div className="prose max-w-none text-gray-600">
+                    <p className="mb-4">
+                      When you buy tobacco-free nicotine pouches online from our store, you're getting premium 
+                      products designed for adult users 21+. Our tobacco-free nicotine pouches for sale include 
+                      popular Zyn collection in various flavors and strengths.
+                    </p>
+                    <p className="mb-4">
+                      Shop our complete selection of tobacco-free nicotine pouches online with confidence. We offer mint, 
+                      citrus, berry, and wintergreen flavors in 3mg, 6mg, and 9mg strengths. All products 
+                      are 100% tobacco-free, fresh, and ship fast.
+                    </p>
+                    <p className="mb-4">
+                      <strong>Why choose tobacco-free nicotine pouches?</strong> Unlike traditional tobacco products, 
+                      our tobacco-free pouches contain no tobacco leaf, providing a cleaner nicotine experience 
+                      without smoke, spit, or tobacco taste.
+                    </p>
+                    <p>
+                      Looking to buy tobacco-free nicotine pouches online? Browse our Zyn collection above to find the perfect 
+                      tobacco-free nicotine pouches for your needs. Free shipping on orders over $25. Adults 21+ only.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="bg-gradient-to-r from-blue-50 to-green-50 rounded-lg p-8">
+                  <h2 className="text-2xl font-bold text-gray-900 mb-4">
+                    Find Cheap Tobacco-Free Nicotine Pouches Online
+                  </h2>
+                  <div className="prose max-w-none text-gray-700">
+                    <p className="mb-4">
+                      Looking for cheap tobacco-free nicotine pouches without compromising on quality? We offer 
+                      competitive prices on premium Zyn collection products. Our cheap nicotine pouches online 
+                      selection includes discounted bulk options and regular sales.
+                    </p>
+                    <div className="grid md:grid-cols-2 gap-6 mt-6">
+                      <div>
+                        <h3 className="text-lg font-semibold text-gray-900 mb-2">💰 Best Value Options</h3>
+                        <ul className="text-gray-600 space-y-1">
+                          <li>• Bulk purchase discounts available</li>
+                          <li>• Free shipping on orders over $25</li>
+                          <li>• Regular sales and promotions</li>
+                          <li>• Price matching on competitor offers</li>
+                        </ul>
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-semibold text-gray-900 mb-2">🔥 Popular Cheap Options</h3>
+                        <ul className="text-gray-600 space-y-1">
+                          <li>• Cheap mint nicotine pouches from $4.99</li>
+                          <li>• Affordable citrus flavors on sale</li>
+                          <li>• Discounted 3mg strength options</li>
+                          <li>• Budget-friendly variety packs</li>
+                        </ul>
+                      </div>
+                    </div>
+                    <p className="mt-4 text-sm font-medium text-gray-800">
+                      Shop smart: Our cheap tobacco-free nicotine pouches deliver the same premium quality as 
+                      expensive alternatives, but at affordable prices. Compare and save today!
+                    </p>
+                  </div>
                 </div>
               </div>
             )}
