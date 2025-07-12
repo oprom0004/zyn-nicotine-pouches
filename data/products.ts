@@ -405,8 +405,9 @@ export const categories = [
   { name: "Berry Flavors", filter: "category", value: "berry", count: products.filter(p => p.category === "berry").length },
   { name: "Wintergreen Flavors", filter: "category", value: "wintergreen", count: products.filter(p => p.category === "wintergreen").length },
   { name: "Coffee Flavors", filter: "category", value: "coffee", count: products.filter(p => p.category === "coffee").length },
-  { name: "Spearmint", filter: "category", value: "spearmint", count: products.filter(p => p.category === "spearmint").length },
-  { name: "Sweet Flavors", filter: "category", value: "sweet", count: products.filter(p => p.category === "sweet").length }
+  { name: "Spearmint Flavors", filter: "category", value: "spearmint", count: products.filter(p => p.category === "spearmint").length },
+  { name: "Sweet Flavors", filter: "category", value: "sweet", count: products.filter(p => p.category === "sweet").length },
+  { name: "Spice Flavors", filter: "category", value: "spice", count: products.filter(p => p.category === "spice").length }
 ]
 
 // Get featured products
