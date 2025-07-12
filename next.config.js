@@ -6,6 +6,20 @@ const nextConfig = {
   env: {
     CUSTOM_KEY: 'my-value',
   },
+  async redirects() {
+    return [
+      {
+        source: '/products',
+        destination: '/nicotine-pouches',
+        permanent: true,
+      },
+      {
+        source: '/products/:path*',
+        destination: '/nicotine-pouches/:path*',
+        permanent: true,
+      },
+    ]
+  },
 }
 
 module.exports = nextConfig

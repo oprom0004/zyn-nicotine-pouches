@@ -101,7 +101,7 @@ export default function Categories() {
         {/* Call to Action */}
         <div className="text-center mt-12">
           <Link 
-            href="/products" 
+            href="/nicotine-pouches" 
             className="inline-flex items-center px-8 py-4 bg-white text-gray-700 hover:text-gray-900 font-bold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-blue-500"
           >
             <span>View All Products</span>
