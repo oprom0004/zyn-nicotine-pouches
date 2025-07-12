@@ -16,6 +16,16 @@ const flavorCategories = [
   },
   {
     id: 2,
+    name: 'Spearmint Flavors',
+    description: 'Classic & gentle spearmint',
+    emoji: '🍃',
+    productCount: 2,
+    color: 'bg-gradient-to-br from-emerald-100 to-green-100',
+    href: '/spearmint-flavors-nicotine-pouches',
+    textColor: 'text-emerald-800'
+  },
+  {
+    id: 3,
     name: 'Citrus Flavors',
     description: 'Zesty & vibrant citrus burst',
     emoji: '🍊',
@@ -25,7 +35,7 @@ const flavorCategories = [
     textColor: 'text-orange-800'
   },
   {
-    id: 3,
+    id: 4,
     name: 'Berry Flavors',
     description: 'Sweet & fruity berry blend',
     emoji: '🫐',
@@ -35,7 +45,7 @@ const flavorCategories = [
     textColor: 'text-purple-800'
   },
   {
-    id: 4,
+    id: 5,
     name: 'Wintergreen Flavors',
     description: 'Fresh & crisp wintergreen',
     emoji: '🌲',
@@ -43,6 +53,36 @@ const flavorCategories = [
     color: 'bg-gradient-to-br from-green-100 to-emerald-100',
     href: '/wintergreen-flavors-nicotine-pouches',
     textColor: 'text-emerald-800'
+  },
+  {
+    id: 6,
+    name: 'Coffee Flavors',
+    description: 'Rich & bold coffee experience',
+    emoji: '☕',
+    productCount: 3,
+    color: 'bg-gradient-to-br from-amber-100 to-orange-100',
+    href: '/coffee-flavors-nicotine-pouches',
+    textColor: 'text-amber-800'
+  },
+  {
+    id: 7,
+    name: 'Sweet Flavors',
+    description: 'Smooth & sweet indulgence',
+    emoji: '🍦',
+    productCount: 2,
+    color: 'bg-gradient-to-br from-pink-100 to-purple-100',
+    href: '/sweet-flavors-nicotine-pouches',
+    textColor: 'text-pink-800'
+  },
+  {
+    id: 8,
+    name: 'Spice Flavors',
+    description: 'Warm & aromatic spice blend',
+    emoji: '🔥',
+    productCount: 2,
+    color: 'bg-gradient-to-br from-red-100 to-orange-100',
+    href: '/spice-flavors-nicotine-pouches',
+    textColor: 'text-red-800'
   }
 ]
 
@@ -98,7 +138,7 @@ export default function Categories() {
           <h3 className="text-2xl font-bold text-gray-900 text-center mb-8">
             Shop by <span className="gradient-text">Flavor</span>
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {flavorCategories.map((category) => (
               <Link 
                 key={category.id} 

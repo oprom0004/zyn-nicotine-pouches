@@ -25,9 +25,13 @@ export default function Header() {
 
   const flavorCategories = [
     { name: 'Mint Flavors', href: '/mint-flavors-nicotine-pouches', emoji: '🌿', description: 'Cool & Refreshing' },
+    { name: 'Spearmint Flavors', href: '/spearmint-flavors-nicotine-pouches', emoji: '🍃', description: 'Classic & Gentle' },
     { name: 'Citrus Flavors', href: '/citrus-flavors-nicotine-pouches', emoji: '🍊', description: 'Zesty & Vibrant' },
     { name: 'Berry Flavors', href: '/berry-flavors-nicotine-pouches', emoji: '🫐', description: 'Sweet & Fruity' },
-    { name: 'Wintergreen Flavors', href: '/wintergreen-flavors-nicotine-pouches', emoji: '🌲', description: 'Fresh & Crisp' }
+    { name: 'Wintergreen Flavors', href: '/wintergreen-flavors-nicotine-pouches', emoji: '🌲', description: 'Fresh & Crisp' },
+    { name: 'Coffee Flavors', href: '/coffee-flavors-nicotine-pouches', emoji: '☕', description: 'Rich & Bold' },
+    { name: 'Sweet Flavors', href: '/sweet-flavors-nicotine-pouches', emoji: '🍦', description: 'Smooth & Sweet' },
+    { name: 'Spice Flavors', href: '/spice-flavors-nicotine-pouches', emoji: '🔥', description: 'Warm & Aromatic' }
   ]
 
   const strengthCategories = [
