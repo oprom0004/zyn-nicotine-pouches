@@ -47,6 +47,27 @@ export default function Breadcrumbs() {
       breadcrumbs.push({ label: 'Search', href: '/search', current: true })
     } else if (pathSegments[0] === 'checkout') {
       breadcrumbs.push({ label: 'Checkout', href: '/checkout', current: true })
+    } else if (pathSegments[0] === 'buy') {
+      breadcrumbs.push({ label: 'Buy Nicotine Pouches', href: '/buy', current: true })
+    } else if (pathSegments[0] === 'privacy') {
+      breadcrumbs.push({ label: 'Privacy Policy', href: '/privacy', current: true })
+    } else if (pathSegments[0] === 'terms') {
+      breadcrumbs.push({ label: 'Terms of Service', href: '/terms', current: true })
+    } else if (pathSegments[0] === 'shipping') {
+      breadcrumbs.push({ label: 'Shipping Information', href: '/shipping', current: true })
+    } else if (pathSegments[0] === 'returns') {
+      breadcrumbs.push({ label: 'Returns Policy', href: '/returns', current: true })
+    } else if (pathSegments[0].includes('flavors-nicotine-pouches')) {
+      // Handle flavor category pages
+      const flavorName = pathSegments[0].replace('-flavors-nicotine-pouches', '').replace('-', ' ')
+      const capitalizedFlavor = flavorName.charAt(0).toUpperCase() + flavorName.slice(1)
+      breadcrumbs.push({ label: 'Buy Nicotine Pouches', href: '/buy' })
+      breadcrumbs.push({ label: `${capitalizedFlavor} Flavors`, href: `/${pathSegments[0]}`, current: true })
+    } else if (pathSegments[0].includes('mg-nicotine-pouches')) {
+      // Handle strength category pages
+      const strength = pathSegments[0].replace('-nicotine-pouches', '')
+      breadcrumbs.push({ label: 'Buy Nicotine Pouches', href: '/buy' })
+      breadcrumbs.push({ label: `${strength.toUpperCase()} Nicotine Pouches`, href: `/${pathSegments[0]}`, current: true })
     } else {
       // Check if it's a product slug
       const product = products.find(p => p.slug === pathSegments[0])
