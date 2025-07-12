@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { useCart } from '@/contexts/CartContext'
-import { Search, ShoppingCart, Menu, X, User, Sparkles } from 'lucide-react'
+import { Search, ShoppingCart, Menu, X, User, Sparkles, ChevronDown } from 'lucide-react'
 import SearchModal from './SearchModal'
 import CartModal from './CartModal'
 
@@ -11,6 +11,7 @@ export default function Header() {
   const [isSearchOpen, setIsSearchOpen] = useState(false)
   const [isCartOpen, setIsCartOpen] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isFlavorsOpen, setIsFlavorsOpen] = useState(false)
   const { cart } = useCart()
 
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0)
@@ -19,6 +20,13 @@ export default function Header() {
     { name: 'Collection', href: '/products' },
     { name: 'About', href: '/about' },
     { name: 'Experience', href: '/contact' },
+  ]
+
+  const flavorCategories = [
+    { name: 'Mint Flavors', href: '/mint-flavors-nicotine-pouches', emoji: '🌿', description: 'Cool & Refreshing' },
+    { name: 'Citrus Flavors', href: '/citrus-flavors-nicotine-pouches', emoji: '🍊', description: 'Zesty & Vibrant' },
+    { name: 'Berry Flavors', href: '/berry-flavors-nicotine-pouches', emoji: '🫐', description: 'Sweet & Fruity' },
+    { name: 'Wintergreen Flavors', href: '/wintergreen-flavors-nicotine-pouches', emoji: '🌲', description: 'Fresh & Crisp' }
   ]
 
   return (
@@ -48,6 +56,47 @@ export default function Header() {
                   <span className="absolute bottom-0 left-0 w-0 h-0.5 luxury-gradient transition-all duration-300 group-hover:w-full"></span>
                 </Link>
               ))}
+              
+              {/* Flavors Dropdown */}
+              <div className="relative">
+                <button
+                  onMouseEnter={() => setIsFlavorsOpen(true)}
+                  onMouseLeave={() => setIsFlavorsOpen(false)}
+                  className="relative text-gray-700 hover:text-gray-900 font-medium transition-all duration-300 group flex items-center space-x-1"
+                >
+                  <span>Flavors</span>
+                  <ChevronDown size={16} className={`transition-transform duration-300 ${isFlavorsOpen ? 'rotate-180' : ''}`} />
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 luxury-gradient transition-all duration-300 group-hover:w-full"></span>
+                </button>
+                
+                {/* Dropdown Menu */}
+                {isFlavorsOpen && (
+                  <div 
+                    className="absolute top-full left-0 mt-2 w-72 bg-white rounded-2xl shadow-2xl border border-gray-100 py-4 z-50"
+                    onMouseEnter={() => setIsFlavorsOpen(true)}
+                    onMouseLeave={() => setIsFlavorsOpen(false)}
+                  >
+                    {flavorCategories.map((flavor) => (
+                      <Link
+                        key={flavor.name}
+                        href={flavor.href}
+                        className="block px-6 py-3 hover:bg-gray-50 transition-colors duration-200 group"
+                        onClick={() => setIsFlavorsOpen(false)}
+                      >
+                        <div className="flex items-center space-x-3">
+                          <span className="text-2xl">{flavor.emoji}</span>
+                          <div>
+                            <div className="font-medium text-gray-900 group-hover:text-blue-600 transition-colors">
+                              {flavor.name}
+                            </div>
+                            <div className="text-sm text-gray-500">{flavor.description}</div>
+                          </div>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
             </nav>
 
             {/* Actions */}
@@ -102,10 +151,33 @@ export default function Header() {
                     key={item.name}
                     href={item.href}
                     className="text-gray-700 hover:text-gray-900 font-medium py-3 px-4 rounded-2xl hover:bg-white/50 transition-all duration-300"
+                    onClick={() => setIsMobileMenuOpen(false)}
                   >
                     {item.name}
                   </Link>
                 ))}
+                
+                {/* Mobile Flavors Section */}
+                <div className="py-2">
+                  <div className="text-gray-900 font-bold px-4 py-2 text-sm uppercase tracking-wide">
+                    Shop by Flavor
+                  </div>
+                  {flavorCategories.map((flavor) => (
+                    <Link
+                      key={flavor.name}
+                      href={flavor.href}
+                      className="flex items-center space-x-3 text-gray-700 hover:text-gray-900 py-3 px-4 rounded-2xl hover:bg-white/50 transition-all duration-300"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      <span className="text-xl">{flavor.emoji}</span>
+                      <div>
+                        <div className="font-medium">{flavor.name}</div>
+                        <div className="text-sm text-gray-500">{flavor.description}</div>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+                
                 <a href="https://zylopouch.com/" className="luxury-gradient text-white py-4 rounded-2xl font-bold mt-4 text-center">
                   Shop Collection
                 </a>
