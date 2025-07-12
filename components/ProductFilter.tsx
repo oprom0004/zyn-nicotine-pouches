@@ -31,7 +31,16 @@ export default function ProductFilter({
     availability: true
   })
 
-  const categories = ['Cool Mint', 'Citrus', 'Coffee', 'Spearmint', 'Wintergreen', 'Berry', 'Cinnamon', 'Vanilla']
+  const categories = [
+    { name: 'Mint', value: 'mint' },
+    { name: 'Citrus', value: 'citrus' },
+    { name: 'Berry', value: 'berry' },
+    { name: 'Wintergreen', value: 'wintergreen' },
+    { name: 'Coffee', value: 'coffee' },
+    { name: 'Spearmint', value: 'spearmint' },
+    { name: 'Sweet', value: 'sweet' },
+    { name: 'Spice', value: 'spice' }
+  ]
   const strengths = ['3mg', '6mg', '9mg', '12mg']
   const priceRanges = [
     { label: 'Under $5', value: 'under-5', min: 0, max: 5 },
@@ -55,10 +64,10 @@ export default function ProductFilter({
     }))
   }
 
-  const handleCategoryChange = (category: string) => {
+  const handleCategoryChange = (categoryValue: string) => {
     onFilterChange({
       ...filters,
-      category: category === 'All' ? null : category
+      category: categoryValue === 'All' ? null : categoryValue
     })
   }
 
@@ -188,15 +197,15 @@ export default function ProductFilter({
           </button>
           {categories.map((category) => (
             <button
-              key={category}
-              onClick={() => handleCategoryChange(category)}
+              key={category.value}
+              onClick={() => handleCategoryChange(category.value)}
               className={`w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                filters.category === category
+                filters.category === category.value
                   ? 'bg-blue-600 text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
-              {category}
+              {category.name}
             </button>
           ))}
         </div>
