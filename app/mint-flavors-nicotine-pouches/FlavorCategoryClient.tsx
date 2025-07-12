@@ -145,7 +145,34 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
             <h2 className="text-2xl font-bold text-gray-900 text-center mb-8">
               Explore Different Mint Flavor Types
             </h2>
-            <div className="grid md:grid-cols-3 gap-6">
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {/* All Mint Flavors Card */}
+              <div 
+                onClick={() => setSelectedMintType(null)}
+                className={`cursor-pointer p-6 rounded-2xl border-2 transition-all duration-300 hover:scale-105 ${
+                  !selectedMintType
+                    ? 'border-blue-500 bg-blue-50 shadow-lg'
+                    : 'border-gray-200 bg-white hover:border-gray-300 hover:shadow-md'
+                }`}
+              >
+                <div className="text-center">
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">All Mint Flavors</h3>
+                  <div className="text-sm text-gray-600 mb-4">
+                    {products.length} products available
+                  </div>
+                  <div className="text-sm text-gray-500">
+                    Complete mint collection - cool mint, spearmint & menthol varieties
+                  </div>
+                  <div className={`mt-4 px-4 py-2 rounded-lg text-sm font-medium ${
+                    !selectedMintType
+                      ? 'bg-blue-600 text-white'
+                      : 'bg-gray-100 text-gray-700'
+                  }`}>
+                    {!selectedMintType ? 'Selected' : 'View All'}
+                  </div>
+                </div>
+              </div>
+
               {mintTypes.map((mintType) => (
                 <div 
                   key={mintType.value}
@@ -161,11 +188,19 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
                     <div className="text-sm text-gray-600 mb-4">
                       {mintType.count} {mintType.count === 1 ? 'product' : 'products'} available
                     </div>
-                    <div className="text-sm text-gray-500">
+                    <div className="text-sm text-gray-500 mb-3">
                       {mintType.value === 'Cool Mint' && 'Classic refreshing mint flavor with cooling sensation'}
                       {mintType.value === 'Spearmint' && 'Sweet, fresh spearmint with natural cooling effect'}
                       {mintType.value === 'Menthol' && 'Intense menthol cooling for maximum freshness'}
                     </div>
+                    
+                    {/* Coming Soon Badge */}
+                    <div className="text-xs text-blue-600 font-medium mb-3">
+                      {mintType.value === 'Cool Mint' && '🔜 Cool Mint & Ice Mint专页即将上线'}
+                      {mintType.value === 'Spearmint' && '🔜 Spearmint专页即将上线'}
+                      {mintType.value === 'Menthol' && '🔜 Menthol专页即将上线'}
+                    </div>
+                    
                     <div className={`mt-4 px-4 py-2 rounded-lg text-sm font-medium ${
                       selectedMintType === mintType.value
                         ? 'bg-blue-600 text-white'
