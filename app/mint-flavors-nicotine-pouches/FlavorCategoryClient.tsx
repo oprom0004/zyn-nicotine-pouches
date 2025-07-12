@@ -77,8 +77,8 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Hero Section with Conversion Elements */}
-      <section className="py-16 bg-gradient-to-br from-white to-blue-50">
+      {/* Hero Section with Conversion Elements - Compressed */}
+      <section className="py-6 bg-gradient-to-br from-white to-blue-50">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             {/* Breadcrumb for SEO */}
@@ -90,16 +90,16 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
               <span className="capitalize font-medium">{flavorInfo.title}</span>
             </nav>
 
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
               {flavorInfo.h1}
             </h1>
             
-            <p className="text-xl text-gray-600 mb-8 leading-relaxed">
+            <p className="text-lg text-gray-600 mb-6 leading-relaxed">
               {flavorInfo.description}
             </p>
 
-            {/* Social Proof Bar */}
-            <div className="flex flex-wrap justify-center items-center gap-8 mb-8 p-6 bg-white rounded-2xl shadow-sm">
+            {/* Social Proof Bar - Compressed */}
+            <div className="flex flex-wrap justify-center items-center gap-6 mb-6 p-4 bg-white rounded-xl shadow-sm">
               <div className="flex items-center text-gray-700">
                 <Star className="text-yellow-400 mr-2" size={20} fill="currentColor" />
                 <span className="font-bold">{avgRating.toFixed(1)}</span>
@@ -120,10 +120,10 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
       </section>
 
       {/* Mint Sub-Category Navigation - Compact with Images */}
-      <section className="py-6 bg-gradient-to-r from-green-50 to-blue-50">
+      <section className="py-4 bg-gradient-to-r from-green-50 to-blue-50">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-xl font-bold text-gray-900 text-center mb-6">
+            <h2 className="text-lg font-bold text-gray-900 text-center mb-4">
               Choose Your Mint Flavor
             </h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -178,6 +178,11 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
                       )}
                     </div>
                     <h3 className="font-bold text-gray-900 mb-1">{mintType.name}</h3>
+                    <div className="text-xs text-gray-500 mb-2">
+                      {mintType.value === 'Cool Mint' && 'Classic refreshing mint flavor'}
+                      {mintType.value === 'Spearmint' && 'Sweet, fresh spearmint taste'}
+                      {mintType.value === 'Menthol' && 'Intense menthol cooling'}
+                    </div>
                     <div className="text-xs text-gray-600 mb-1">
                       {mintType.count} products
                     </div>
