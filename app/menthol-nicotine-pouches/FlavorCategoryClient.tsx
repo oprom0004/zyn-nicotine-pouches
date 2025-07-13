@@ -28,16 +28,14 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
   const [selectedStrength, setSelectedStrength] = useState<string | null>(null)
   const [showStickyFilter, setShowStickyFilter] = useState(false)
 
-  // Scroll to products grid when filter is selected (mobile only)
+  // Scroll to products grid when filter is selected
   const scrollToProducts = () => {
-    if (window.innerWidth < 768) {
-      const productsGrid = document.getElementById('products-grid')
-      if (productsGrid) {
-        productsGrid.scrollIntoView({ 
-          behavior: 'smooth', 
-          block: 'start' 
-        })
-      }
+    const productsGrid = document.getElementById('products-grid')
+    if (productsGrid) {
+      productsGrid.scrollIntoView({ 
+        behavior: 'smooth', 
+        block: 'start' 
+      })
     }
   }
 
