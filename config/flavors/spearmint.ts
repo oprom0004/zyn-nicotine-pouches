@@ -92,11 +92,10 @@ export const spearmintFlavorConfig: FlavorPageConfig = {
     ]
   },
 
-  // 产品筛选逻辑 - 只显示Spearmint产品
-  filterLogic: (allProducts) => {
-    return allProducts.filter(product => 
-      product.flavor === 'Spearmint'
-    )
+  // 产品筛选配置 - 只显示Spearmint产品
+  filterConfig: {
+    type: 'single-flavor',
+    flavors: ['Spearmint']
   },
 
   // 页面URL slug

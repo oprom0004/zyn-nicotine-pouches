@@ -71,11 +71,10 @@ export const citrusFlavorConfig: FlavorPageConfig = {
     }
   },
 
-  // 产品筛选逻辑
-  filterLogic: (allProducts) => {
-    return allProducts.filter(product => 
-      product.category === 'citrus'
-    )
+  // 产品筛选配置
+  filterConfig: {
+    type: 'simple-category',
+    category: 'citrus'
   },
 
   // 页面URL slug

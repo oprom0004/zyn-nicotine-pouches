@@ -68,12 +68,11 @@ export const coffeeFlavorConfig: FlavorPageConfig = {
     ]
   },
 
-  // 产品筛选逻辑
-  filterLogic: (allProducts) => {
-    return allProducts.filter(product => 
-      product.category === 'coffee' || 
-      ['Coffee', 'Espresso'].includes(product.flavor)
-    )
+  // 产品筛选配置
+  filterConfig: {
+    type: 'complex-flavor',
+    category: 'coffee',
+    flavors: ['Coffee', 'Espresso']
   },
 
   // 页面URL slug

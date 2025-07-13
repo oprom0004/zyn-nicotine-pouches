@@ -86,13 +86,11 @@ export const berryFlavorConfig: FlavorPageConfig = {
     ]
   },
 
-  // 产品筛选逻辑
-  filterLogic: (allProducts) => {
-    return allProducts.filter(product => 
-      product.category === 'berry' || 
-      product.category === 'fruit' ||
-      ['Strawberry', 'Blueberry', 'Mixed Berry', 'Berry'].includes(product.flavor)
-    )
+  // 产品筛选配置
+  filterConfig: {
+    type: 'complex-flavor',
+    category: ['berry', 'fruit'],
+    flavors: ['Strawberry', 'Blueberry', 'Mixed Berry', 'Berry']
   },
 
   // 页面URL slug

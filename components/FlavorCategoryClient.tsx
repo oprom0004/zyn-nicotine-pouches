@@ -6,6 +6,7 @@ import { FlavorPageConfig, SubCategoryItem } from '@/types/flavor-config'
 import ProductCard from '@/components/ProductCard'
 import { Star, Shield, Truck, Award, TrendingUp, Users, CheckCircle } from 'lucide-react'
 import Link from 'next/link'
+import { applyFilterLogic } from '@/utils/filter-logic'
 
 interface FlavorCategoryClientProps {
   config: FlavorPageConfig
@@ -19,7 +20,7 @@ export default function FlavorCategoryClient({ config, products }: FlavorCategor
   const [showStickyFilter, setShowStickyFilter] = useState(false)
 
   // 使用配置中的筛选逻辑
-  const filteredConfigProducts = config.filterLogic(products)
+  const filteredConfigProducts = applyFilterLogic(products, config.filterConfig)
 
   // Scroll to products grid when filter is selected (mobile only)
   const scrollToProducts = () => {

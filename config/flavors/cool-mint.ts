@@ -92,11 +92,10 @@ export const coolMintFlavorConfig: FlavorPageConfig = {
     ]
   },
 
-  // 产品筛选逻辑 - 只显示Cool Mint产品
-  filterLogic: (allProducts) => {
-    return allProducts.filter(product => 
-      product.flavor === 'Cool Mint'
-    )
+  // 产品筛选配置 - 只显示Cool Mint产品
+  filterConfig: {
+    type: 'single-flavor',
+    flavors: ['Cool Mint']
   },
 
   // 页面URL slug

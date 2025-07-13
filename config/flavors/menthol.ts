@@ -92,11 +92,10 @@ export const mentholFlavorConfig: FlavorPageConfig = {
     ]
   },
 
-  // 产品筛选逻辑 - 只显示Menthol产品
-  filterLogic: (allProducts) => {
-    return allProducts.filter(product => 
-      product.flavor === 'Menthol'
-    )
+  // 产品筛选配置 - 只显示Menthol产品
+  filterConfig: {
+    type: 'single-flavor',
+    flavors: ['Menthol']
   },
 
   // 页面URL slug

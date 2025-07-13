@@ -87,13 +87,12 @@ export const mintFlavorConfig: FlavorPageConfig = {
     ]
   },
 
-  // 产品筛选逻辑
-  filterLogic: (allProducts) => {
-    return allProducts.filter(product => 
-      ['Cool Mint', 'Menthol', 'Spearmint'].includes(product.flavor) ||
-      (['mint', 'spearmint'].includes(product.category.toLowerCase()) && 
-       !product.flavor.toLowerCase().includes('wintergreen'))
-    )
+  // 产品筛选配置
+  filterConfig: {
+    type: 'complex-flavor',
+    category: ['mint', 'spearmint'],
+    flavors: ['Cool Mint', 'Menthol', 'Spearmint'],
+    excludeFlavors: ['Wintergreen']
   },
 
   // 页面URL slug

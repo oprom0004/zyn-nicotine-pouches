@@ -52,6 +52,14 @@ export interface FAQItem {
   answer: string
 }
 
+// 产品筛选配置
+export interface FilterConfig {
+  type: 'simple-category' | 'complex-flavor' | 'multi-category' | 'single-flavor'
+  category?: string | string[]
+  flavors?: string[]
+  excludeFlavors?: string[]
+}
+
 // 完整的口味页面配置
 export interface FlavorPageConfig {
   // 基础信息
@@ -63,8 +71,8 @@ export interface FlavorPageConfig {
   // 子分类配置
   subCategories: SubCategoryConfig
   
-  // 产品筛选逻辑
-  filterLogic: (products: Product[]) => Product[]
+  // 产品筛选配置
+  filterConfig: FilterConfig
   
   // 页面URL slug
   slug: string
