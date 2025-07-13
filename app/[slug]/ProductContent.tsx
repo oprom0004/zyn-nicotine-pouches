@@ -2,12 +2,35 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { Star, Plus, Minus, ShoppingCart, Heart, Share2, Shield, Truck, Award, Info, Play, ChevronDown, ChevronUp, Clock, Users, Package, Zap } from 'lucide-react'
+import { redirectToZyloProduct } from '@/utils/zylo-mapping'
 
 export default function ProductContent({ product }: { product: any }) {
   const [quantity, setQuantity] = useState(1)
   const [selectedImage, setSelectedImage] = useState(0)
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null)
   const [showAllReviews, setShowAllReviews] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+
+  // Zylo跳转处理函数
+  const handleAddToCart = async (e: React.MouseEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+    
+    if (!product.inStock) return
+    
+    setIsLoading(true)
+    
+    try {
+      // 跳转到Zylo对应的产品页面
+      redirectToZyloProduct(product.flavor)
+    } catch (error) {
+      console.error('Failed to redirect to Zylo:', error)
+      // 备用方案：直接打开Zylo首页
+      window.open('https://zylopouch.com/', '_blank')
+    } finally {
+      setIsLoading(false)
+    }
+  }
 
   const productImages = [
     'https://via.placeholder.com/600x600/3B82F6/FFFFFF?text=Zyn+Pouch',
@@ -414,9 +437,13 @@ export default function ProductContent({ product }: { product: any }) {
                 
                 <div className="space-y-4">
                   <div className="flex space-x-4">
-                    <button className="flex-1 bg-blue-600 text-white py-4 rounded-xl font-bold hover:bg-blue-700 transition-all duration-300 flex items-center justify-center">
+                    <button 
+                      onClick={handleAddToCart}
+                      disabled={!product.inStock || isLoading}
+                      className="flex-1 bg-blue-600 text-white py-4 rounded-xl font-bold hover:bg-blue-700 transition-all duration-300 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
                       <ShoppingCart size={20} className="mr-2" />
-                      Add to Cart
+                      {isLoading ? 'Redirecting...' : 'Add to Cart'}
                     </button>
                     <button className="bg-gray-100 p-4 rounded-xl hover:bg-gray-200 transition-colors">
                       <Heart size={20} />
