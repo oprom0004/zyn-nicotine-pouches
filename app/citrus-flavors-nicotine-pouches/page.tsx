@@ -3,7 +3,7 @@ import { products } from '@/data/products'
 import FlavorCategoryClient from './FlavorCategoryClient'
 
 const flavorInfo = {
-  title: 'Citrus Flavors Nicotine Pouches',
+  title: 'Citrus & Lemon Nicotine Pouches',
   description: 'Experience vibrant citrus flavors nicotine pouches with zesty orange, lemon, and lime. Premium tobacco-free citrus pouches for refreshing satisfaction.',
   h1: 'Zesty Citrus Flavors Nicotine Pouches Collection',
   seoDescription: 'Shop premium citrus flavors nicotine pouches with fresh orange, lemon, lime flavors. Tobacco-free citrus pouches in all strengths. Order online today.',
