@@ -100,6 +100,9 @@ export default function FlavorCategoryClient({ config, products }: FlavorCategor
 
   const subCategories = getSubCategories()
   
+  // 决定是否显示子分类区块 - 只有按口味筛选且有多个口味时才显示
+  const shouldShowSubCategories = config.subCategories.filterBy === 'flavor' && subCategories.length > 1
+  
   // Handle scroll for sticky mobile filter
   useEffect(() => {
     const handleScroll = () => {
@@ -203,11 +206,12 @@ export default function FlavorCategoryClient({ config, products }: FlavorCategor
         </div>
       </section>
 
-      {/* Sub-Category Navigation */}
-      <section className={`py-1 bg-gradient-to-r from-${config.theme.gradient.from} to-${config.theme.gradient.to}`}>
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+      {/* Sub-Category Navigation - 只在有多个子分类时显示 */}
+      {shouldShowSubCategories && (
+        <section className={`py-1 bg-gradient-to-r from-${config.theme.gradient.from} to-${config.theme.gradient.to}`}>
+          <div className="container mx-auto px-4">
+            <div className="max-w-6xl mx-auto">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
               {/* All Categories Card */}
               <div 
                 onClick={() => setSelectedSubCategory(null)}
@@ -259,14 +263,16 @@ export default function FlavorCategoryClient({ config, products }: FlavorCategor
             </div>
           </div>
         </div>
-      </section>
+        </section>
+      )}
 
       {/* Mobile Bottom Sticky Filter Bar */}
       {showStickyFilter && (
         <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white p-3 border-t shadow-lg animate-in slide-in-from-bottom duration-300">
           <div className="max-h-32 overflow-y-auto">
-            {/* Sub-Category Pills */}
-            <div className="flex flex-wrap gap-2 mb-2">
+            {/* Sub-Category Pills - 只在有多个子分类时显示 */}
+            {shouldShowSubCategories && (
+              <div className="flex flex-wrap gap-2 mb-2">
               <button
                 onClick={() => {
                   setSelectedSubCategory(null)
@@ -294,10 +300,11 @@ export default function FlavorCategoryClient({ config, products }: FlavorCategor
                   {subCategory.name}
                 </button>
               ))}
-            </div>
+              </div>
+            )}
             
-            {/* Strength Pills */}
-            {config.subCategories.filterBy !== 'strength' && (
+            {/* Strength Pills - 没有子分类时总是显示，有子分类时只在不按强度筛选时显示 */}
+            {(!shouldShowSubCategories || config.subCategories.filterBy !== 'strength') && (
               <div className="flex flex-wrap gap-2">
               <button
                 onClick={() => {
@@ -338,7 +345,7 @@ export default function FlavorCategoryClient({ config, products }: FlavorCategor
           <div className="max-w-6xl mx-auto">
             {/* Filter Controls */}
             <div className="flex flex-wrap justify-between items-center mb-6 p-4 bg-white rounded-xl shadow-sm">
-              {config.subCategories.filterBy !== 'strength' && (
+              {(!shouldShowSubCategories || config.subCategories.filterBy !== 'strength') && (
                 <div className="flex flex-wrap items-center gap-3 mb-3 lg:mb-0">
                   <span className="font-medium text-gray-700">Filter by Strength:</span>
                 <button
