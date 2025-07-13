@@ -214,7 +214,7 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
         <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white p-3 border-t shadow-lg animate-in slide-in-from-bottom duration-300">
           <div className="max-h-32 overflow-y-auto">
             {/* Coffee Type Pills */}
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-2 mb-2">
               <button
                 onClick={() => {
                   setSelectedCoffeeType(null)
@@ -240,6 +240,37 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
                   }`}
                 >
                   {coffeeType.name}
+                </button>
+              ))}
+            </div>
+            
+            {/* Strength Pills */}
+            <div className="flex flex-wrap gap-2">
+              <button
+                onClick={() => {
+                  setSelectedStrength(null)
+                  scrollToProducts()
+                }}
+                className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
+                  !selectedStrength ? 'bg-orange-600 text-white' : 'bg-white text-gray-700 border hover:bg-gray-50'
+                }`}
+              >
+                All Strengths
+              </button>
+              {availableStrengths.map(strength => (
+                <button
+                  key={strength}
+                  onClick={() => {
+                    setSelectedStrength(strength)
+                    scrollToProducts()
+                  }}
+                  className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
+                    selectedStrength === strength 
+                      ? 'bg-orange-600 text-white' 
+                      : 'bg-white text-gray-700 border hover:bg-gray-50'
+                  }`}
+                >
+                  {strength}
                 </button>
               ))}
             </div>
