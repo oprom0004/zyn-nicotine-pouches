@@ -145,7 +145,6 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
           <a
             href={product.inStock ? zyloUrl : undefined}
             target={product.inStock ? "_blank" : undefined}
-            rel={product.inStock ? "noopener noreferrer" : undefined}
             onClick={(e) => {
               if (!product.inStock) {
                 e.preventDefault()

@@ -93,7 +93,7 @@ export function getZyloHomeUrl(): string {
  * 在新窗口打开Zylo URL
  */
 export function openZyloUrl(url: string): void {
-  window.open(url, '_blank', 'noopener,noreferrer')
+  window.open(url, '_blank')
 }
 
 /**

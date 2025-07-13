@@ -421,7 +421,6 @@ export default function ProductContent({ product }: { product: any }) {
                     <a 
                       href={zyloUrl}
                       target="_blank"
-                      rel="noopener noreferrer"
                       className={`flex-1 py-4 rounded-xl font-bold transition-all duration-300 flex items-center justify-center ${
                         product.inStock 
                           ? 'bg-blue-600 text-white hover:bg-blue-700' 
