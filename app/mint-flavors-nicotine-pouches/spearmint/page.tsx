@@ -1,14 +1,14 @@
 import { Metadata } from 'next'
 import { products } from '@/data/products'
 import FlavorCategoryClient from '@/components/FlavorCategoryClient'
-import { berryFlavorConfig } from '@/config/flavors/berry'
+import { spearmintFlavorConfig } from '@/config/flavors/spearmint'
 
 // 生成metadata
 export async function generateMetadata(): Promise<Metadata> {
-  const config = berryFlavorConfig
+  const config = spearmintFlavorConfig
   
   return {
-    title: `${config.flavorInfo.title} | Premium Tobacco-Free Collection | Zyn`,
+    title: `${config.flavorInfo.title} | Premium Spearmint Collection | Zyn`,
     description: config.flavorInfo.seoDescription,
     keywords: config.flavorInfo.keywords.join(', '),
     openGraph: {
@@ -17,7 +17,7 @@ export async function generateMetadata(): Promise<Metadata> {
       url: `https://nicotinepoucheszyn.com/${config.slug}`,
       images: [
         {
-          url: `/og-flavor-berry.jpg`,
+          url: `/og-flavor-spearmint.jpg`,
           width: 1200,
           height: 630,
           alt: `${config.flavorInfo.title} Collection`,
@@ -28,22 +28,23 @@ export async function generateMetadata(): Promise<Metadata> {
       card: 'summary_large_image',
       title: `${config.flavorInfo.title} | Zyn`,
       description: config.flavorInfo.description,
-      images: [`/og-flavor-berry.jpg`],
+      images: [`/og-flavor-spearmint.jpg`],
     },
     alternates: {
       canonical: `https://nicotinepoucheszyn.com/${config.slug}`,
     },
     other: {
-      'product:category': config.flavorInfo.flavorName,
+      'product:category': 'mint',
+      'product:flavor': 'spearmint',
       'product:type': 'nicotine-pouches',
     },
   }
 }
 
-export default function BerryFlavorsPage() {
+export default function SpearmintPage() {
   return (
     <FlavorCategoryClient 
-      config={berryFlavorConfig}
+      config={spearmintFlavorConfig}
       products={products}
     />
   )

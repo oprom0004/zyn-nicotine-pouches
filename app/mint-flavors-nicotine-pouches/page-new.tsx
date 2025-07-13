@@ -1,11 +1,11 @@
 import { Metadata } from 'next'
 import { products } from '@/data/products'
 import FlavorCategoryClient from '@/components/FlavorCategoryClient'
-import { berryFlavorConfig } from '@/config/flavors/berry'
+import { mintFlavorConfig } from '@/config/flavors/mint'
 
 // 生成metadata
 export async function generateMetadata(): Promise<Metadata> {
-  const config = berryFlavorConfig
+  const config = mintFlavorConfig
   
   return {
     title: `${config.flavorInfo.title} | Premium Tobacco-Free Collection | Zyn`,
@@ -17,7 +17,7 @@ export async function generateMetadata(): Promise<Metadata> {
       url: `https://nicotinepoucheszyn.com/${config.slug}`,
       images: [
         {
-          url: `/og-flavor-berry.jpg`,
+          url: `/og-flavor-mint.jpg`,
           width: 1200,
           height: 630,
           alt: `${config.flavorInfo.title} Collection`,
@@ -28,7 +28,7 @@ export async function generateMetadata(): Promise<Metadata> {
       card: 'summary_large_image',
       title: `${config.flavorInfo.title} | Zyn`,
       description: config.flavorInfo.description,
-      images: [`/og-flavor-berry.jpg`],
+      images: [`/og-flavor-mint.jpg`],
     },
     alternates: {
       canonical: `https://nicotinepoucheszyn.com/${config.slug}`,
@@ -40,10 +40,10 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
-export default function BerryFlavorsPage() {
+export default function MintFlavorsPage() {
   return (
     <FlavorCategoryClient 
-      config={berryFlavorConfig}
+      config={mintFlavorConfig}
       products={products}
     />
   )

@@ -1,14 +1,14 @@
 import { Metadata } from 'next'
 import { products } from '@/data/products'
 import FlavorCategoryClient from '@/components/FlavorCategoryClient'
-import { berryFlavorConfig } from '@/config/flavors/berry'
+import { mentholFlavorConfig } from '@/config/flavors/menthol'
 
 // 生成metadata
 export async function generateMetadata(): Promise<Metadata> {
-  const config = berryFlavorConfig
+  const config = mentholFlavorConfig
   
   return {
-    title: `${config.flavorInfo.title} | Premium Tobacco-Free Collection | Zyn`,
+    title: `${config.flavorInfo.title} | Premium Menthol Collection | Zyn`,
     description: config.flavorInfo.seoDescription,
     keywords: config.flavorInfo.keywords.join(', '),
     openGraph: {
@@ -17,7 +17,7 @@ export async function generateMetadata(): Promise<Metadata> {
       url: `https://nicotinepoucheszyn.com/${config.slug}`,
       images: [
         {
-          url: `/og-flavor-berry.jpg`,
+          url: `/og-flavor-menthol.jpg`,
           width: 1200,
           height: 630,
           alt: `${config.flavorInfo.title} Collection`,
@@ -28,22 +28,23 @@ export async function generateMetadata(): Promise<Metadata> {
       card: 'summary_large_image',
       title: `${config.flavorInfo.title} | Zyn`,
       description: config.flavorInfo.description,
-      images: [`/og-flavor-berry.jpg`],
+      images: [`/og-flavor-menthol.jpg`],
     },
     alternates: {
       canonical: `https://nicotinepoucheszyn.com/${config.slug}`,
     },
     other: {
-      'product:category': config.flavorInfo.flavorName,
+      'product:category': 'mint',
+      'product:flavor': 'menthol',
       'product:type': 'nicotine-pouches',
     },
   }
 }
 
-export default function BerryFlavorsPage() {
+export default function MentholPage() {
   return (
     <FlavorCategoryClient 
-      config={berryFlavorConfig}
+      config={mentholFlavorConfig}
       products={products}
     />
   )
