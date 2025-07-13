@@ -1,16 +1,13 @@
 'use client'
 
 import { Product } from '@/types'
-import { useCart } from '@/contexts/CartContext'
-import { useNotificationHelpers } from '@/contexts/NotificationContext'
 import { Star, Heart, ShoppingCart, Truck, Shield } from 'lucide-react'
 import { useState } from 'react'
 import Link from 'next/link'
 import { Card, CardContent, CardFooter } from '@/components/ui/Card'
-import Button from '@/components/ui/Button'
 import { StockBadge, DiscountBadge, FeaturedBadge, StrengthBadge, FlavorBadge } from '@/components/ui/Badge'
 import SEOImage from '@/components/SEOImage'
-import { redirectToZyloProduct } from '@/utils/zylo-mapping'
+import { getZyloCategoryUrl } from '@/utils/zylo-mapping'
 
 interface ProductCardProps {
   product: Product
@@ -18,31 +15,10 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ product, index = 0 }: ProductCardProps) {
-  const { addToCart } = useCart()
-  const { showSuccess } = useNotificationHelpers()
   const [isWishlisted, setIsWishlisted] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
 
-  // 临时方案：跳转到Zylo网站而不是添加到购物车
-  const handleAddToCart = async (e: React.MouseEvent) => {
-    e.preventDefault() // Prevent navigation when clicking the button
-    e.stopPropagation()
-    
-    if (!product.inStock) return
-    
-    setIsLoading(true)
-    
-    try {
-      // 跳转到Zylo对应的产品页面
-      redirectToZyloProduct(product.flavor)
-      showSuccess(`Redirecting to ${product.flavor} nicotine pouches...`)
-    } catch (error) {
-      console.error('Failed to redirect to Zylo:', error)
-      showSuccess('Opening product page...')
-    } finally {
-      setIsLoading(false)
-    }
-  }
+  // 获取Zylo外链URL
+  const zyloUrl = getZyloCategoryUrl(product.category)
 
   const handleWishlistToggle = (e: React.MouseEvent) => {
     e.preventDefault()
@@ -166,17 +142,26 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
         </CardContent>
 
         <CardFooter className="p-0">
-          <Button
-            variant={product.inStock ? 'primary' : 'outline'}
-            size="md"
-            className="w-full"
-            disabled={!product.inStock}
-            loading={isLoading}
-            onClick={handleAddToCart}
-            leftIcon={<ShoppingCart className="w-4 h-4" />}
+          <a
+            href={product.inStock ? zyloUrl : undefined}
+            target={product.inStock ? "_blank" : undefined}
+            rel={product.inStock ? "noopener noreferrer" : undefined}
+            onClick={(e) => {
+              if (!product.inStock) {
+                e.preventDefault()
+              } else {
+                e.stopPropagation() // Prevent parent Link navigation
+              }
+            }}
+            className={`w-full inline-flex items-center justify-center px-4 py-3 rounded-lg font-medium transition-all duration-200 ${
+              product.inStock
+                ? 'bg-blue-600 text-white hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2'
+                : 'bg-gray-200 text-gray-500 cursor-not-allowed'
+            }`}
           >
+            <ShoppingCart className="w-4 h-4 mr-2" />
             {!product.inStock ? 'Out of Stock' : 'Buy Now'}
-          </Button>
+          </a>
         </CardFooter>
 
         {/* Quick View Overlay (appears on hover) */}

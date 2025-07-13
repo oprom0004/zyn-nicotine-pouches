@@ -39,16 +39,15 @@ const flavorToZyloMapping: Record<string, string> = {
   'Cinnamon': 'cinnamon',
 }
 
-// 类别到Zylo类别URL的映射
+// 类别到Zylo URL的映射（新的外链策略）
 const categoryToZyloMapping: Record<string, string> = {
-  'mint': 'mint',
-  'spearmint': 'spearmint', 
-  'wintergreen': 'wintergreen',
-  'citrus': 'citrus',
-  'coffee': 'coffee',
-  'berry': 'berry',
-  'sweet': 'vanilla', // Sweet类别映射到vanilla
-  'spice': 'cinnamon', // Spice类别映射到cinnamon
+  'mint': 'https://zylopouch.com/product-category/mint-pouches/',
+  'spearmint': 'https://zylopouch.com/product-category/mint-pouches/', // Spearmint归入mint类别
+  'fruit': 'https://zylopouch.com/product-category/fruit-pouches/',
+  'berry': 'https://zylopouch.com/product/berry-nicotine-pouches/',
+  'citrus': 'https://zylopouch.com/product/citrus-nicotine-pouches/',
+  'wintergreen': 'https://zylopouch.com/product/wintergreen-nicotine-pouches/',
+  'spice': 'https://zylopouch.com/product/spearmint-moist/',
 }
 
 /**
@@ -67,12 +66,20 @@ export function getZyloProductUrl(flavor: string): string {
  * 根据类别生成Zylo类别页面URL
  */
 export function getZyloCategoryUrl(category: string): string {
-  const baseUrl = 'https://zylopouch.com/product/'
+  // 直接映射的类别
+  if (categoryToZyloMapping[category]) {
+    return categoryToZyloMapping[category]
+  }
   
-  // 获取映射的类别slug
-  const categorySlug = categoryToZyloMapping[category] || category.toLowerCase().replace(/\s+/g, '-')
+  // 其他无法分类的类别，随机分配到两个URL
+  const otherUrls = [
+    'https://zylopouch.com/products/',
+    'https://zylopouch.com/'
+  ]
   
-  return `${baseUrl}${categorySlug}-nicotine-pouches/`
+  // 基于类别名称的简单哈希，确保同一类别总是分配到同一个URL
+  const hash = category.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0)
+  return otherUrls[hash % 2]
 }
 
 /**
