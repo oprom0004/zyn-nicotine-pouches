@@ -3,6 +3,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { Star, Plus, Minus, ShoppingCart, Heart, Share2, Shield, Truck, Award, Info, Play, ChevronDown, ChevronUp, Clock, Users, Package, Zap } from 'lucide-react'
 import { redirectToZyloProduct } from '@/utils/zylo-mapping'
+import { useNotificationHelpers } from '@/contexts/NotificationContext'
 
 export default function ProductContent({ product }: { product: any }) {
   const [quantity, setQuantity] = useState(1)
@@ -10,6 +11,7 @@ export default function ProductContent({ product }: { product: any }) {
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null)
   const [showAllReviews, setShowAllReviews] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const { showSuccess, showError } = useNotificationHelpers()
 
   // Zylo跳转处理函数
   const handleAddToCart = async (e: React.MouseEvent) => {
@@ -23,8 +25,10 @@ export default function ProductContent({ product }: { product: any }) {
     try {
       // 跳转到Zylo对应的产品页面
       redirectToZyloProduct(product.flavor)
+      showSuccess(`Redirecting to ${product.flavor} nicotine pouches...`)
     } catch (error) {
       console.error('Failed to redirect to Zylo:', error)
+      showError('Failed to redirect. Opening Zylo homepage...')
       // 备用方案：直接打开Zylo首页
       window.open('https://zylopouch.com/', '_blank')
     } finally {
