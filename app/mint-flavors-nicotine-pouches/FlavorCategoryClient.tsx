@@ -475,6 +475,93 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
           </div>
         </div>
       </section>
+
+      {/* Explore Specific Mint Flavors Section */}
+      <section className="py-12 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-8">
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                🌿 Explore Specific Mint Flavors
+              </h2>
+              <p className="text-lg text-gray-600">
+                Want a more targeted mint experience? Explore our specialized mint flavor collections
+              </p>
+            </div>
+            
+            <div className="grid md:grid-cols-3 gap-6">
+              {/* Cool Mint Card */}
+              <Link href="/cool-mint-nicotine-pouches" className="group">
+                <div className="bg-gradient-to-br from-blue-50 to-cyan-50 p-6 rounded-2xl border-2 border-blue-100 hover:border-blue-300 transition-all duration-300 hover:scale-105 hover:shadow-lg">
+                  <div className="text-center">
+                    <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full flex items-center justify-center">
+                      <span className="text-2xl">❄️</span>
+                    </div>
+                    <h3 className="text-xl font-bold text-gray-900 mb-2">Cool Mint</h3>
+                    <p className="text-gray-600 text-sm mb-3">
+                      Classic refreshing cool mint with arctic sensation
+                    </p>
+                    <div className="text-blue-600 text-sm font-medium">
+                      {products.filter(p => p.flavor === 'Cool Mint').length} products available
+                    </div>
+                    <div className="mt-3 text-blue-600 group-hover:text-blue-800 font-medium">
+                      Explore Cool Mint →
+                    </div>
+                  </div>
+                </div>
+              </Link>
+
+              {/* Menthol Card */}
+              <Link href="/menthol-nicotine-pouches" className="group">
+                <div className="bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-2xl border-2 border-green-100 hover:border-green-300 transition-all duration-300 hover:scale-105 hover:shadow-lg">
+                  <div className="text-center">
+                    <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-green-500 to-emerald-500 rounded-full flex items-center justify-center">
+                      <span className="text-2xl">💨</span>
+                    </div>
+                    <h3 className="text-xl font-bold text-gray-900 mb-2">Menthol</h3>
+                    <p className="text-gray-600 text-sm mb-3">
+                      Intense menthol cooling with powerful mint sensation
+                    </p>
+                    <div className="text-green-600 text-sm font-medium">
+                      {products.filter(p => p.flavor === 'Menthol').length} products available
+                    </div>
+                    <div className="mt-3 text-green-600 group-hover:text-green-800 font-medium">
+                      Explore Menthol →
+                    </div>
+                  </div>
+                </div>
+              </Link>
+
+              {/* Spearmint Card */}
+              <Link href="/spearmint-flavors-nicotine-pouches" className="group">
+                <div className="bg-gradient-to-br from-emerald-50 to-teal-50 p-6 rounded-2xl border-2 border-emerald-100 hover:border-emerald-300 transition-all duration-300 hover:scale-105 hover:shadow-lg">
+                  <div className="text-center">
+                    <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-full flex items-center justify-center">
+                      <span className="text-2xl">🌱</span>
+                    </div>
+                    <h3 className="text-xl font-bold text-gray-900 mb-2">Spearmint</h3>
+                    <p className="text-gray-600 text-sm mb-3">
+                      Gentle refreshing spearmint with classic mint taste
+                    </p>
+                    <div className="text-emerald-600 text-sm font-medium">
+                      {products.filter(p => p.flavor === 'Spearmint').length} products available
+                    </div>
+                    <div className="mt-3 text-emerald-600 group-hover:text-emerald-800 font-medium">
+                      Explore Spearmint →
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            </div>
+
+            <div className="text-center mt-8">
+              <p className="text-gray-500 text-sm">
+                Each specialized collection offers unique mint experiences tailored to your preferences
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   )
 }
