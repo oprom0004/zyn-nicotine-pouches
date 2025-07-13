@@ -26,6 +26,7 @@ interface FlavorCategoryClientProps {
 export default function FlavorCategoryClient({ flavor, flavorInfo, products }: FlavorCategoryClientProps) {
   const [sortBy, setSortBy] = useState('popular')
   const [selectedStrength, setSelectedStrength] = useState<string | null>(null)
+  const [selectedFlavor, setSelectedFlavor] = useState<string | null>(null)
   const [showStickyFilter, setShowStickyFilter] = useState(false)
 
   // Scroll to products grid when filter is selected (mobile only)
@@ -43,6 +44,8 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
 
   // Get available strengths for this flavor
   const availableStrengths = Array.from(new Set(products.map(p => p.strength))).sort()
+  // Get available flavors for citrus category
+  const availableFlavors = Array.from(new Set(products.map(p => p.flavor))).sort()
   
   
   // Handle scroll for sticky mobile filter
@@ -58,7 +61,12 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
   // Filter and sort products
   let filteredProducts = products
   
-  // Apply strength filter
+  // Apply flavor filter (from Choose Flavors section)
+  if (selectedFlavor) {
+    filteredProducts = filteredProducts.filter(p => p.flavor === selectedFlavor)
+  }
+  
+  // Apply strength filter (from Filter by Strength section)
   if (selectedStrength) {
     filteredProducts = filteredProducts.filter(p => p.strength === selectedStrength)
   }
@@ -136,57 +144,56 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-              {/* All Strengths Card */}
+              {/* All Flavors Card */}
               <div 
                 onClick={() => {
-                  setSelectedStrength(null)
+                  setSelectedFlavor(null)
                   scrollToProducts()
                 }}
                 className={`cursor-pointer p-3 rounded-lg border-2 transition-all duration-300 hover:scale-105 ${
-                  !selectedStrength
+                  !selectedFlavor
                     ? 'border-orange-500 bg-orange-50 shadow-lg'
                     : 'border-gray-200 bg-white hover:border-gray-300 hover:shadow-md'
                 }`}
               >
                 <div className="text-center">
                   <div className="w-12 h-12 mx-auto mb-2 bg-orange-600 rounded-full flex items-center justify-center">
-                    <span className="text-white text-lg">🌟</span>
+                    <span className="text-white text-lg">🍊</span>
                   </div>
-                  <h3 className="font-semibold text-sm text-gray-900 mb-1">All Strengths</h3>
+                  <h3 className="font-semibold text-sm text-gray-900 mb-1">All Flavors</h3>
                   <div className="text-xs text-gray-600">
                     {products.length} products
                   </div>
                 </div>
               </div>
 
-              {availableStrengths.slice(0, 7).map((strength) => {
-                const strengthCount = products.filter(p => p.strength === strength).length
-                const strengthEmoji = {
-                  '3mg': '💚',
-                  '6mg': '💙', 
-                  '9mg': '❤️'
-                }[strength] || '⭐'
+              {availableFlavors.slice(0, 7).map((flavor) => {
+                const flavorCount = products.filter(p => p.flavor === flavor).length
+                const flavorEmoji = {
+                  'Citrus': '🍊',
+                  'Lemon': '🍋'
+                }[flavor] || '🌟'
 
                 return (
                   <div 
-                    key={strength}
+                    key={flavor}
                     onClick={() => {
-                      setSelectedStrength(selectedStrength === strength ? null : strength)
+                      setSelectedFlavor(selectedFlavor === flavor ? null : flavor)
                       scrollToProducts()
                     }}
                     className={`cursor-pointer p-3 rounded-lg border-2 transition-all duration-300 hover:scale-105 ${
-                      selectedStrength === strength
+                      selectedFlavor === flavor
                         ? 'border-orange-500 bg-orange-50 shadow-lg'
                         : 'border-gray-200 bg-white hover:border-gray-300 hover:shadow-md'
                     }`}
                   >
                     <div className="text-center">
                       <div className="w-12 h-12 mx-auto mb-2 bg-gradient-to-br from-gray-100 to-gray-200 rounded-full flex items-center justify-center">
-                        <span className="text-lg">{strengthEmoji}</span>
+                        <span className="text-lg">{flavorEmoji}</span>
                       </div>
-                      <h3 className="font-semibold text-sm text-gray-900 mb-1">{strength}</h3>
+                      <h3 className="font-semibold text-sm text-gray-900 mb-1">{flavor}</h3>
                       <div className="text-xs text-gray-600">
-                        {strengthCount} products
+                        {flavorCount} products
                       </div>
                     </div>
                   </div>
