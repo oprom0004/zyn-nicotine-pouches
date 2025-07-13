@@ -25,7 +25,7 @@ interface FlavorCategoryClientProps {
 
 export default function FlavorCategoryClient({ flavor, flavorInfo, products }: FlavorCategoryClientProps) {
   const [sortBy, setSortBy] = useState('popular')
-  const [selectedStrength, setSelectedStrength] = useState<string | null>(null)
+  const [selectedFlavor, setSelectedFlavor] = useState<string | null>(null)
   const [showStickyFilter, setShowStickyFilter] = useState(false)
 
   // Scroll to products grid when filter is selected (mobile only)
@@ -41,8 +41,8 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
     }
   }
 
-  // Get available strengths for this flavor
-  const availableStrengths = Array.from(new Set(products.map(p => p.strength))).sort()
+  // Get available flavors for citrus category
+  const availableFlavors = Array.from(new Set(products.map(p => p.flavor))).sort()
   
   
   // Handle scroll for sticky mobile filter
@@ -58,9 +58,9 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
   // Filter and sort products
   let filteredProducts = products
   
-  // Apply strength filter
-  if (selectedStrength) {
-    filteredProducts = filteredProducts.filter(p => p.strength === selectedStrength)
+  // Apply flavor filter
+  if (selectedFlavor) {
+    filteredProducts = filteredProducts.filter(p => p.flavor === selectedFlavor)
   }
 
   // Sort products based on selection
@@ -136,57 +136,56 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-              {/* All Strengths Card */}
+              {/* All Flavors Card */}
               <div 
                 onClick={() => {
-                  setSelectedStrength(null)
+                  setSelectedFlavor(null)
                   scrollToProducts()
                 }}
                 className={`cursor-pointer p-3 rounded-lg border-2 transition-all duration-300 hover:scale-105 ${
-                  !selectedStrength
+                  !selectedFlavor
                     ? 'border-orange-500 bg-orange-50 shadow-lg'
                     : 'border-gray-200 bg-white hover:border-gray-300 hover:shadow-md'
                 }`}
               >
                 <div className="text-center">
                   <div className="w-12 h-12 mx-auto mb-2 bg-orange-600 rounded-full flex items-center justify-center">
-                    <span className="text-white text-lg">🌟</span>
+                    <span className="text-white text-lg">🍊</span>
                   </div>
-                  <h3 className="font-semibold text-sm text-gray-900 mb-1">All Strengths</h3>
+                  <h3 className="font-semibold text-sm text-gray-900 mb-1">All Flavors</h3>
                   <div className="text-xs text-gray-600">
                     {products.length} products
                   </div>
                 </div>
               </div>
 
-              {availableStrengths.slice(0, 7).map((strength) => {
-                const strengthCount = products.filter(p => p.strength === strength).length
-                const strengthEmoji = {
-                  '3mg': '💚',
-                  '6mg': '💙', 
-                  '9mg': '❤️'
-                }[strength] || '⭐'
+              {availableFlavors.slice(0, 7).map((flavor) => {
+                const flavorCount = products.filter(p => p.flavor === flavor).length
+                const flavorEmoji = {
+                  'Citrus': '🍊',
+                  'Lemon': '🍋'
+                }[flavor] || '🌟'
 
                 return (
                   <div 
-                    key={strength}
+                    key={flavor}
                     onClick={() => {
-                      setSelectedStrength(selectedStrength === strength ? null : strength)
+                      setSelectedFlavor(selectedFlavor === flavor ? null : flavor)
                       scrollToProducts()
                     }}
                     className={`cursor-pointer p-3 rounded-lg border-2 transition-all duration-300 hover:scale-105 ${
-                      selectedStrength === strength
+                      selectedFlavor === flavor
                         ? 'border-orange-500 bg-orange-50 shadow-lg'
                         : 'border-gray-200 bg-white hover:border-gray-300 hover:shadow-md'
                     }`}
                   >
                     <div className="text-center">
                       <div className="w-12 h-12 mx-auto mb-2 bg-gradient-to-br from-gray-100 to-gray-200 rounded-full flex items-center justify-center">
-                        <span className="text-lg">{strengthEmoji}</span>
+                        <span className="text-lg">{flavorEmoji}</span>
                       </div>
-                      <h3 className="font-semibold text-sm text-gray-900 mb-1">{strength}</h3>
+                      <h3 className="font-semibold text-sm text-gray-900 mb-1">{flavor}</h3>
                       <div className="text-xs text-gray-600">
-                        {strengthCount} products
+                        {flavorCount} products
                       </div>
                     </div>
                   </div>
@@ -201,33 +200,33 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
       {showStickyFilter && (
         <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white p-3 border-t shadow-lg animate-in slide-in-from-bottom duration-300">
           <div className="max-h-32 overflow-y-auto">
-            {/* Strength Pills */}
+            {/* Flavor Pills */}
             <div className="flex flex-wrap gap-2">
               <button
                 onClick={() => {
-                  setSelectedStrength(null)
+                  setSelectedFlavor(null)
                   scrollToProducts()
                 }}
                 className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
-                  !selectedStrength ? 'bg-orange-600 text-white' : 'bg-white text-gray-700 border hover:bg-gray-50'
+                  !selectedFlavor ? 'bg-orange-600 text-white' : 'bg-white text-gray-700 border hover:bg-gray-50'
                 }`}
               >
-                All Strengths
+                All Flavors
               </button>
-              {availableStrengths.map((strength) => (
+              {availableFlavors.map((flavor) => (
                 <button
-                  key={strength}
+                  key={flavor}
                   onClick={() => {
-                    setSelectedStrength(selectedStrength === strength ? null : strength)
+                    setSelectedFlavor(selectedFlavor === flavor ? null : flavor)
                     scrollToProducts()
                   }}
                   className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
-                    selectedStrength === strength 
+                    selectedFlavor === flavor 
                       ? 'bg-orange-600 text-white' 
                       : 'bg-white text-gray-700 border hover:bg-gray-50'
                   }`}
                 >
-                  {strength}
+                  {flavor}
                 </button>
               ))}
             </div>
@@ -242,34 +241,34 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
             {/* Filter Controls */}
             <div className="flex flex-wrap justify-between items-center mb-6 p-4 bg-white rounded-xl shadow-sm">
               <div className="flex flex-wrap items-center gap-3 mb-3 lg:mb-0">
-                <span className="font-medium text-gray-700">Filter by Strength:</span>
+                <span className="font-medium text-gray-700">Filter by Flavor:</span>
                 <button
                   onClick={() => {
-                    setSelectedStrength(null)
+                    setSelectedFlavor(null)
                     scrollToProducts()
                   }}
                   className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
-                    !selectedStrength 
+                    !selectedFlavor 
                       ? 'bg-orange-600 text-white' 
                       : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                   }`}
                 >
-                  All Strengths
+                  All Flavors
                 </button>
-                {availableStrengths.map(strength => (
+                {availableFlavors.map(flavor => (
                   <button
-                    key={strength}
+                    key={flavor}
                     onClick={() => {
-                      setSelectedStrength(strength)
+                      setSelectedFlavor(flavor)
                       scrollToProducts()
                     }}
                     className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
-                      selectedStrength === strength
+                      selectedFlavor === flavor
                         ? 'bg-orange-600 text-white'
                         : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                     }`}
                   >
-                    {strength}
+                    {flavor}
                   </button>
                 ))}
               </div>
@@ -387,11 +386,11 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
               </div>
               <div className="bg-white p-6 rounded-lg">
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                  What strengths are available in {flavor} pouches?
+                  What flavors are available in {flavor} category?
                 </h3>
                 <p className="text-gray-600">
-                  We offer {flavor} nicotine pouches in {availableStrengths.join(', ')} strengths 
-                  to suit different preferences and experience levels.
+                  We offer {flavor} nicotine pouches in {availableFlavors.join(' and ')} flavors 
+                  to suit different taste preferences.
                 </p>
               </div>
             </div>
