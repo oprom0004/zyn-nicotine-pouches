@@ -63,6 +63,7 @@ export const berryFlavorConfig: FlavorPageConfig = {
   subCategories: {
     type: 'hardcoded',
     title: 'Choose Berries',
+    filterBy: 'flavor',
     items: [
       {
         name: 'Strawberry',
