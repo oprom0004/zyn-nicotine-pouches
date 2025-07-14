@@ -4,13 +4,38 @@ import Link from 'next/link'
 import { Sparkles, Mail, Phone, MapPin } from 'lucide-react'
 
 export default function Footer() {
-  const flavorLinks = [
-    { name: 'Mint Flavors', href: '/mint-flavors-nicotine-pouches' },
-    { name: 'Spearmint Flavors', href: '/spearmint-flavors-nicotine-pouches' },
-    { name: 'Citrus Flavors', href: '/citrus-flavors-nicotine-pouches' },
+  // 主分类与子分类导航
+  const flavorCategories = [
+    {
+      name: '🌿 Mint Collection',
+      href: '/mint-flavors-nicotine-pouches',
+      subcategories: [
+        { name: 'Cool Mint', href: '/cool-mint-nicotine-pouches' },
+        { name: 'Menthol', href: '/menthol-nicotine-pouches' },
+        { name: 'Spearmint', href: '/spearmint-flavors-nicotine-pouches' }
+      ]
+    },
+    {
+      name: '🍊 Citrus Collection', 
+      href: '/citrus-flavors-nicotine-pouches',
+      subcategories: [
+        { name: 'Citrus', href: '/citrus-nicotine-pouches' },
+        { name: 'Lemon', href: '/lemon-nicotine-pouches' }
+      ]
+    },
+    {
+      name: '☕ Coffee Collection',
+      href: '/coffee-flavors-nicotine-pouches', 
+      subcategories: [
+        { name: 'Coffee', href: '/coffee-nicotine-pouches' },
+        { name: 'Espresso', href: '/espresso-nicotine-pouches' }
+      ]
+    }
+  ]
+
+  const otherFlavors = [
     { name: 'Berry Flavors', href: '/berry-flavors-nicotine-pouches' },
     { name: 'Wintergreen Flavors', href: '/wintergreen-flavors-nicotine-pouches' },
-    { name: 'Coffee Flavors', href: '/coffee-flavors-nicotine-pouches' },
     { name: 'Sweet Flavors', href: '/sweet-flavors-nicotine-pouches' },
     { name: 'Spice Flavors', href: '/spice-flavors-nicotine-pouches' }
   ]
@@ -32,7 +57,7 @@ export default function Footer() {
     <footer className="bg-gray-900 text-white">
       {/* Main Footer Content */}
       <div className="container mx-auto px-4 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
           
           {/* Logo and Brand Info */}
           <div className="lg:col-span-1">
@@ -64,11 +89,40 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Shop by Flavor */}
+          {/* Flavor Collections */}
           <div>
-            <h3 className="text-lg font-bold text-white mb-6">Shop by Flavor</h3>
-            <ul className="space-y-3">
-              {flavorLinks.map((link) => (
+            <h3 className="text-lg font-bold text-white mb-6">Flavor Collections</h3>
+            <div className="space-y-4">
+              {flavorCategories.map((category) => (
+                <div key={category.href}>
+                  <Link 
+                    href={category.href}
+                    className="text-gray-300 hover:text-white transition-colors duration-200 text-sm font-medium block mb-2"
+                  >
+                    {category.name}
+                  </Link>
+                  <ul className="ml-4 space-y-1">
+                    {category.subcategories.map((sub) => (
+                      <li key={sub.href}>
+                        <Link 
+                          href={sub.href}
+                          className="text-gray-400 hover:text-gray-300 transition-colors duration-200 text-xs"
+                        >
+                          {sub.name}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Other Flavors & Strength */}
+          <div>
+            <h3 className="text-lg font-bold text-white mb-6">More Flavors</h3>
+            <ul className="space-y-3 mb-8">
+              {otherFlavors.map((link) => (
                 <li key={link.href}>
                   <Link 
                     href={link.href}
@@ -78,21 +132,10 @@ export default function Footer() {
                   </Link>
                 </li>
               ))}
-              <li className="pt-2">
-                <Link 
-                  href="/buy"
-                  className="text-blue-400 hover:text-blue-300 transition-colors duration-200 text-sm font-medium"
-                >
-                  View All Flavors →
-                </Link>
-              </li>
             </ul>
-          </div>
 
-          {/* Shop by Strength */}
-          <div>
-            <h3 className="text-lg font-bold text-white mb-6">Shop by Strength</h3>
-            <ul className="space-y-3">
+            <h4 className="text-md font-bold text-white mb-4">By Strength</h4>
+            <ul className="space-y-2">
               {strengthLinks.map((link) => (
                 <li key={link.href}>
                   <Link 
@@ -103,21 +146,76 @@ export default function Footer() {
                   </Link>
                 </li>
               ))}
-              <li className="pt-2">
+            </ul>
+          </div>
+
+          {/* Popular Subcategories */}
+          <div>
+            <h3 className="text-lg font-bold text-white mb-6">Popular Flavors</h3>
+            <ul className="space-y-3">
+              <li>
                 <Link 
-                  href="/buy"
-                  className="text-blue-400 hover:text-blue-300 transition-colors duration-200 text-sm font-medium"
+                  href="/cool-mint-nicotine-pouches"
+                  className="text-gray-300 hover:text-white transition-colors duration-200 text-sm"
                 >
-                  View All Strengths →
+                  ❄️ Cool Mint
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  href="/menthol-nicotine-pouches"
+                  className="text-gray-300 hover:text-white transition-colors duration-200 text-sm"
+                >
+                  💨 Menthol
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  href="/spearmint-flavors-nicotine-pouches"
+                  className="text-gray-300 hover:text-white transition-colors duration-200 text-sm"
+                >
+                  🌱 Spearmint
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  href="/citrus-nicotine-pouches"
+                  className="text-gray-300 hover:text-white transition-colors duration-200 text-sm"
+                >
+                  🍊 Citrus
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  href="/lemon-nicotine-pouches"
+                  className="text-gray-300 hover:text-white transition-colors duration-200 text-sm"
+                >
+                  🍋 Lemon
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  href="/coffee-nicotine-pouches"
+                  className="text-gray-300 hover:text-white transition-colors duration-200 text-sm"
+                >
+                  ☕ Coffee
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  href="/espresso-nicotine-pouches"
+                  className="text-gray-300 hover:text-white transition-colors duration-200 text-sm"
+                >
+                  ☕ Espresso
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Quick Links */}
+          {/* Quick Links & Newsletter */}
           <div>
             <h3 className="text-lg font-bold text-white mb-6">Quick Links</h3>
-            <ul className="space-y-3">
+            <ul className="space-y-3 mb-8">
               {quickLinks.map((link) => (
                 <li key={link.href}>
                   <Link 
@@ -128,18 +226,26 @@ export default function Footer() {
                   </Link>
                 </li>
               ))}
+              <li className="pt-2">
+                <Link 
+                  href="/buy"
+                  className="text-blue-400 hover:text-blue-300 transition-colors duration-200 text-sm font-medium"
+                >
+                  View All Products →
+                </Link>
+              </li>
             </ul>
 
             {/* Newsletter Signup */}
-            <div className="mt-8">
+            <div>
               <h4 className="text-sm font-semibold text-white mb-3">Stay Updated</h4>
               <div className="flex flex-col space-y-2">
                 <input 
                   type="email" 
                   placeholder="Enter your email"
-                  className="px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
-                <button className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition-colors duration-200">
+                <button className="px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-medium rounded-lg transition-colors duration-200">
                   Subscribe
                 </button>
               </div>
