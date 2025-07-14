@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 import { products } from '@/data/products'
-import FlavorCategoryClient from '@/components/FlavorCategoryClient'
+import FlavorCategoryClient from '@/app/spearmint-flavors-nicotine-pouches/FlavorCategoryClient'
 
 const flavorInfo = {
   title: "Lemon Flavor Nicotine Pouches",
@@ -31,7 +31,16 @@ const flavorInfo = {
     "natural lemon flavor",
     "lemon tobacco alternative",
     "bright lemon experience"
-  ]
+  ],
+  // Add navigation config for citrus parent category
+  parentCategory: {
+    name: "Citrus Flavors",
+    url: "/citrus-flavors-nicotine-pouches",
+    description: "Explore all citrus flavors including Orange & Citrus →",
+    bgColor: "bg-orange-100",
+    textColor: "text-orange-800",
+    hoverColor: "hover:text-orange-600"
+  }
 }
 
 // Filter products for lemon flavors

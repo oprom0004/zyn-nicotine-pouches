@@ -15,6 +15,14 @@ interface FlavorInfo {
   benefits: string[]
   keywords: string[]
   lsiKeywords: string[]
+  parentCategory?: {
+    name: string
+    url: string
+    description: string
+    bgColor: string
+    textColor: string
+    hoverColor: string
+  }
 }
 
 interface FlavorCategoryClientProps {
@@ -92,11 +100,13 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
       <section className="py-4 bg-gradient-to-br from-white to-emerald-50">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            {/* Breadcrumb for SEO with Mint Flavors connection */}
+            {/* Breadcrumb for SEO with parent category connection */}
             <nav className="text-sm text-gray-500 mb-3">
               <Link href="/" className="hover:text-blue-600">Home</Link>
               <span className="mx-2">/</span>
-              <Link href="/mint-flavors-nicotine-pouches" className="hover:text-blue-600">Mint Flavors</Link>
+              <Link href={flavorInfo.parentCategory?.url || "/mint-flavors-nicotine-pouches"} className="hover:text-blue-600">
+                {flavorInfo.parentCategory?.name || "Mint Flavors"}
+              </Link>
               <span className="mx-2">/</span>
               <span className="capitalize font-medium">{flavorInfo.title}</span>
             </nav>
@@ -109,12 +119,12 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
               {flavorInfo.description}
             </p>
 
-            {/* Connection to Mint Flavors */}
-            <div className="mb-4 p-3 bg-emerald-100 rounded-lg">
-              <p className="text-sm text-emerald-800">
-                <span className="font-medium">Part of our Mint Collection:</span> 
-                <Link href="/mint-flavors-nicotine-pouches" className="ml-1 underline hover:text-emerald-600">
-                  Explore all mint flavors including Cool Mint & Menthol →
+            {/* Connection to parent category */}
+            <div className={`mb-4 p-3 rounded-lg ${flavorInfo.parentCategory?.bgColor || 'bg-emerald-100'}`}>
+              <p className={`text-sm ${flavorInfo.parentCategory?.textColor || 'text-emerald-800'}`}>
+                <span className="font-medium">Part of our {flavorInfo.parentCategory?.name || "Mint"} Collection:</span> 
+                <Link href={flavorInfo.parentCategory?.url || "/mint-flavors-nicotine-pouches"} className={`ml-1 underline ${flavorInfo.parentCategory?.hoverColor || 'hover:text-emerald-600'}`}>
+                  {flavorInfo.parentCategory?.description || "Explore all mint flavors including Cool Mint & Menthol →"}
                 </Link>
               </p>
             </div>

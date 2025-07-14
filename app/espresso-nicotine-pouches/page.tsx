@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 import { products } from '@/data/products'
-import FlavorCategoryClient from '@/components/FlavorCategoryClient'
+import FlavorCategoryClient from '@/app/spearmint-flavors-nicotine-pouches/FlavorCategoryClient'
 
 const flavorInfo = {
   title: "Espresso Flavor Nicotine Pouches",
@@ -31,7 +31,16 @@ const flavorInfo = {
     "concentrated espresso flavor",
     "espresso tobacco alternative",
     "dark roast experience"
-  ]
+  ],
+  // Add navigation config for coffee parent category
+  parentCategory: {
+    name: "Coffee Flavors",
+    url: "/coffee-flavors-nicotine-pouches",
+    description: "Explore all coffee flavors including Coffee & Roasted →",
+    bgColor: "bg-amber-100",
+    textColor: "text-amber-800",
+    hoverColor: "hover:text-amber-600"
+  }
 }
 
 // Filter products for espresso flavors
