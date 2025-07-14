@@ -1,46 +1,47 @@
 import { Metadata } from 'next'
 import { products } from '@/data/products'
-import CoffeeFlavorCategoryClient from './FlavorCategoryClient'
+import FlavorCategoryClient from '@/components/FlavorCategoryClient'
 
 const flavorInfo = {
-  title: "Coffee Nicotine Pouches",
-  description: "Experience the rich coffee flavor nicotine pouches with authentic roasted taste and warming satisfaction. Premium tobacco-free coffee pouches.",
+  title: "Coffee Flavor Nicotine Pouches",
+  description: "Experience the rich boldness of our premium coffee flavor nicotine pouches. Smooth and aromatic coffee experience with roasted bean essence perfect for coffee enthusiasts.",
   h1: "Premium Coffee Flavor Nicotine Pouches",
-  seoDescription: "Shop coffee flavor nicotine pouches with rich roasted taste. Tobacco-free, premium quality coffee pouches in multiple strengths. Free shipping over $25.",
+  seoDescription: "Shop coffee flavor nicotine pouches with rich roasted taste. Tobacco-free, premium quality with smooth coffee flavor. Free shipping over $25.",
   flavorName: "coffee",
   benefits: [
-    "Rich Coffee Flavor",
-    "Authentic Roasted Taste", 
-    "Warming Experience",
-    "Perfect for Coffee Lovers",
-    "Premium Quality Ingredients",
-    "Various Nicotine Strengths"
+    "Rich Coffee Aroma",
+    "Smooth Roasted Flavor", 
+    "Bold & Satisfying",
+    "Tobacco-Free Experience",
+    "Long-Lasting Coffee Taste",
+    "Premium Quality Ingredients"
   ],
   keywords: [
     "coffee nicotine pouches",
     "coffee flavor pouches", 
-    "coffee zyn alternatives",
+    "roasted coffee pouches",
     "tobacco-free coffee",
     "premium coffee pouches",
-    "rich coffee taste"
+    "bold coffee pouches"
   ],
   lsiKeywords: [
     "coffee taste nicotine pouches",
-    "roasted coffee flavored pouches",
-    "coffee lover experience",
-    "authentic coffee flavor",
-    "coffee nicotine satisfaction",
-    "morning coffee alternative"
+    "rich coffee flavored pouches",
+    "bold coffee pouches",
+    "aromatic coffee flavor",
+    "coffee tobacco alternative",
+    "smooth coffee experience"
   ]
 }
 
-// Filter products for coffee flavor
+// Filter products for coffee flavors
 const coffeeProducts = products.filter(product => 
-  product.category === 'coffee' && ['Coffee'].includes(product.flavor)
+  product.category === 'coffee' || 
+  ['Coffee', 'Espresso'].includes(product.flavor)
 )
 
 export const metadata: Metadata = {
-  title: `${flavorInfo.title} | Premium Tobacco-Free Collection`,
+  title: `${flavorInfo.title} | Rich Bold Coffee Pouches`,
   description: flavorInfo.seoDescription,
   keywords: flavorInfo.keywords.join(', '),
   openGraph: {
@@ -54,9 +55,9 @@ export const metadata: Metadata = {
   }
 }
 
-export default function CoffeePage() {
+export default function CoffeeFlavorsPage() {
   return (
-    <CoffeeFlavorCategoryClient 
+    <FlavorCategoryClient 
       flavor="coffee"
       flavorInfo={flavorInfo}
       products={coffeeProducts}
