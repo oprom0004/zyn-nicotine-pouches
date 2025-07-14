@@ -469,57 +469,57 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
         </div>
       </section>
 
-      {/* Explore Specific Citrus Flavors Section */}
+      {/* Explore Specific Coffee Flavors Section */}
       <section className="py-12 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-8">
               <h2 className="text-3xl font-bold text-gray-900 mb-4">
-                🍊 Explore Specific Citrus Flavors
+                ☕ Explore Specific Coffee Flavors
               </h2>
               <p className="text-lg text-gray-600">
-                Want a more targeted citrus experience? Explore our specialized citrus flavor collections
+                Want a more targeted coffee experience? Explore our specialized coffee flavor collections
               </p>
             </div>
             
             <div className="grid md:grid-cols-2 gap-6">
-              {/* Citrus Card */}
-              <Link href="/citrus-nicotine-pouches" className="group">
-                <div className="bg-gradient-to-br from-orange-50 to-red-50 p-6 rounded-2xl border-2 border-orange-100 hover:border-orange-300 transition-all duration-300 hover:scale-105 hover:shadow-lg">
+              {/* Coffee Card */}
+              <Link href="/coffee-nicotine-pouches" className="group">
+                <div className="bg-gradient-to-br from-amber-50 to-orange-50 p-6 rounded-2xl border-2 border-amber-100 hover:border-amber-300 transition-all duration-300 hover:scale-105 hover:shadow-lg">
                   <div className="text-center">
-                    <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-orange-500 to-red-500 rounded-full flex items-center justify-center">
-                      <span className="text-2xl">🍊</span>
+                    <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-amber-600 to-orange-600 rounded-full flex items-center justify-center">
+                      <span className="text-2xl">☕</span>
                     </div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">Citrus</h3>
+                    <h3 className="text-xl font-bold text-gray-900 mb-2">Coffee</h3>
                     <p className="text-gray-600 text-sm mb-3">
-                      Vibrant citrus blend with energizing zesty flavor
+                      Rich coffee blend with authentic roasted flavor
                     </p>
-                    <div className="text-orange-600 text-sm font-medium">
-                      {products.filter(p => p.flavor === 'Citrus').length} products available
+                    <div className="text-amber-600 text-sm font-medium">
+                      {products.filter(p => p.flavor === 'Coffee').length} products available
                     </div>
-                    <div className="mt-3 text-orange-600 group-hover:text-orange-800 font-medium">
-                      Explore Citrus →
+                    <div className="mt-3 text-amber-600 group-hover:text-amber-800 font-medium">
+                      Explore Coffee →
                     </div>
                   </div>
                 </div>
               </Link>
 
-              {/* Lemon Card */}
-              <Link href="/lemon-nicotine-pouches" className="group">
-                <div className="bg-gradient-to-br from-yellow-50 to-amber-50 p-6 rounded-2xl border-2 border-yellow-100 hover:border-yellow-300 transition-all duration-300 hover:scale-105 hover:shadow-lg">
+              {/* Espresso Card */}
+              <Link href="/espresso-nicotine-pouches" className="group">
+                <div className="bg-gradient-to-br from-stone-50 to-gray-50 p-6 rounded-2xl border-2 border-stone-100 hover:border-stone-300 transition-all duration-300 hover:scale-105 hover:shadow-lg">
                   <div className="text-center">
-                    <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-yellow-500 to-amber-500 rounded-full flex items-center justify-center">
-                      <span className="text-2xl">🍋</span>
+                    <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-stone-600 to-gray-700 rounded-full flex items-center justify-center">
+                      <span className="text-2xl">☕</span>
                     </div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">Lemon</h3>
+                    <h3 className="text-xl font-bold text-gray-900 mb-2">Espresso</h3>
                     <p className="text-gray-600 text-sm mb-3">
-                      Bright lemon flavor with crisp citrusy kick
+                      Bold espresso flavor with intense roasted kick
                     </p>
-                    <div className="text-yellow-600 text-sm font-medium">
-                      {products.filter(p => p.flavor === 'Lemon').length} products available
+                    <div className="text-stone-600 text-sm font-medium">
+                      {products.filter(p => p.flavor === 'Espresso').length} products available
                     </div>
-                    <div className="mt-3 text-yellow-600 group-hover:text-yellow-800 font-medium">
-                      Explore Lemon →
+                    <div className="mt-3 text-stone-600 group-hover:text-stone-800 font-medium">
+                      Explore Espresso →
                     </div>
                   </div>
                 </div>
@@ -528,7 +528,7 @@ export default function FlavorCategoryClient({ flavor, flavorInfo, products }: F
 
             <div className="text-center mt-8">
               <p className="text-gray-500 text-sm">
-                Each specialized collection offers unique citrus experiences tailored to your preferences
+                Each specialized collection offers unique coffee experiences tailored to your preferences
               </p>
             </div>
           </div>
