@@ -28,6 +28,11 @@ const nextConfig = {
         destination: '/buy/:path*',
         permanent: true,
       },
+      {
+        source: '/citrus-nicotine-pouches',
+        destination: '/citrus-flavors-nicotine-pouches',
+        permanent: true,
+      },
     ]
   },
 }
