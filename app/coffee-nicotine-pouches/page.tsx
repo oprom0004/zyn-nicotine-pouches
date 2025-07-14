@@ -243,6 +243,51 @@ export default function CoffeePage() {
           </div>
         </div>
       </section>
+
+      {/* Explore Related Coffee Flavors Section */}
+      <section className="py-12 bg-amber-50">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-8">
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                ☕ Explore More Coffee Flavors
+              </h2>
+              <p className="text-lg text-gray-600">
+                Love coffee flavors? Try our other premium coffee-inspired nicotine pouches
+              </p>
+            </div>
+            
+            <div className="flex justify-center">
+              {/* Espresso Card */}
+              <Link href="/espresso-nicotine-pouches" className="group max-w-md">
+                <div className="bg-gradient-to-br from-stone-50 to-gray-50 p-6 rounded-2xl border-2 border-stone-100 hover:border-stone-300 transition-all duration-300 hover:scale-105 hover:shadow-lg">
+                  <div className="text-center">
+                    <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-stone-600 to-gray-700 rounded-full flex items-center justify-center">
+                      <span className="text-2xl">☕</span>
+                    </div>
+                    <h3 className="text-xl font-bold text-gray-900 mb-2">Espresso</h3>
+                    <p className="text-gray-600 text-sm mb-3">
+                      Bold espresso flavor with intense roasted kick - perfect for those who want a stronger coffee experience
+                    </p>
+                    <div className="text-stone-600 text-sm font-medium">
+                      Available in multiple strengths
+                    </div>
+                    <div className="mt-3 text-stone-600 group-hover:text-stone-800 font-medium">
+                      Explore Espresso →
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            </div>
+
+            <div className="text-center mt-8">
+              <p className="text-gray-500 text-sm">
+                Or explore our <Link href="/coffee-flavors-nicotine-pouches" className="text-amber-600 hover:text-amber-800 font-medium">complete coffee collection</Link> for all coffee varieties
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   )
 }
