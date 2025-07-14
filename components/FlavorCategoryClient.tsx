@@ -8,6 +8,101 @@ import { Star, Shield, Truck, Award, TrendingUp, Users, CheckCircle } from 'luci
 import Link from 'next/link'
 import { applyFilterLogic } from '@/utils/filter-logic'
 
+// 获取按钮激活状态的CSS类
+function getButtonActiveClasses(color: string): string {
+  const colorMap: Record<string, string> = {
+    'purple-500': 'bg-purple-500 text-white',
+    'blue-500': 'bg-blue-500 text-white',
+    'green-500': 'bg-green-500 text-white',
+    'orange-500': 'bg-orange-500 text-white',
+    'red-500': 'bg-red-500 text-white',
+    'red-600': 'bg-red-600 text-white',
+    'emerald-500': 'bg-emerald-500 text-white',
+    'amber-500': 'bg-amber-500 text-white',
+    'pink-500': 'bg-pink-500 text-white',
+  }
+  return colorMap[color] || 'bg-blue-500 text-white'
+}
+
+// 获取子分类卡片激活状态的CSS类
+function getSubCategoryActiveClasses(primary: string, gradientFrom: string): string {
+  const colorMap: Record<string, string> = {
+    'purple-500': 'border-purple-500 bg-purple-50 shadow-lg',
+    'blue-500': 'border-blue-500 bg-blue-50 shadow-lg',
+    'green-500': 'border-green-500 bg-green-50 shadow-lg',
+    'orange-500': 'border-orange-500 bg-orange-50 shadow-lg',
+    'red-500': 'border-red-500 bg-red-50 shadow-lg',
+    'emerald-500': 'border-emerald-500 bg-emerald-50 shadow-lg',
+    'amber-500': 'border-amber-500 bg-amber-50 shadow-lg',
+    'pink-500': 'border-pink-500 bg-pink-50 shadow-lg',
+  }
+  return colorMap[primary] || 'border-blue-500 bg-blue-50 shadow-lg'
+}
+
+// 获取背景渐变类
+function getGradientClasses(gradientFrom: string): string {
+  const colorMap: Record<string, string> = {
+    'purple-50': 'bg-purple-50',
+    'blue-50': 'bg-blue-50',
+    'green-50': 'bg-green-50',
+    'orange-50': 'bg-orange-50',
+    'red-50': 'bg-red-50',
+    'emerald-50': 'bg-emerald-50',
+    'amber-50': 'bg-amber-50',
+    'pink-50': 'bg-pink-50',
+  }
+  return colorMap[gradientFrom] || 'bg-blue-50'
+}
+
+// 获取双色渐变类
+function getDoubleGradientClasses(from: string, to: string): string {
+  const key = `${from}-${to}`
+  const gradientMap: Record<string, string> = {
+    'purple-50-pink-50': 'bg-gradient-to-r from-purple-50 to-pink-50',
+    'blue-50-cyan-50': 'bg-gradient-to-r from-blue-50 to-cyan-50',
+    'green-50-emerald-50': 'bg-gradient-to-r from-green-50 to-emerald-50',
+    'orange-50-yellow-50': 'bg-gradient-to-r from-orange-50 to-yellow-50',
+    'red-50-pink-50': 'bg-gradient-to-r from-red-50 to-pink-50',
+    'emerald-50-blue-50': 'bg-gradient-to-r from-emerald-50 to-blue-50',
+    'amber-50-orange-50': 'bg-gradient-to-r from-amber-50 to-orange-50',
+    'pink-50-purple-50': 'bg-gradient-to-r from-pink-50 to-purple-50',
+  }
+  return gradientMap[key] || 'bg-gradient-to-r from-blue-50 to-cyan-50'
+}
+
+// 获取按钮渐变类
+function getButtonGradientClasses(from: string, to: string): string {
+  const key = `${from}-${to}`
+  const gradientMap: Record<string, string> = {
+    'purple-500-pink-500': 'bg-gradient-to-r from-purple-500 to-pink-500',
+    'blue-500-cyan-500': 'bg-gradient-to-r from-blue-500 to-cyan-500',
+    'green-500-emerald-500': 'bg-gradient-to-r from-green-500 to-emerald-500',
+    'orange-500-yellow-500': 'bg-gradient-to-r from-orange-500 to-yellow-500',
+    'red-500-pink-500': 'bg-gradient-to-r from-red-500 to-pink-500',
+    'emerald-500-blue-500': 'bg-gradient-to-r from-emerald-500 to-blue-500',
+    'amber-500-orange-500': 'bg-gradient-to-r from-amber-500 to-orange-500',
+    'pink-500-purple-500': 'bg-gradient-to-r from-pink-500 to-purple-500',
+  }
+  return gradientMap[key] || 'bg-gradient-to-r from-blue-500 to-cyan-500'
+}
+
+// 获取图标渐变类
+function getIconGradientClasses(primary: string, secondary: string): string {
+  const primaryColor = primary.replace('-500', '-400')
+  const key = `${primaryColor}-${secondary}`
+  const gradientMap: Record<string, string> = {
+    'purple-400-pink-500': 'bg-gradient-to-br from-purple-400 to-pink-500',
+    'blue-400-cyan-500': 'bg-gradient-to-br from-blue-400 to-cyan-500',
+    'green-400-emerald-500': 'bg-gradient-to-br from-green-400 to-emerald-500',
+    'orange-400-yellow-500': 'bg-gradient-to-br from-orange-400 to-yellow-500',
+    'red-400-pink-500': 'bg-gradient-to-br from-red-400 to-pink-500',
+    'emerald-400-blue-500': 'bg-gradient-to-br from-emerald-400 to-blue-500',
+    'amber-400-orange-500': 'bg-gradient-to-br from-amber-400 to-orange-500',
+    'pink-400-purple-500': 'bg-gradient-to-br from-pink-400 to-purple-500',
+  }
+  return gradientMap[key] || 'bg-gradient-to-br from-blue-400 to-cyan-500'
+}
+
 interface FlavorCategoryClientProps {
   config: FlavorPageConfig
   products: Product[]
@@ -208,7 +303,7 @@ export default function FlavorCategoryClient({ config, products }: FlavorCategor
 
       {/* Sub-Category Navigation - 只在有多个子分类时显示 */}
       {shouldShowSubCategories && (
-        <section className={`py-1 bg-gradient-to-r from-${config.theme.gradient.from} to-${config.theme.gradient.to}`}>
+        <section className={`py-1 ${getDoubleGradientClasses(config.theme.gradient.from, config.theme.gradient.to)}`}>
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
@@ -217,12 +312,12 @@ export default function FlavorCategoryClient({ config, products }: FlavorCategor
                 onClick={() => setSelectedSubCategory(null)}
                 className={`cursor-pointer p-3 rounded-lg border-2 transition-all duration-300 hover:scale-105 ${
                   !selectedSubCategory
-                    ? `border-${config.theme.primary} bg-${config.theme.gradient.from} shadow-lg`
+                    ? getSubCategoryActiveClasses(config.theme.primary, config.theme.gradient.from)
                     : 'border-gray-200 bg-white hover:border-gray-300 hover:shadow-md'
                 }`}
               >
                 <div className="text-center">
-                  <div className={`w-12 h-12 mx-auto mb-2 bg-gradient-to-br from-${config.theme.primary.replace('-500', '-400')} to-${config.theme.secondary} rounded-full flex items-center justify-center`}>
+                  <div className={`w-12 h-12 mx-auto mb-2 ${getIconGradientClasses(config.theme.primary, config.theme.secondary)} rounded-full flex items-center justify-center`}>
                     <span className="text-white text-lg">{subCategories[0]?.emoji || '🌟'}</span>
                   </div>
                   <h3 className="font-semibold text-sm text-gray-900 mb-1">All {config.subCategories.title.replace('Choose ', '')}</h3>
@@ -238,13 +333,13 @@ export default function FlavorCategoryClient({ config, products }: FlavorCategor
                   onClick={() => setSelectedSubCategory(selectedSubCategory === subCategory.value ? null : subCategory.value)}
                   className={`cursor-pointer p-3 rounded-lg border-2 transition-all duration-300 hover:scale-105 ${
                     selectedSubCategory === subCategory.value
-                      ? `border-${config.theme.primary} bg-${config.theme.gradient.from} shadow-lg`
+                      ? getSubCategoryActiveClasses(config.theme.primary, config.theme.gradient.from)
                       : 'border-gray-200 bg-white hover:border-gray-300 hover:shadow-md'
                   }`}
                 >
                   <div className="text-center">
                     <div className="w-12 h-12 mx-auto mb-2 rounded-full flex items-center justify-center overflow-hidden">
-                      <div className={`w-full h-full bg-gradient-to-br from-${config.theme.primary.replace('-500', '-400')} to-${config.theme.secondary} flex items-center justify-center`}>
+                      <div className={`w-full h-full ${getIconGradientClasses(config.theme.primary, config.theme.secondary)} flex items-center justify-center`}>
                         <span className="text-white text-lg">{subCategory.emoji}</span>
                       </div>
                     </div>
@@ -279,7 +374,7 @@ export default function FlavorCategoryClient({ config, products }: FlavorCategor
                   scrollToProducts()
                 }}
                 className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
-                  !selectedSubCategory ? `bg-${config.theme.primary} text-white` : 'bg-white text-gray-700 border hover:bg-gray-50'
+                  !selectedSubCategory ? getButtonActiveClasses(config.theme.primary) : 'bg-white text-gray-700 border hover:bg-gray-50'
                 }`}
               >
                 All {config.subCategories.title.replace('Choose ', '')}
@@ -293,7 +388,7 @@ export default function FlavorCategoryClient({ config, products }: FlavorCategor
                   }}
                   className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
                     selectedSubCategory === subCategory.value 
-                      ? `bg-${config.theme.primary} text-white` 
+                      ? getButtonActiveClasses(config.theme.primary)
                       : 'bg-white text-gray-700 border hover:bg-gray-50'
                   }`}
                 >
@@ -312,7 +407,7 @@ export default function FlavorCategoryClient({ config, products }: FlavorCategor
                   scrollToProducts()
                 }}
                 className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
-                  !selectedStrength ? `bg-${config.theme.accent} text-white` : 'bg-white text-gray-700 border hover:bg-gray-50'
+                  !selectedStrength ? getButtonActiveClasses(config.theme.accent) : 'bg-white text-gray-700 border hover:bg-gray-50'
                 }`}
               >
                 All Strengths
@@ -326,7 +421,7 @@ export default function FlavorCategoryClient({ config, products }: FlavorCategor
                   }}
                   className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
                     selectedStrength === strength 
-                      ? `bg-${config.theme.accent} text-white` 
+                      ? getButtonActiveClasses(config.theme.accent)
                       : 'bg-white text-gray-700 border hover:bg-gray-50'
                   }`}
                 >
@@ -355,7 +450,7 @@ export default function FlavorCategoryClient({ config, products }: FlavorCategor
                   }}
                   className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
                     !selectedStrength 
-                      ? `bg-${config.theme.primary} text-white` 
+                      ? getButtonActiveClasses(config.theme.primary)
                       : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                   }`}
                 >
@@ -370,7 +465,7 @@ export default function FlavorCategoryClient({ config, products }: FlavorCategor
                     }}
                     className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
                       selectedStrength === strength
-                        ? `bg-${config.theme.primary} text-white`
+                        ? getButtonActiveClasses(config.theme.primary)
                         : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                     }`}
                   >
@@ -385,7 +480,7 @@ export default function FlavorCategoryClient({ config, products }: FlavorCategor
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value)}
-                  className={`px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-${config.theme.primary} focus:border-${config.theme.primary}`}
+                  className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 >
                   <option value="popular">Most Popular</option>
                   <option value="rating">Highest Rated</option>
@@ -396,7 +491,7 @@ export default function FlavorCategoryClient({ config, products }: FlavorCategor
             </div>
 
             {/* Urgency/Scarcity Element - Compact */}
-            <div className={`bg-gradient-to-r from-${config.theme.urgencyGradient.from} to-${config.theme.urgencyGradient.to} text-white p-2 rounded-lg mb-4 text-center`}>
+            <div className={`${getButtonGradientClasses(config.theme.urgencyGradient.from, config.theme.urgencyGradient.to)} text-white p-2 rounded-lg mb-4 text-center`}>
               <div className="flex items-center justify-center text-sm">
                 <TrendingUp className="mr-1" size={16} />
                 <span className="font-bold">{config.urgencyText.prefix}</span>
@@ -476,7 +571,7 @@ export default function FlavorCategoryClient({ config, products }: FlavorCategor
 
       {/* Education Section - Optional */}
       {config.educationSection && (
-        <section className={`py-12 bg-${config.theme.gradient.from}`}>
+        <section className={`py-12 ${getGradientClasses(config.theme.gradient.from)}`}>
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto text-center">
               <h2 className="text-3xl font-bold text-gray-900 mb-8">
