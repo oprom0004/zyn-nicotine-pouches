@@ -1,3 +1,6 @@
+'use client'
+
+import { useState } from 'react'
 import { Metadata } from 'next'
 import { products } from '@/data/products'
 import ProductCard from '@/components/ProductCard'
@@ -36,8 +39,8 @@ const flavorInfo = {
   ]
 }
 
-// Filter products for citrus flavor
-const citrusProducts = products.filter(product => 
+// Filter products for citrus flavor only
+const allCitrusProducts = products.filter(product => 
   product.category === 'citrus' || ['Citrus', 'Lemon'].includes(product.flavor)
 )
 
@@ -57,6 +60,17 @@ export const metadata: Metadata = {
 }
 
 export default function CitrusPage() {
+  const [selectedStrength, setSelectedStrength] = useState<string | null>(null)
+
+  // Get available strengths for citrus products
+  const availableStrengths = Array.from(new Set(allCitrusProducts.map(p => p.strength))).sort()
+  
+  // Filter products by selected strength
+  let filteredProducts = allCitrusProducts
+  if (selectedStrength) {
+    filteredProducts = filteredProducts.filter(p => p.strength === selectedStrength)
+  }
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
@@ -99,7 +113,7 @@ export default function CitrusPage() {
               </div>
               <div className="flex items-center text-gray-700">
                 <Users className="text-blue-600 mr-2" size={20} />
-                <span className="font-bold">{citrusProducts.length}</span>
+                <span className="font-bold">{allCitrusProducts.length}</span>
                 <span className="ml-1">products available</span>
               </div>
               <div className="flex items-center text-gray-700">
@@ -107,19 +121,11 @@ export default function CitrusPage() {
                 <span className="font-medium">FREE shipping $25+</span>
               </div>
             </div>
-
-            {/* CTA Button */}
-            <Link 
-              href="#products-grid"
-              className="inline-block bg-orange-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-orange-700 transition-colors duration-200"
-            >
-              Shop Citrus Pouches
-            </Link>
           </div>
         </div>
       </section>
 
-      {/* Products Section */}
+      {/* Products Section with Strength Filter */}
       <section className="py-8" id="products-grid">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
@@ -127,9 +133,39 @@ export default function CitrusPage() {
               Premium Citrus Flavor Collection
             </h2>
             
+            {/* Strength Filter */}
+            <div className="mb-8">
+              <h3 className="text-xl font-semibold text-center text-gray-800 mb-6">Filter by Strength</h3>
+              <div className="flex flex-wrap justify-center gap-4">
+                <button
+                  onClick={() => setSelectedStrength(null)}
+                  className={`px-6 py-2 rounded-full transition-colors ${
+                    !selectedStrength 
+                      ? 'bg-orange-500 text-white' 
+                      : 'bg-white text-orange-500 border-2 border-orange-500 hover:bg-orange-500 hover:text-white'
+                  }`}
+                >
+                  All Strengths
+                </button>
+                {availableStrengths.map(strength => (
+                  <button
+                    key={strength}
+                    onClick={() => setSelectedStrength(selectedStrength === strength ? null : strength)}
+                    className={`px-6 py-2 rounded-full transition-colors ${
+                      selectedStrength === strength
+                        ? 'bg-orange-500 text-white'
+                        : 'bg-white text-orange-500 border-2 border-orange-500 hover:bg-orange-500 hover:text-white'
+                    }`}
+                  >
+                    {strength}
+                  </button>
+                ))}
+              </div>
+            </div>
+
             {/* Products Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {citrusProducts.map((product, index) => (
+              {filteredProducts.map((product, index) => (
                 <ProductCard 
                   key={product.id} 
                   product={product} 
@@ -140,7 +176,12 @@ export default function CitrusPage() {
 
             {/* Results Count */}
             <div className="text-center mt-8 text-gray-600">
-              Showing {citrusProducts.length} premium citrus flavor nicotine pouches
+              Showing {filteredProducts.length} of {allCitrusProducts.length} premium citrus flavor nicotine pouches
+              {selectedStrength && (
+                <span className="ml-2 text-orange-600 font-medium">
+                  (filtered by {selectedStrength})
+                </span>
+              )}
             </div>
           </div>
         </div>
