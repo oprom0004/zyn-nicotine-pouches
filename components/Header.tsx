@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import Link from 'next/link'
 import { useCart } from '@/contexts/CartContext'
 import { Search, ShoppingCart, Menu, X, User, Sparkles, ChevronDown } from 'lucide-react'
@@ -14,6 +14,37 @@ export default function Header() {
   const [isFlavorsOpen, setIsFlavorsOpen] = useState(false)
   const [isStrengthsOpen, setIsStrengthsOpen] = useState(false)
   const { cart } = useCart()
+  
+  // Timeout refs for delayed hiding
+  const flavorsTimeoutRef = useRef<NodeJS.Timeout | null>(null)
+  const strengthsTimeoutRef = useRef<NodeJS.Timeout | null>(null)
+
+  // Handler functions for delayed dropdowns
+  const handleFlavorsMouseEnter = () => {
+    if (flavorsTimeoutRef.current) {
+      clearTimeout(flavorsTimeoutRef.current)
+    }
+    setIsFlavorsOpen(true)
+  }
+
+  const handleFlavorsMouseLeave = () => {
+    flavorsTimeoutRef.current = setTimeout(() => {
+      setIsFlavorsOpen(false)
+    }, 300) // 300ms delay before hiding
+  }
+
+  const handleStrengthsMouseEnter = () => {
+    if (strengthsTimeoutRef.current) {
+      clearTimeout(strengthsTimeoutRef.current)
+    }
+    setIsStrengthsOpen(true)
+  }
+
+  const handleStrengthsMouseLeave = () => {
+    strengthsTimeoutRef.current = setTimeout(() => {
+      setIsStrengthsOpen(false)
+    }, 300) // 300ms delay before hiding
+  }
 
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0)
 
@@ -71,8 +102,8 @@ export default function Header() {
               {/* Flavors Dropdown */}
               <div className="relative">
                 <button
-                  onMouseEnter={() => setIsFlavorsOpen(true)}
-                  onMouseLeave={() => setIsFlavorsOpen(false)}
+                  onMouseEnter={handleFlavorsMouseEnter}
+                  onMouseLeave={handleFlavorsMouseLeave}
                   className="relative text-gray-700 hover:text-gray-900 font-medium transition-all duration-300 group flex items-center space-x-1"
                 >
                   <span>Flavors</span>
@@ -84,15 +115,20 @@ export default function Header() {
                 {isFlavorsOpen && (
                   <div 
                     className="absolute top-full left-0 mt-2 w-72 bg-white rounded-2xl shadow-2xl border border-gray-100 py-4 z-50"
-                    onMouseEnter={() => setIsFlavorsOpen(true)}
-                    onMouseLeave={() => setIsFlavorsOpen(false)}
+                    onMouseEnter={handleFlavorsMouseEnter}
+                    onMouseLeave={handleFlavorsMouseLeave}
                   >
                     {flavorCategories.map((flavor) => (
                       <Link
                         key={flavor.name}
                         href={flavor.href}
                         className="block px-6 py-3 hover:bg-gray-50 transition-colors duration-200 group"
-                        onClick={() => setIsFlavorsOpen(false)}
+                        onClick={() => {
+                          setIsFlavorsOpen(false)
+                          if (flavorsTimeoutRef.current) {
+                            clearTimeout(flavorsTimeoutRef.current)
+                          }
+                        }}
                       >
                         <div className="flex items-center space-x-3">
                           <span className="text-2xl">{flavor.emoji}</span>
@@ -112,8 +148,8 @@ export default function Header() {
               {/* Strengths Dropdown */}
               <div className="relative">
                 <button
-                  onMouseEnter={() => setIsStrengthsOpen(true)}
-                  onMouseLeave={() => setIsStrengthsOpen(false)}
+                  onMouseEnter={handleStrengthsMouseEnter}
+                  onMouseLeave={handleStrengthsMouseLeave}
                   className="relative text-gray-700 hover:text-gray-900 font-medium transition-all duration-300 group flex items-center space-x-1"
                 >
                   <span>Strengths</span>
@@ -125,15 +161,20 @@ export default function Header() {
                 {isStrengthsOpen && (
                   <div 
                     className="absolute top-full left-0 mt-2 w-72 bg-white rounded-2xl shadow-2xl border border-gray-100 py-4 z-50"
-                    onMouseEnter={() => setIsStrengthsOpen(true)}
-                    onMouseLeave={() => setIsStrengthsOpen(false)}
+                    onMouseEnter={handleStrengthsMouseEnter}
+                    onMouseLeave={handleStrengthsMouseLeave}
                   >
                     {strengthCategories.map((strength) => (
                       <Link
                         key={strength.name}
                         href={strength.href}
                         className="block px-6 py-3 hover:bg-gray-50 transition-colors duration-200 group"
-                        onClick={() => setIsStrengthsOpen(false)}
+                        onClick={() => {
+                          setIsStrengthsOpen(false)
+                          if (strengthsTimeoutRef.current) {
+                            clearTimeout(strengthsTimeoutRef.current)
+                          }
+                        }}
                       >
                         <div className="flex items-center space-x-3">
                           <span className="text-2xl">{strength.emoji}</span>
