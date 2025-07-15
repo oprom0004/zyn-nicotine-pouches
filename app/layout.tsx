@@ -160,6 +160,19 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <meta name="theme-color" content="#0066cc" />
         <script src="/fayu.js"></script>
+        
+        {/* Plausible Analytics */}
+        <script 
+          defer 
+          data-domain="nicotinepoucheszyn.com" 
+          src="https://plausible.io/js/script.file-downloads.hash.outbound-links.pageview-props.revenue.tagged-events.js"
+        ></script>
+        <script 
+          dangerouslySetInnerHTML={{
+            __html: `window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }`
+          }}
+        />
+        
         <SchemaMarkup />
       </head>
       <body className={`${inter.variable} ${playfair.variable} font-sans antialiased`}>

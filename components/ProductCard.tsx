@@ -8,6 +8,7 @@ import { Card, CardContent, CardFooter } from '@/components/ui/Card'
 import { StockBadge, DiscountBadge, FeaturedBadge, StrengthBadge, FlavorBadge } from '@/components/ui/Badge'
 import SEOImage from '@/components/SEOImage'
 import { getZyloCategoryUrl } from '@/utils/zylo-mapping'
+import { trackProductView, trackAddToCart, trackOutboundClick } from '@/utils/plausible'
 
 interface ProductCardProps {
   product: Product
@@ -24,6 +25,26 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
     e.preventDefault()
     e.stopPropagation()
     setIsWishlisted(!isWishlisted)
+    
+    // Track wishlist interaction
+    trackProductView(product.name, product.category, product.price)
+  }
+
+  const handleProductClick = () => {
+    // Track product view
+    trackProductView(product.name, product.category, product.price)
+  }
+
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+    
+    // Track add to cart and redirect to Zylo
+    trackAddToCart(product.name, product.category, product.price)
+    trackOutboundClick(zyloUrl, `Add to Cart - ${product.name}`)
+    
+    // Open in new tab
+    window.open(zyloUrl, '_blank', 'noopener,noreferrer')
   }
 
   const renderStars = (rating: number) => {
@@ -44,7 +65,7 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
     : 0
 
   return (
-    <Link href={`/${product.slug}`} className="group">
+    <Link href={`/${product.slug}`} className="group" onClick={handleProductClick}>
       <Card 
         variant="default" 
         padding="md"
@@ -150,6 +171,7 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
                 e.preventDefault()
               } else {
                 e.stopPropagation() // Prevent parent Link navigation
+                handleAddToCart(e)
               }
             }}
             className={`w-full inline-flex items-center justify-center px-4 py-3 rounded-lg font-medium transition-all duration-200 ${

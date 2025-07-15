@@ -7,6 +7,7 @@ import ProductCard from '@/components/ProductCard'
 import { Star, Shield, Truck, Award, TrendingUp, Users, CheckCircle } from 'lucide-react'
 import Link from 'next/link'
 import { applyFilterLogic } from '@/utils/filter-logic'
+import { trackFilterUsage } from '@/utils/plausible'
 
 // 获取按钮激活状态的CSS类
 function getButtonActiveClasses(color: string): string {
@@ -208,6 +209,19 @@ export default function FlavorCategoryClient({ config, products }: FlavorCategor
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
   
+  // Track filter usage
+  const handleStrengthFilter = (strength: string | null) => {
+    setSelectedStrength(strength)
+    trackFilterUsage('strength', strength || 'all', 'flavor-category')
+    scrollToProducts()
+  }
+
+  const handleSubCategoryFilter = (subCategory: string | null) => {
+    setSelectedSubCategory(subCategory)
+    trackFilterUsage('subcategory', subCategory || 'all', 'flavor-category')
+    scrollToProducts()
+  }
+  
   // Filter and sort products
   let filteredProducts = filteredConfigProducts
   
@@ -309,7 +323,7 @@ export default function FlavorCategoryClient({ config, products }: FlavorCategor
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
               {/* All Categories Card */}
               <div 
-                onClick={() => setSelectedSubCategory(null)}
+                onClick={() => handleSubCategoryFilter(null)}
                 className={`cursor-pointer p-3 rounded-lg border-2 transition-all duration-300 hover:scale-105 ${
                   !selectedSubCategory
                     ? getSubCategoryActiveClasses(config.theme.primary, config.theme.gradient.from)
@@ -330,7 +344,7 @@ export default function FlavorCategoryClient({ config, products }: FlavorCategor
               {subCategories.map((subCategory) => (
                 <div 
                   key={subCategory.value}
-                  onClick={() => setSelectedSubCategory(selectedSubCategory === subCategory.value ? null : subCategory.value)}
+                  onClick={() => handleSubCategoryFilter(selectedSubCategory === subCategory.value ? null : subCategory.value)}
                   className={`cursor-pointer p-3 rounded-lg border-2 transition-all duration-300 hover:scale-105 ${
                     selectedSubCategory === subCategory.value
                       ? getSubCategoryActiveClasses(config.theme.primary, config.theme.gradient.from)
@@ -369,10 +383,7 @@ export default function FlavorCategoryClient({ config, products }: FlavorCategor
             {shouldShowSubCategories && (
               <div className="flex flex-wrap gap-2 mb-2">
               <button
-                onClick={() => {
-                  setSelectedSubCategory(null)
-                  scrollToProducts()
-                }}
+                onClick={() => handleSubCategoryFilter(null)}
                 className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
                   !selectedSubCategory ? getButtonActiveClasses(config.theme.primary) : 'bg-white text-gray-700 border hover:bg-gray-50'
                 }`}
@@ -382,10 +393,7 @@ export default function FlavorCategoryClient({ config, products }: FlavorCategor
               {subCategories.map((subCategory) => (
                 <button
                   key={subCategory.value}
-                  onClick={() => {
-                    setSelectedSubCategory(selectedSubCategory === subCategory.value ? null : subCategory.value)
-                    scrollToProducts()
-                  }}
+                  onClick={() => handleSubCategoryFilter(selectedSubCategory === subCategory.value ? null : subCategory.value)}
                   className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
                     selectedSubCategory === subCategory.value 
                       ? getButtonActiveClasses(config.theme.primary)
@@ -402,10 +410,7 @@ export default function FlavorCategoryClient({ config, products }: FlavorCategor
             {(!shouldShowSubCategories || config.subCategories.filterBy !== 'strength') && (
               <div className="flex flex-wrap gap-2">
               <button
-                onClick={() => {
-                  setSelectedStrength(null)
-                  scrollToProducts()
-                }}
+                onClick={() => handleStrengthFilter(null)}
                 className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
                   !selectedStrength ? getButtonActiveClasses(config.theme.accent) : 'bg-white text-gray-700 border hover:bg-gray-50'
                 }`}
@@ -415,10 +420,7 @@ export default function FlavorCategoryClient({ config, products }: FlavorCategor
               {availableStrengths.map(strength => (
                 <button
                   key={strength}
-                  onClick={() => {
-                    setSelectedStrength(strength)
-                    scrollToProducts()
-                  }}
+                  onClick={() => handleStrengthFilter(strength)}
                   className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
                     selectedStrength === strength 
                       ? getButtonActiveClasses(config.theme.accent)
@@ -444,10 +446,7 @@ export default function FlavorCategoryClient({ config, products }: FlavorCategor
                 <div className="flex flex-wrap items-center gap-3 mb-3 lg:mb-0">
                   <span className="font-medium text-gray-700">Filter by Strength:</span>
                 <button
-                  onClick={() => {
-                    setSelectedStrength(null)
-                    scrollToProducts()
-                  }}
+                  onClick={() => handleStrengthFilter(null)}
                   className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
                     !selectedStrength 
                       ? getButtonActiveClasses(config.theme.primary)
@@ -459,10 +458,7 @@ export default function FlavorCategoryClient({ config, products }: FlavorCategor
                 {availableStrengths.map(strength => (
                   <button
                     key={strength}
-                    onClick={() => {
-                      setSelectedStrength(strength)
-                      scrollToProducts()
-                    }}
+                    onClick={() => handleStrengthFilter(strength)}
                     className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
                       selectedStrength === strength
                         ? getButtonActiveClasses(config.theme.primary)
@@ -479,7 +475,10 @@ export default function FlavorCategoryClient({ config, products }: FlavorCategor
                 <span className="font-medium text-gray-700">Sort by:</span>
                 <select
                   value={sortBy}
-                  onChange={(e) => setSortBy(e.target.value)}
+                  onChange={(e) => {
+                    setSortBy(e.target.value)
+                    trackFilterUsage('sort', e.target.value, 'flavor-category')
+                  }}
                   className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 >
                   <option value="popular">Most Popular</option>
